@@ -12,6 +12,14 @@
 </head>
 
 <body>
+    <header>
+        <div id="title-div" class="col-6">
+            <h1 id="title" class="display-4 text-center my-4">ASE 220 Financial Planning</h1>
+        </div>
+        <div class="col-6 text-end mt-2">
+            <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">Add Purchase</button>
+        </div>
+    </header>
     <div class="container" id="login">
         <div class="row">
             <h1>Please choose a username first</h1>
@@ -22,27 +30,29 @@
         </div>
     </div>
     <div class="container" id="content" style="display: none;">
-        <div class="row">
-            <div id="title-div" class="col-6">
-                <h1 id="title" class="display-4 text-center my-4">ASE 220 Financial Planning</h1>
-            </div>
-            <div class="col-6 text-end mt-2">
-                <button type="button" class="btn btn-primary my-4" id="addpetButton" data-bs-toggle="modal" data-bs-target="#addpetModal">Add Plan</button>
-            </div>
-        </div>
         <div class="row" id="cards-container">
-            <table class="table table-striped">
-                <thead>
-                    <th scope="col">Date</th>
-                    <th scope="col">Transaction Type</th>
-                    <th scope="col">Vendor</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Frequency</th>
-                </thead>
-                <tbody id="transaction-history">
-                    <!--Fill with JS-->
-                </tbody>
-            </table>
+            <div class="card" id="spending-history">
+                <h3>Spending History - <span class="percent"></span> Remaining</h3>
+                <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" style="width: 25%"></div>
+                  </div>
+            </div>
+            <div class="card">
+                <h3>Recent Transaction</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <th scope="col">Date</th>
+                        <th scope="col">Transaction Type</th>
+                        <th scope="col">Vendor</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Frequency</th>
+                    </thead>
+                    <tbody>
+                        <!--Fill with JS-->
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
         <div class="text-center mt-4">
             <button id="load-more" class="btn btn-primary">Load More</button>

@@ -10,25 +10,36 @@ async function loadIndex() {
     } catch (error) {
         console.error('Failed to load data!', error);
     }
-
+    
 }
 
 function displayIndexData(user) {
     // until more work is done, i'm sticking to a single user
-    userData = data[user]
-    console.log()
+    userData = data[user];
+    displayTransactionTable(userData);
+    displaySpendingHistory(userData);
+    
+}
+
+function displayTransactionTable(userData) {
     document.getElementById("title-div").innerHTML += `<h2>${userData.username}</h2>`
     
     userData.transactionHistory.forEach(function(transaction) {
-        let frequency;
+        let frequency, type;
         if (transaction.recurring = true) {
             frequency = "Recurring"
         }
         else {
             frequency = "One-Time"
         }
+        if (transaction.type == "purchase") {
+            type = "add"
+        }
+        else {
+            type = "subtract"
+        }
         document.querySelector("tbody").innerHTML += `
-        <tr>
+        <tr class="${type}">
         <td>${transaction.date}</td>
         <td>${transaction.type}</td>
         <td>${transaction.vendor}</td>
@@ -37,7 +48,6 @@ function displayIndexData(user) {
         </tr>`
     })
     
-    document.getElementById("transaction-history").innerHTML += userData.transactionHistory[0]
 }
 
 $(document).on("click", "#login-button", function() {
@@ -54,3 +64,12 @@ $(document).on("click", "#login-button", function() {
         }
     }
 });
+
+
+function displaySpendingHistory(userData) {
+    budget = userData.spendingHistory[0].budget
+    spending = userData.spendingHistory[0].spending
+    percentage = spending/budget * 100
+    document.querySelector("#spending-history .progress-bar").style.width = `${percentage}%`
+    document.querySelector('.percent').innerHTML = `${Math.round(100-percentage)}%`
+}

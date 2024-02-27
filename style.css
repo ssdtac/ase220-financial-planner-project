@@ -1,10 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;700&display=swap');
+
+:root {
+    --red: rgb(185, 94, 94);
+    --green: rgb(137, 184, 137);
+    --background: #18181B;
+    --card-background: #2B2B2B;
+    --text: #FFF;
+    --header-background: #000;
+}
+
 #title {
     margin-bottom: 0 !important;
     
 }
 #title-div h2 {
+<<<<<<< HEAD
     margin-left: .5em;
 }
 #content {
     display: none;
+=======
+    margin-left: 2.6em;
+}
+
+.add {
+    background-color: var(--green);
+}
+.subtract {
+    background-color: var(--red);
+}
+
+html body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Source Sans Pro';
+}
+
+html .card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+html .table th {
+    color: var(--text);
+}
+
+html .table {
+    border-bottom: 0;
+}
+
+header {
+    display: flex;
+    background-color: var(--header-background);
+    border-bottom: grey solid 3px;
+    padding-bottom: 1em;
+}
+
+header button {
+    margin-right: 1em;
+>>>>>>> de4a47bc9f7addea3bb44ba99dcda0bcc8aca256
 }
