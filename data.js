@@ -15,7 +15,12 @@ async function loadIndex() {
 function displayIndexData() {
     // until more work is done, i'm sticking to a single user
     userData = data["cassiancc"]
-    console.log()
+    displayTransactionTable(userData)
+    displaySpendingHistory(userData)
+    
+}
+
+function displayTransactionTable(userData) {
     document.getElementById("title-div").innerHTML += `<h2>${userData.username}</h2>`
     
     userData.transactionHistory.forEach(function(transaction) {
@@ -42,5 +47,12 @@ function displayIndexData() {
         </tr>`
     })
     
-    document.getElementById("transaction-history").innerHTML += userData.transactionHistory[0]
+}
+
+function displaySpendingHistory(userData) {
+    budget = userData.spendingHistory[0].budget
+    spending = userData.spendingHistory[0].spending
+    percentage = spending/budget * 100
+    document.querySelector("#spending-history .progress-bar").style.width = `${percentage}%`
+    document.querySelector('.percent').innerHTML = `${Math.round(percentage)}%`
 }
