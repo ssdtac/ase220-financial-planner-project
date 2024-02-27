@@ -14,7 +14,7 @@ async function loadIndex() {
 
 function displayIndexData() {
     // until more work is done, i'm sticking to a single user
-    userData = data[0]
+    userData = data["cassiancc"]
     console.log()
     document.getElementById("title-div").innerHTML += `<h2>${userData.username}</h2>`
 }

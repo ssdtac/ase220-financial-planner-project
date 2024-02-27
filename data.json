@@ -1,6 +1,7 @@
-[
-    {
+{
+    "cassiancc": {
         "username": "cassiancc",
+        "password": "cassiancc",
         "balance": 404.04,
         "transactionHistory": [
             {
@@ -26,8 +27,9 @@
             }
         ]
     },
-    {
-        "username": "ssdtac",
+    "ssdtac": {
+        "username": "cassiancc",
+        "password": "ssdtac",
         "balance": 404.04,
         "transactionHistory": [
             {
@@ -53,4 +55,5 @@
             }
         ]
     }
-]
+}
+    
