@@ -54,5 +54,5 @@ function displaySpendingHistory(userData) {
     spending = userData.spendingHistory[0].spending
     percentage = spending/budget * 100
     document.querySelector("#spending-history .progress-bar").style.width = `${percentage}%`
-    document.querySelector('.percent').innerHTML = `${Math.round(percentage)}%`
+    document.querySelector('.percent').innerHTML = `${Math.round(100-percentage)}%`
 }
