@@ -5,3 +5,6 @@
 #title-div h2 {
     margin-left: .5em;
 }
+#content {
+    display: none;
+}

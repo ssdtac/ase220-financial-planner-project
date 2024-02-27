@@ -12,7 +12,16 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="login">
+        <div class="row">
+            <h1>Please choose a username first</h1>
+        </div>
+        <div>
+            <input type="text" placeholder="Username" id="username">
+            <button class="btn btn-primary" id="login-button">Select User</button>
+        </div>
+    </div>
+    <div class="container" id="content" style="display: none;">
         <div class="row">
             <div id="title-div" class="col-6">
                 <h1 id="title" class="display-4 text-center my-4">ASE 220 Financial Planning</h1>
@@ -30,7 +39,7 @@
                     <th scope="col">Amount</th>
                     <th scope="col">Frequency</th>
                 </thead>
-                <tbody>
+                <tbody id="transaction-history">
                     <!--Fill with JS-->
                 </tbody>
             </table>
