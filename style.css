@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;700&display=swap');
+
 :root {
     --red: rgb(185, 94, 94);
     --green: rgb(137, 184, 137);
     --background: #18181B;
     --card-background: #2B2B2B;
     --text: #FFF;
+    --header-background: #000;
 }
 
 #title {
@@ -11,7 +14,7 @@
     
 }
 #title-div h2 {
-    margin-left: .5em;
+    margin-left: 2.6em;
 }
 
 .add {
@@ -24,6 +27,7 @@
 html body {
     background-color: var(--background);
     color: var(--text);
+    font-family: 'Source Sans Pro';
 }
 
 html .card {
@@ -40,4 +44,15 @@ html .table th {
 
 html .table {
     border-bottom: 0;
+}
+
+header {
+    display: flex;
+    background-color: var(--header-background);
+    border-bottom: grey solid 3px;
+    padding-bottom: 1em;
+}
+
+header button {
+    margin-right: 1em;
 }
