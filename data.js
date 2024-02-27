@@ -26,20 +26,20 @@ function displayTransactionTable(userData) {
     
     userData.transactionHistory.forEach(function(transaction) {
         let frequency, type;
-        if (transaction.recurring = true) {
+        if (transaction.recurring == true) {
             frequency = "Recurring"
         }
         else {
             frequency = "One-Time"
         }
-        if (transaction.type == "purchase") {
+        if (transaction.type == "credit") {
             type = "add"
         }
         else {
             type = "subtract"
         }
         document.querySelector("tbody").innerHTML += `
-        <tr class="${type}">
+        <tr class="${type} recurring-${transaction.recurring}">
         <td>${transaction.date}</td>
         <td>${transaction.type}</td>
         <td>${transaction.vendor}</td>

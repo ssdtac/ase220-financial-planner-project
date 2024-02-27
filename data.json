@@ -44,6 +44,19 @@
         "username": "cassiancc",
         "password": "ssdtac",
         "balance": 404.04,
+        "spendingHistory": [
+            {
+                "timeframe": "February 2024",
+                "spending": 404.04,
+                "budget": 808.08
+            },
+            {
+                "timeframe": "January 2024",
+                "spending": 404.04,
+                "budget": 606.06
+            }
+            
+        ],
         "transactionHistory": [
             {
                 "date": "2024-12-31",

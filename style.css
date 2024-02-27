@@ -29,6 +29,9 @@
 .subtract {
     background-color: var(--red);
 }
+.recurring-true {
+    font-weight: bold;
+}
 
 html body {
     background-color: var(--background);
