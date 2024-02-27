@@ -1,0 +1,56 @@
+[
+    {
+        "username": "cassiancc",
+        "balance": 404.04,
+        "transactionHistory": [
+            {
+                "date": "2024-12-31",
+                "type": "purchase",
+                "vendor": "NKU",
+                "recurring": true,
+                "amount": 404.04
+            },
+            {
+                "date": "2024-12-31",
+                "type": "purchase",
+                "vendor": "NKU",
+                "recurring": true,
+                "amount": 404.04
+            },
+            {
+                "date": "2024-12-31",
+                "type": "credit",
+                "vendor": "NKU",
+                "recurring": false,
+                "amount": 404.04
+            }
+        ]
+    },
+    {
+        "username": "ssdtac",
+        "balance": 404.04,
+        "transactionHistory": [
+            {
+                "date": "2024-12-31",
+                "type": "purchase",
+                "vendor": "NKU",
+                "recurring": true,
+                "amount": 404.04
+            },
+            {
+                "date": "2024-12-31",
+                "type": "purchase",
+                "vendor": "NKU",
+                "recurring": true,
+                "amount": 404.04
+            },
+            {
+                "date": "2024-12-31",
+                "type": "purchase",
+                "vendor": "NKU",
+                "recurring": true,
+                "amount": 404.04
+            }
+        ]
+    }
+]
