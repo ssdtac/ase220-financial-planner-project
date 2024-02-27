@@ -63,3 +63,7 @@ header {
 header button {
     margin-right: 1em;
 }
+
+.caps {
+    text-transform: capitalize;
+}
