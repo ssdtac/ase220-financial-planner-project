@@ -1,9 +1,9 @@
 :root {
     --red: rgb(185, 94, 94);
     --green: rgb(137, 184, 137);
-    --background: #FF;
-    --card-background: #DDD;
-    --text: #000;
+    --background: #18181B;
+    --card-background: #2B2B2B;
+    --text: #FFF;
 }
 
 #title {
@@ -24,4 +24,20 @@
 html body {
     background-color: var(--background);
     color: var(--text);
+}
+
+html .card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+html .table th {
+    color: var(--text);
+}
+
+html .table {
+    border-bottom: 0;
 }

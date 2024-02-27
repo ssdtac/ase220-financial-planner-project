@@ -22,25 +22,28 @@
             </div>
         </div>
         <div class="row" id="cards-container">
-            <div id="spending-history">
+            <div class="card" id="spending-history">
                 <h3>Spending History</h3>
                 <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar bg-success" style="width: 25%"></div>
                   </div>
             </div>
+            <div class="card">
+                <h3>Recent Transaction</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <th scope="col">Date</th>
+                        <th scope="col">Transaction Type</th>
+                        <th scope="col">Vendor</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Frequency</th>
+                    </thead>
+                    <tbody>
+                        <!--Fill with JS-->
+                    </tbody>
+                </table>
+            </div>
             
-            <table class="table table-striped">
-                <thead>
-                    <th scope="col">Date</th>
-                    <th scope="col">Transaction Type</th>
-                    <th scope="col">Vendor</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Frequency</th>
-                </thead>
-                <tbody>
-                    <!--Fill with JS-->
-                </tbody>
-            </table>
         </div>
         <div class="text-center mt-4">
             <button id="load-more" class="btn btn-primary">Load More</button>
