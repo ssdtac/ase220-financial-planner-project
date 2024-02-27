@@ -19,15 +19,21 @@ function displayIndexData() {
     document.getElementById("title-div").innerHTML += `<h2>${userData.username}</h2>`
     
     userData.transactionHistory.forEach(function(transaction) {
-        let frequency;
+        let frequency, type;
         if (transaction.recurring = true) {
             frequency = "Recurring"
         }
         else {
             frequency = "One-Time"
         }
+        if (transaction.type == "purchase") {
+            type = "add"
+        }
+        else {
+            type = "subtract"
+        }
         document.querySelector("tbody").innerHTML += `
-        <tr>
+        <tr class="${type}">
         <td>${transaction.date}</td>
         <td>${transaction.type}</td>
         <td>${transaction.vendor}</td>

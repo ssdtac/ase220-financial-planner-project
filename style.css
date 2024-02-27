@@ -1,7 +1,21 @@
+:root {
+    --red: rgb(185, 94, 94);
+    --green: rgb(137, 184, 137);
+    --background: #FFFFFF;
+    --text: #000;
+}
+
 #title {
     margin-bottom: 0 !important;
     
 }
 #title-div h2 {
     margin-left: .5em;
+}
+
+.add {
+    background-color: var(--green);
+}
+.subtract {
+    background-color: var(--red);
 }
