@@ -1,7 +1,8 @@
 :root {
     --red: rgb(185, 94, 94);
     --green: rgb(137, 184, 137);
-    --background: #FFFFFF;
+    --background: #FF;
+    --card-background: #DDD;
     --text: #000;
 }
 
@@ -18,4 +19,9 @@
 }
 .subtract {
     background-color: var(--red);
+}
+
+html body {
+    background-color: var(--background);
+    color: var(--text);
 }
