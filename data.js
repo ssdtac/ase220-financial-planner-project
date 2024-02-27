@@ -22,7 +22,7 @@ function displayIndexData(user) {
 }
 
 function displayTransactionTable(userData) {
-    document.getElementById("username").innerText = userData.username;
+    document.getElementById("user-title").innerText = userData.username;
     
     userData.transactionHistory.forEach(function(transaction) {
         let frequency, type;
@@ -52,7 +52,6 @@ function displayTransactionTable(userData) {
 
 $(document).on("click", "#login-button", function() {
     let username = $("#username").val();
-    console.log(username);
     loginUser(username);
     localStorage.username = username;
 });
@@ -78,7 +77,7 @@ function logoutUser() {
         $("#content").css("display", "none");
         $("#login").css("display", "block");
         userShown = false;
-        document.querySelector(".tbody").innerHTML = "";
+        document.querySelector("tbody").innerHTML = "";
         document.getElementById("user-title").innerText = "";
     }
 }
