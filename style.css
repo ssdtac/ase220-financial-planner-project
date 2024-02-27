@@ -14,12 +14,10 @@
     
 }
 #title-div h2 {
-<<<<<<< HEAD
-    margin-left: .5em;
+    margin-left: 2.5em;
 }
 #content {
     display: none;
-=======
     margin-left: 2.6em;
 }
 
@@ -64,5 +62,4 @@ header {
 
 header button {
     margin-right: 1em;
->>>>>>> de4a47bc9f7addea3bb44ba99dcda0bcc8aca256
 }
