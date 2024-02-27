@@ -10,9 +10,7 @@ async function loadIndex() {
     } catch (error) {
         console.error('Failed to load data!', error);
     }
-    loginUser(localStorage.username)
-
-    
+    loginUser(localStorage.username);
 }
 
 function displayIndexData(user) {
@@ -24,7 +22,7 @@ function displayIndexData(user) {
 }
 
 function displayTransactionTable(userData) {
-    document.getElementById("title-div").innerHTML += `<h2>${userData.username}</h2>`
+    document.getElementById("username").innerText = userData.username;
     
     userData.transactionHistory.forEach(function(transaction) {
         let frequency, type;
@@ -53,19 +51,19 @@ function displayTransactionTable(userData) {
 }
 
 $(document).on("click", "#login-button", function() {
-    username = $("#username").val();
-    console.log(username)
-    loginUser(username)
-    localStorage.username = username
+    let username = $("#username").val();
+    console.log(username);
+    loginUser(username);
+    localStorage.username = username;
+});
 
-
+$(document).on("click", "#logout-button", function() {
+    logoutUser()
 });
 
 function loginUser(username) {
-
     if(!userShown){
         if (username in data) {  
-            console.log("success!");
             userShown = true;
             $("#content").css("display", "block");
             $("#login").css("display", "none");
@@ -75,9 +73,14 @@ function loginUser(username) {
 }
 
 function logoutUser() {
-    localStorage.username = ""
-    $("#content").css("display", "none");
-    $("#login").css("display", "block");
+    if(userShown) {
+        localStorage.username = ""
+        $("#content").css("display", "none");
+        $("#login").css("display", "block");
+        userShown = false;
+        document.querySelector(".tbody").innerHTML = "";
+        document.getElementById("user-title").innerText = "";
+    }
 }
 
 function displaySpendingHistory(userData) {
