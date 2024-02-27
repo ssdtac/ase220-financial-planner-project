@@ -6,13 +6,17 @@
         "spendingHistory": [
             {
                 "timeframe": "February 2024",
-                "spending": 404.04,
-                "budget": 808.08
+                "paycheck": 1000,
+                "needs": 0.5,
+                "wants": 0.2,
+                "savings": 0.2
             },
             {
                 "timeframe": "January 2024",
-                "spending": 404.04,
-                "budget": 606.06
+                "paycheck": 900,
+                "needs": 0.5,
+                "wants": 0.2,
+                "savings": 0.2
             }
             
         ],
