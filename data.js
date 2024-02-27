@@ -1,6 +1,7 @@
 const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976"
 const itemsPerPage = 9
 
+var data;
 
 async function loadIndex() {
     try {
