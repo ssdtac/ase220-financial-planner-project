@@ -80,3 +80,7 @@ header button {
 .caps {
     text-transform: capitalize;
 }
+
+tr {
+    cursor: pointer;
+}

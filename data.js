@@ -26,13 +26,12 @@ function displayTransactionTable(userData) {
             type = "subtract"
         }
         document.querySelector("tbody").innerHTML += `
-        <tr class="${type} recurring-${transaction.recurring}">
+        <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type} recurring-${transaction.recurring}">
         <td>${transaction.date}</td>
         <td class="caps">${transaction.category}</td>
         <td>${transaction.vendor}</td>
         <td>$${transaction.amount}</td>
         <td>${frequency}</td>
-        <td><button class="details-button btn btn-secondary" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'">See More Details</button></td>
         </tr>`
     })
     

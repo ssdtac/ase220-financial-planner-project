@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,15 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Transaction Details</title>
 </head>
+
 <body>
     <header>
-        
+
         <div id="title-div" class="col-6">
             <h1 id="title" class="display-4 text-center my-4 bold">ASE 220 Financial Planning</h1>
-            
+
         </div>
         <div class="col-6 text-end mt-2">
-            <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">Add Purchase</button>
+            <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal"
+                data-bs-target="#addPurchaseModal">Add Purchase</button>
             <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
         </div>
     </header>
@@ -30,7 +33,7 @@
                 <button class="btn btn-primary" id="login-button">Select User</button>
             </div>
         </div>
-        
+
     </div>
     <main>
         <div class="container">
@@ -48,59 +51,58 @@
 
 
     </footer>
-    
+
     <!-- Edit Transaction Modal -->
-<div id="editTransactionModal" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Transaction</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div id="editTransactionModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Transaction</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editTransactionForm">
+                        <div class="mb-3">
+                            <label for="transactionDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="transactionDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionVendor" class="form-label">Vendor</label>
+                            <input type="text" class="form-control" id="transactionVendor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionAmount" class="form-label">Amount</label>
+                            <input type="number" class="form-control" id="transactionAmount" step="0.01">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionCategory" class="form-label">Category</label>
+                            <select class="form-control" id="transactionCategory">
+                                <option value="need">Need</option>
+                                <option value="want">Want</option>
+                                <option value="savings">Savings</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="entertainment">Entertainment</option>
+                                <!-- Add more categories as needed -->
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="transactionDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="transactionDescription"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
+                    <button type="button" class="btn btn-primary" id="saveTransactionChanges">Save Changes</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <form id="editTransactionForm">
-            <div class="mb-3">
-              <label for="transactionDate" class="form-label">Date</label>
-              <input type="date" class="form-control" id="transactionDate">
-            </div>
-            <div class="mb-3">
-              <label for="transactionVendor" class="form-label">Vendor</label>
-              <input type="text" class="form-control" id="transactionVendor">
-            </div>
-            <div class="mb-3">
-              <label for="transactionAmount" class="form-label">Amount</label>
-              <input type="number" class="form-control" id="transactionAmount" step="0.01">
-            </div>
-            <div class="mb-3">
-                <label for="transactionCategory" class="form-label">Category</label>
-                <select class="form-control" id="transactionCategory">
-                    <option value="need">Need</option>
-                    <option value="want">Want</option>
-                    <option value="savings">Savings</option>
-                    <option value="utilities">Utilities</option>
-                    <option value="entertainment">Entertainment</option>
-                    <!-- Add more categories as needed -->
-                </select>
-            </div>
-            
-            <div class="mb-3">
-              <label for="transactionDescription" class="form-label">Description</label>
-              <textarea class="form-control" id="transactionDescription"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
-          <button type="button" class="btn btn-primary" id="saveTransactionChanges">Save Changes</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-  <script src="auth.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="auth.js"></script>
     <script src="detail.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
