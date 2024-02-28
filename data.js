@@ -10,7 +10,14 @@ async function loadIndex() {
     } catch (error) {
         console.error('Failed to load data!', error);
     }
-    loginUser(localStorage.username);
+    if ((localStorage.username == '') || (localStorage.username == undefined)) {
+        $("#content").css("display", "none");
+        $("#login").css("display", "block");
+    }
+    else {
+        loginUser(localStorage.username);
+
+    }
 }
 
 function displayIndexData(user) {
@@ -53,7 +60,6 @@ function displayTransactionTable(userData) {
 $(document).on("click", "#login-button", function() {
     let username = $("#username").val();
     loginUser(username);
-    localStorage.username = username;
 });
 
 $(document).on("click", "#logout-button", function() {
@@ -67,7 +73,15 @@ function loginUser(username) {
             $("#content").css("display", "block");
             $("#login").css("display", "none");
             displayIndexData(username);
+            localStorage.username = username;
         }
+        else {
+            localStorage.username = ""
+            alert("Username does not exist!")
+            $("#content").css("display", "none");
+            $("#login").css("display", "block");
+        }
+        document.getElementById("username").value = ""
     }
 }
 

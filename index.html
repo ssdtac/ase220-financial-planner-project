@@ -22,14 +22,18 @@
             <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">Add Purchase</button>
         </div>
     </header>
-    <div class="container" id="login">
-        <div class="row">
-            <h1>Please choose a username first</h1>
+    <div class="container" id="login" style="display: none;">
+        <div class="card">
+            <div class="row">
+                <h1>Login</h1>
+                <h2>For your security, please log in to continue.</h2>
+            </div>
+            <div>
+                <input type="text" placeholder="Username" id="username">
+                <button class="btn btn-primary" id="login-button">Select User</button>
+            </div>
         </div>
-        <div>
-            <input type="text" placeholder="Username" id="username">
-            <button class="btn btn-primary" id="login-button">Select User</button>
-        </div>
+        
     </div>
     <div class="container" id="content" style="display: none;">
         <div class="row" id="cards-container">
