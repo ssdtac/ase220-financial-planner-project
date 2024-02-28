@@ -16,10 +16,6 @@
 #title-div h2 {
     margin-left: 2.5em;
 }
-#content {
-    display: none;
-    margin-left: 2.6em;
-}
 
 .add {
     background-color: var(--green);

@@ -1,26 +1,8 @@
-const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976"
 const itemsPerPage = 9
 
-var data;
-var userShown = false;
-async function loadIndex() {
-    try {
-        const response = await fetch(dataLocation);
-        data = await response.json();
-    } catch (error) {
-        console.error('Failed to load data!', error);
-    }
-    if ((localStorage.username == '') || (localStorage.username == undefined)) {
-        $("#content").css("display", "none");
-        $("#login").css("display", "block");
-    }
-    else {
-        loginUser(localStorage.username);
 
-    }
-}
 
-function displayIndexData(user) {
+function displayPageData(user) {
     userData = data[user];
     displayTransactionTable(userData);
     displaySpendingOverview(userData);
@@ -28,9 +10,7 @@ function displayIndexData(user) {
     
 }
 
-function displayTransactionTable(userData) {
-    document.getElementById("user-title").innerText = userData.username;
-    
+function displayTransactionTable(userData) {    
     userData.transactionHistory.forEach(function(transaction) {
         let frequency, type;
         if (transaction.recurring == true) {
@@ -58,45 +38,6 @@ function displayTransactionTable(userData) {
     
 }
 
-$(document).on("click", "#login-button", function() {
-    let username = $("#username").val();
-    loginUser(username);
-});
-
-$(document).on("click", "#logout-button", function() {
-    logoutUser()
-});
-
-function loginUser(username) {
-    if(!userShown){
-        if (username in data) {  
-            userShown = true;
-            $("#content").css("display", "block");
-            $("#login").css("display", "none");
-            displayIndexData(username);
-            localStorage.username = username;
-        }
-        else {
-            localStorage.username = ""
-            alert("Username does not exist!")
-            $("#content").css("display", "none");
-            $("#login").css("display", "block");
-        }
-        document.getElementById("username").value = ""
-    }
-}
-
-function logoutUser() {
-    if(userShown) {
-        localStorage.username = ""
-        $("#content").css("display", "none");
-        $("#login").css("display", "block");
-        userShown = false;
-        document.querySelector("tbody").innerHTML = "";
-        document.getElementById("user-title").innerText = "";
-    }
-}
-
 function displaySpendingOverview(userData) {
     //REWORK ALL OF THIS WITH NEW DATA
     //This should calculate spending automatically from transactions.
@@ -120,5 +61,10 @@ function displayOverviewText(userData) {
     document.querySelector("#summary .wants").innerHTML = toPercentage(userData.spendingHistory[0].wants)
     document.querySelector("#summary .savings").innerHTML = toPercentage(userData.spendingHistory[0].savings)
 
+
+}
+
+function clearPage() {
+    document.querySelector("tbody").innerHTML = "";
 
 }

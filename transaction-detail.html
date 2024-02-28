@@ -3,19 +3,52 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Transaction Details</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Transaction Details</h1>
-        <div id="transaction-details" class="details">
-            <!-- Transaction details will be loaded here -->
+    <header>
+        
+        <div id="title-div" class="col-6">
+            <h1 id="title" class="display-4 text-center my-4 bold">ASE 220 Financial Planning</h1>
+            
         </div>
-        <button id="edit-transaction" class="btn btn-primary">Edit</button>
-        <button id="delete-transaction" class="btn btn-danger">Delete</button>
+        <div class="col-6 text-end mt-2">
+            <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">Add Purchase</button>
+            <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
+        </div>
+    </header>
+    <div class="container" id="login" style="display: none;">
+        <div class="card">
+            <div class="row">
+                <h1>Login</h1>
+                <h2>For your security, please log in to continue.</h2>
+            </div>
+            <div>
+                <input type="text" placeholder="Username" id="username">
+                <button class="btn btn-primary" id="login-button">Select User</button>
+            </div>
+        </div>
+        
     </div>
+    <main>
+        <div class="container">
+            <h1>Transaction Details</h1>
+            <div id="transaction-details" class="details">
+                <!-- Transaction details will be loaded here -->
+            </div>
+            <button id="edit-transaction" class="btn btn-primary">Edit</button>
+            <button id="delete-transaction" class="btn btn-danger">Delete</button>
+        </div>
+    </main>
+    <footer>
+        <p>You're logged in as <span id="user-title"><!--Username--></span>.</p>
+        <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
+
+
+    </footer>
+    
     <!-- Edit Transaction Modal -->
 <div id="editTransactionModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
@@ -63,7 +96,10 @@
       </div>
     </div>
   </div>
-  
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <script src="auth.js"></script>
+
     <script src="detail.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

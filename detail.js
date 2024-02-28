@@ -1,4 +1,5 @@
 
+
 async function fetchTransactionData() {
     const dataLocation = "https://jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976";
     try {
@@ -36,12 +37,11 @@ function findTransactionById(data, id) {
     return null;
 }
 
-async function loadTransactionDetails() {
+async function displayPageData() {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionId = urlParams.get('id');
 
     if (transactionId) {
-        const data = await fetchTransactionData();
         if (data) {
             const transactionDetails = findTransactionById(data, transactionId);
             displayTransactionDetails(transactionDetails);
@@ -52,28 +52,24 @@ async function loadTransactionDetails() {
     }
 }
 
+
 function setupEditAndDeleteButtons(transaction, data, transactionId) {
     document.getElementById('edit-transaction').addEventListener('click', () => showEditModal(transaction, data, transactionId));
     document.getElementById('delete-transaction').addEventListener('click', () => deleteTransaction(transactionId, data));
 }
-
 function showEditModal(transaction, data, transactionId) {
     document.getElementById('transactionDate').value = transaction.date;
     document.getElementById('transactionVendor').value = transaction.vendor;
     document.getElementById('transactionAmount').value = transaction.amount;
     document.getElementById('transactionCategory').value = transaction.category;
     document.getElementById('transactionDescription').value = transaction.description;
-
     var editModal = new bootstrap.Modal(document.getElementById('editTransactionModal'));
     editModal.show();
-
     document.getElementById('saveTransactionChanges').onclick = () => {
         saveTransactionChanges(transactionId, data);
         editModal.hide();
     };
 }
-
-
 function saveTransactionChanges(transactionId, data) {
     const updatedTransaction = {
         date: document.getElementById('transactionDate').value,
@@ -82,7 +78,6 @@ function saveTransactionChanges(transactionId, data) {
         category: document.getElementById('transactionCategory').value, 
         description: document.getElementById('transactionDescription').value, 
     };
-
     const userData = data[Object.keys(data)[0]]; 
     const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === transactionId);
     if (transactionIndex !== -1) {
@@ -90,7 +85,6 @@ function saveTransactionChanges(transactionId, data) {
         updateJSONBlob(data);
     }
 }
-
 function deleteTransaction(transactionId, data) {
     if (confirm('Are you sure you want to delete this transaction?')) {
         const userData = data[Object.keys(data)[0]]; 
@@ -99,7 +93,6 @@ function deleteTransaction(transactionId, data) {
         updateJSONBlob(data);
     }
 }
-
 // Update JSONBlob
 function updateJSONBlob(data) {
     const dataLocation = 'https://jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976';
@@ -119,5 +112,3 @@ function updateJSONBlob(data) {
     })
     .catch(error => console.error('Error updating JSONBlob:', error));
 }
-
-loadTransactionDetails();
