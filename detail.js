@@ -69,6 +69,8 @@ function saveTransactionChanges(transactionId, data) {
     if (transactionIndex !== -1) {
         userData.transactionHistory[transactionIndex] = {...userData.transactionHistory[transactionIndex], ...updatedTransaction};
         updateJSONBlob(data);
+        location.reload()
+
     }
 }
 function deleteTransaction(transactionId, data) {
@@ -77,6 +79,7 @@ function deleteTransaction(transactionId, data) {
         const newTransactionHistory = userData.transactionHistory.filter(transaction => transaction.id !== transactionId);
         userData.transactionHistory = newTransactionHistory;
         updateJSONBlob(data);
+        location.href = "/"
     }
 }
 // Update JSONBlob
