@@ -32,7 +32,7 @@ function displayTransactionTable(userData) {
         <td>${transaction.vendor}</td>
         <td>$${transaction.amount}</td>
         <td>${frequency}</td>
-        <td><button class="details-button" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'">See More Details</button></td>
+        <td><button class="details-button btn btn-secondary" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'">See More Details</button></td>
         </tr>`
     })
     
