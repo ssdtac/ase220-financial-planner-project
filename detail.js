@@ -1,17 +1,3 @@
-
-
-async function fetchTransactionData() {
-    const dataLocation = "https://jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976";
-    try {
-        const response = await fetch(dataLocation);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Failed to load data!', error);
-        return null;
-    }
-}
-
 function displayTransactionDetails(transaction) {
     if (transaction) {
         document.getElementById('transaction-details').innerHTML = `
