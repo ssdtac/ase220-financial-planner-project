@@ -1,41 +1,58 @@
-const itemsPerPage = 9
+var data; 
+const itemsPerPage = 3;
+let currentPage = 1;
 
-
+async function loadIndex() {
+    try {
+        const response = await fetch(dataLocation);
+        data = await response.json();
+        loginUser(localStorage.username);
+    } catch (error) {
+        console.error('Failed to load data!', error);
+    }
+}
 
 function displayPageData(user) {
     userData = data[user];
     displayTransactionTable(userData);
     displaySpendingOverview(userData);
     displayOverviewText(userData)
+    document.getElementById('load-more').style.display = 'block';
+}
+
+function displayTransactionTable(userData) {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const transactions = userData.transactionHistory.slice(startIndex, endIndex);
+
+    if (currentPage === 1) {
+        document.querySelector("tbody").innerHTML = "";
+    }
+
+    transactions.forEach(transaction => {
+        let frequency = transaction.recurring ? "Recurring" : "One-Time";
+        let type = transaction.type === "credit" ? "add" : "subtract";
+        document.querySelector("tbody").innerHTML += `
+        <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type} recurring-${transaction.recurring}">
+            <td>${transaction.date}</td>
+            <td class="caps">${transaction.category}</td>
+            <td>${transaction.vendor}</td>
+            <td>$${transaction.amount}</td>
+            <td>${frequency}</td>
+        </tr>`;
+    });
+
+    if (endIndex >= userData.transactionHistory.length) {
+        document.getElementById('load-more').style.display = 'none';
+    }
     
 }
 
-function displayTransactionTable(userData) {    
-    userData.transactionHistory.forEach(function(transaction) {
-        let frequency, type;
-        if (transaction.recurring == true) {
-            frequency = "Recurring"
-        }
-        else {
-            frequency = "One-Time"
-        }
-        if (transaction.type == "credit") {
-            type = "add"
-        }
-        else {
-            type = "subtract"
-        }
-        document.querySelector("tbody").innerHTML += `
-        <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type} recurring-${transaction.recurring}">
-        <td>${transaction.date}</td>
-        <td class="caps">${transaction.category}</td>
-        <td>${transaction.vendor}</td>
-        <td>$${transaction.amount}</td>
-        <td>${frequency}</td>
-        </tr>`
-    })
-    
-}
+document.getElementById('load-more').addEventListener('click', function() {
+    currentPage++;
+    displayTransactionTable(data[localStorage.username]);
+});
+
 
 function displaySpendingOverview(userData) {
     //REWORK ALL OF THIS WITH NEW DATA
@@ -67,3 +84,5 @@ function clearPage() {
     document.querySelector("tbody").innerHTML = "";
 
 }
+
+loadIndex();
