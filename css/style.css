@@ -84,3 +84,10 @@ header button {
 tr {
     cursor: pointer;
 }
+
+.card button {
+    width: max-content;
+    display: inline;
+    margin-right: .3em;
+    margin-left: .3em;
+}
