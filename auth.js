@@ -7,42 +7,50 @@ $(document).on("click", "#login-button", function() {
 });
 
 $(document).on("click", "#logout-button", function() {
-    logoutUser()
+    logoutUser();
 });
+
+function changeDisplays(login) {
+    if (login) {
+        $("main").css("display", "block");
+        $("#login").css("display", "none");
+        $("#logout-banner").css("display", "block");
+        $("#top-buttons").css("display", "block");
+    } else {
+        $("main").css("display", "none");
+        $("#login").css("display", "block");
+        $("#logout-banner").css("display", "none");
+        $("#top-buttons").css("display", "none");
+    }
+}
 
 function loginUser(username) {
     if(!userShown){
         if (username in data) {  
             userShown = true;
-            $("main").css("display", "block");
-            $("#login").css("display", "none");
             displayPageData(username);
             localStorage.username = username;
         }
         else {
             localStorage.username = ""
             alert("Username does not exist!")
-            $("main").css("display", "none");
-            $("#login").css("display", "block");
         }
+        changeDisplays(userShown);
         document.getElementById("username").value = ""
         document.getElementById("user-title").innerText = username;
-
     }
 }
 
 function logoutUser() {
     if(userShown) {
         localStorage.username = ""
-        $("main").css("display", "none");
-        $("#login").css("display", "block");
         userShown = false;
         clearPage()
         document.getElementById("user-title").innerText = "";
     }
+    changeDisplays(userShown);
 }
 
-var userShown = false;
 const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976"
 
 var data;
@@ -55,8 +63,7 @@ async function loadPage() {
         console.error('Failed to load data!', error);
     }
     if ((localStorage.username == '') || (localStorage.username == undefined)) {
-        $("main").css("display", "none");
-        $("#login").css("display", "block");
+        changeDisplays(false);
     }
     else {
         loginUser(localStorage.username);

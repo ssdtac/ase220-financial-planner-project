@@ -20,10 +20,9 @@
                 <h1 id="title" class="display-4 text-center my-4 bold">ASE 220 Financial Planning</h1>
             </a>
         </div>
-        <div class="col-6 text-end mt-2">
+        <span class="col-6 text-end mt-2" id="top-buttons">
             <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">Add Purchase</button>
-            <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
-        </div>
+        </span>
     </header>
     <div class="container" id="login" style="display: none;">
         <div class="card">
@@ -79,10 +78,10 @@
     </main>
     
     <footer>
-        <p>You're logged in as <span id="user-title"><!--Username--></span>.</p>
-        <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
-
-
+        <div id="logout-banner" style="display:none;">
+            <p>You're logged in as <span id="user-title"><!--Username--></span>.</p>
+            <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
