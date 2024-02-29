@@ -94,4 +94,47 @@ function clearPage() {
 
 }
 
-loadIndex();
+function readDate() {
+    date = userData.transactionHistory[0].date.split("-")
+    date = new Date(date[0], date[1], date[2])
+    return date
+}
+
+let overview = {
+    wants: 0,
+    needs: 0,
+    income: 0,
+    idealWants: 0,
+    idealNeeds: 0,
+    idealSavings: 0,
+}
+
+function transactionsToOverview() {
+    //update dates from strings to Dates
+    first = Date.parse(userData.spendingHistory[0].dates[0])
+    second = Date.parse(userData.spendingHistory[0].dates[1])
+    // calculate needs/wants/income for current time
+    userData.transactionHistory.forEach(function(transaction) {
+        between = Date.parse(transaction.date).between(first, second)                   // true|false
+        if (between) {
+            if (transaction.category == "need") {
+                overview.needs = overview.needs + transaction.amount
+            }
+            else if (transaction.category == "income") {
+                overview.income = overview.income + transaction.amount
+            }
+            else {
+                overview.wants = overview.wants + transaction.amount
+            }
+        }
+    })
+    //calculate ideal need/wants
+    overview.idealNeeds = userData.spendingHistory[0].needs * overview.income
+    overview.idealWants = userData.spendingHistory[0].wants * overview.income
+    overview.idealSavings = userData.spendingHistory[0].savings * overview.income
+
+
+    return overview
+    
+}
+
