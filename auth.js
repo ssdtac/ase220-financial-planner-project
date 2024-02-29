@@ -12,15 +12,11 @@ $(document).on("click", "#logout-button", function() {
 
 function changeDisplays(login) {
     if (login) {
-        $("main").css("display", "block");
+        $("main, #logout-banner, #top-buttons").css("display", "block");
         $("#login").css("display", "none");
-        $("#logout-banner").css("display", "block");
-        $("#top-buttons").css("display", "block");
     } else {
-        $("main").css("display", "none");
+        $("main, #logout-banner, #top-buttons").css("display", "none");
         $("#login").css("display", "block");
-        $("#logout-banner").css("display", "none");
-        $("#top-buttons").css("display", "none");
     }
 }
 
