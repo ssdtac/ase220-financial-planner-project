@@ -86,14 +86,13 @@ function deleteTransaction(transactionId, data) {
     }
 }
 
-$(document).ready(function() { // jquery event listeners go here
-    $(document).on("change", "#transactionType", function() {
-        if(document.querySelector("#transactionType").value == "purchase") {
-            $("#purchaseOptions").css("display", "block");
-        } else if(document.querySelector("#transactionType").value == "deposit") {
-            
-        }
-    });
+document.querySelector("#saveNewTransaction").addEventListener("click", function() {
+    let val = document.querySelector("#transactionCategory").value
+    if(val == "purchase") {
+        console.log("test");
+    } else if (val == "deposit") {
+        console.log("test2");
+    }
 });
 
 // Update JSONBlob
