@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;700&display=swap');
-
+@import url('https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css');
 :root {
     --red: #de7d7d;
     --green: #B7E1CD;
@@ -17,12 +17,12 @@
     margin-left: 2.5em;
 }
 
-.add {
+/* .add {
     background-color: var(--green);
 }
 .subtract {
     background-color: var(--red);
-}
+} */
 .recurring-true, .bold {
     font-weight: bold !important;
 }
@@ -41,13 +41,13 @@ html .card {
     padding: 1em;
 }
 
-html .table th {
+/* html .table th {
     color: var(--text);
 }
 
 html .table {
     border-bottom: 0;
-}
+} */
 
 header {
     display: flex;
@@ -81,9 +81,9 @@ header button {
     text-transform: capitalize;
 }
 
-tr {
+/* tr {
     cursor: pointer;
-}
+} */
 
 .card button {
     width: max-content;

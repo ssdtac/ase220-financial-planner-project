@@ -7,6 +7,7 @@ async function loadIndex() {
         const response = await fetch(dataLocation);
         data = await response.json();
         loginUser(localStorage.username);
+        displayPageData(localStorage.username);
     } catch (error) {
         console.error('Failed to load data!', error);
     }
@@ -21,14 +22,10 @@ function displayPageData(user) {
 }
 
 function displayTransactionTable(userData) {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const transactions = userData.transactionHistory.slice(startIndex, endIndex);
-
-    if (currentPage === 1) {
-        document.querySelector("tbody").innerHTML = "";
-    }
-
+    // const startIndex = (currentPage - 1) * itemsPerPage;
+    // const endIndex = startIndex + itemsPerPage;
+    const transactions = userData["transactionHistory"];
+    clearPage();
     transactions.forEach(transaction => {
         let frequency = transaction.recurring ? "Recurring" : "One-Time";
         let type = transaction.type === "credit" ? "add" : "subtract";
@@ -42,15 +39,14 @@ function displayTransactionTable(userData) {
         </tr>`;
     });
 
-    if (endIndex >= userData.transactionHistory.length) {
-        document.getElementById('load-more').style.display = 'none';
-    }
-    
+    new DataTable("data-table");
 }
+
 
 document.getElementById('load-more').addEventListener('click', function() {
     currentPage++;
     displayTransactionTable(data[localStorage.username]);
+
 });
 
 
@@ -85,4 +81,8 @@ function clearPage() {
 
 }
 
-loadIndex();
+$(document).ready(function() {
+    loadIndex();
+    let dt = new DataTable("#data-table")
+});
+

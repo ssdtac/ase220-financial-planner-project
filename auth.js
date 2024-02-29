@@ -16,11 +16,12 @@ function changeDisplays(login, username) {
         $("#login").css("display", "none");
         document.getElementById("username").value = ""
         document.getElementById("user-title").innerText = username;
+        displayTransactionTable(data);
     } else {
         $("main, #logout-banner, #top-buttons").css("display", "none");
         $("#login").css("display", "block");
-        clearPage()
         document.getElementById("user-title").innerText = "";
+        clearPage();
     }
 }
 
@@ -51,17 +52,21 @@ const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446
 var data;
 
 async function loadPage() {
-    try {
+    try { /* could have conditionals to load specific people's data (privacy)
+           could be achieved with use of separate json file (jsonblob) that has an index of users
+          with individual user blob files. user.js file for fetch retrieval after login?
+          */
         const response = await fetch(dataLocation);
         data = await response.json();
     } catch (error) {
         console.error('Failed to load data!', error);
-    }
+    } 
     if ((localStorage.username == '') || (localStorage.username == undefined)) {
-        changeDisplays(false);
+        logoutUser();
     }
     else {
         loginUser(localStorage.username);
+        
 
     }
 }
