@@ -86,7 +86,15 @@ function deleteTransaction(transactionId, data) {
     }
 }
 
-
+$(document).ready(function() { // jquery event listeners go here
+    $(document).on("change", "#transactionType", function() {
+        if(document.querySelector("#transactionType").value == "purchase") {
+            $("#purchaseOptions").css("display", "block");
+        } else if(document.querySelector("#transactionType").value == "deposit") {
+            
+        }
+    });
+});
 
 // Update JSONBlob
 function updateJSONBlob(data) {
