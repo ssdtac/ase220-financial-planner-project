@@ -41,6 +41,10 @@ html .card {
     padding: 1em;
 }
 
+div.modal-content {
+    background-color: var(--card-background);
+}
+
 html .table th {
     color: var(--text);
 }
@@ -90,4 +94,12 @@ tr {
     display: inline;
     margin-right: .3em;
     margin-left: .3em;
+}
+
+main {
+    min-height: 70vh;
+}
+
+#summary {
+    padding-top: 1em;
 }
