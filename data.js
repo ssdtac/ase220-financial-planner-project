@@ -61,15 +61,6 @@ function toPercentage(val) {
     return val
 }
 
-function displayOverviewText(userData) {
-    //using most recent month until i have a way of switching between
-    document.querySelector("#summary .needs").innerHTML = toPercentage(userData.spendingHistory[0].needs)
-    document.querySelector("#summary .wants").innerHTML = toPercentage(userData.spendingHistory[0].wants)
-    document.querySelector("#summary .savings").innerHTML = toPercentage(userData.spendingHistory[0].savings)
-
-
-}
-
 function clearPage() {
     document.querySelector("tbody").innerHTML = "";
 
@@ -88,6 +79,9 @@ let overview = {
     idealWants: 0,
     idealNeeds: 0,
     idealSavings: 0,
+    wantsPercentage: 0,
+    needsPercentage: 0,
+    savingsPercentage: 0,
 }
 
 function calculateOverview() {
@@ -125,14 +119,26 @@ function displaySpendingOverview(userData) {
     calculateOverview()
     //REWORK ALL OF THIS WITH NEW DATA
     //This should calculate spending automatically from transactions.
-    let wantsPercentage = overview.wants/overview.income * 100
-    let needsPercentage = overview.needs/overview.income * 100
-    let savingsPercentage = overview.idealSavings/overview.income * 100
+    overview.wantsPercentage = overview.wants/overview.income * 100
+    overview.needsPercentage = overview.needs/overview.income * 100
+    overview.savingsPercentage = overview.idealSavings/overview.income * 100
 
-    document.querySelector("#needs-bar").style.width = `${needsPercentage}%`
-    document.querySelector("#wants-bar").style.width = `${wantsPercentage}%`
-    document.querySelector("#savings-bar").style.width = `${savingsPercentage}%`
+    document.querySelector("#needs-bar").style.width = `${overview.needsPercentage}%`
+    document.querySelector("#wants-bar").style.width = `${overview.wantsPercentage}%`
+    document.querySelector("#savings-bar").style.width = `${overview.savingsPercentage}%`
 
-    document.querySelector('.percent').innerHTML = `${Math.round(100-needsPercentage-wantsPercentage-savingsPercentage)}%`
+    document.querySelector('.percent').innerHTML = `${Math.round(100-overview.needsPercentage-overview.wantsPercentage-overview.savingsPercentage)}%`
+
+}
+
+function displayOverviewText(userData) {
+    //using most recent month until i have a way of switching between
+    document.querySelector("#summary .ideal-needs").innerHTML = toPercentage(userData.spendingHistory[0].needs)
+    document.querySelector("#summary .ideal-wants").innerHTML = toPercentage(userData.spendingHistory[0].wants)
+    document.querySelector("#summary .needs").innerHTML = `${overview.needsPercentage}%`
+    document.querySelector("#summary .wants").innerHTML = `${overview.wantsPercentage}%`
+    
+    document.querySelector("#summary .savings").innerHTML = toPercentage(userData.spendingHistory[0].savings)
+
 
 }
