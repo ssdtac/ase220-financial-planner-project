@@ -10,17 +10,17 @@ $(document).on("click", "#logout-button", function() {
     logoutUser();
 });
 
-function changeDisplays(login) {
+function changeDisplays(login, username) {
     if (login) {
-        $("main").css("display", "block");
+        $("main, #logout-banner, #top-buttons").css("display", "block");
         $("#login").css("display", "none");
-        $("#logout-banner").css("display", "block");
-        $("#top-buttons").css("display", "block");
+        document.getElementById("username").value = ""
+        document.getElementById("user-title").innerText = username;
     } else {
-        $("main").css("display", "none");
+        $("main, #logout-banner, #top-buttons").css("display", "none");
         $("#login").css("display", "block");
-        $("#logout-banner").css("display", "none");
-        $("#top-buttons").css("display", "none");
+        clearPage()
+        document.getElementById("user-title").innerText = "";
     }
 }
 
@@ -30,14 +30,11 @@ function loginUser(username) {
             userShown = true;
             displayPageData(username);
             localStorage.username = username;
-        }
-        else {
+        } else {
             localStorage.username = ""
             alert("Username does not exist!")
         }
-        changeDisplays(userShown);
-        document.getElementById("username").value = ""
-        document.getElementById("user-title").innerText = username;
+        changeDisplays(userShown, username);
     }
 }
 
@@ -45,10 +42,8 @@ function logoutUser() {
     if(userShown) {
         localStorage.username = ""
         userShown = false;
-        clearPage()
-        document.getElementById("user-title").innerText = "";
     }
-    changeDisplays(userShown);
+    changeDisplays(userShown, "");
 }
 
 const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976"
