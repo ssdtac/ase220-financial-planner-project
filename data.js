@@ -53,14 +53,7 @@ document.getElementById('load-more').addEventListener('click', function() {
     displayTransactionTable(data[localStorage.username]);
 });
 
-document.querySelector("#saveNewTransaction").addEventListener("click", function() {
-    let val = document.querySelector("#transactionCategory").value
-    if(val == "purchase") {
-        // do purchase things
-    } else if (val == "deposit") {
-        //do deposit things
-    }
-});
+
 
 
 function displaySpendingOverview(userData) {

@@ -24,6 +24,8 @@ function changeDisplays(login, username) {
     }
 }
 
+
+
 function loginUser(username) {
     if(!userShown){
         if (username in data) {  
@@ -45,6 +47,15 @@ function logoutUser() {
     }
     changeDisplays(userShown, "");
 }
+
+document.querySelector("#saveNewTransaction").addEventListener("click", function() {
+    let val = document.querySelector("#transactionCategory").value
+    if(val == "purchase") {
+        // do purchase things
+    } else if (val == "deposit") {
+        //do deposit things
+    }
+});
 
 const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976"
 

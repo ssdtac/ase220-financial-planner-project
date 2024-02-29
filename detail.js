@@ -86,14 +86,6 @@ function deleteTransaction(transactionId, data) {
     }
 }
 
-document.querySelector("#saveNewTransaction").addEventListener("click", function() {
-    let val = document.querySelector("#transactionCategory").value
-    if(val == "purchase") {
-        console.log("test");
-    } else if (val == "deposit") {
-        console.log("test2");
-    }
-});
 
 // Update JSONBlob
 function updateJSONBlob(data) {
