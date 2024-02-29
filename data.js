@@ -55,18 +55,6 @@ document.getElementById('load-more').addEventListener('click', function() {
 
 
 
-
-function displaySpendingOverview(userData) {
-    //REWORK ALL OF THIS WITH NEW DATA
-    //This should calculate spending automatically from transactions.
-    budget = userData.spendingHistory[0].budget
-    spending = userData.spendingHistory[0].spending
-    let percentage = spending/budget * 100
-    document.querySelector("#spending-history .progress-bar").style.width = `${percentage}%`
-    document.querySelector('.percent').innerHTML = `${Math.round(100-percentage)}%`
-
-}
-
 function toPercentage(val) {
     val = val * 100
     val = `${val}%`
@@ -102,7 +90,7 @@ let overview = {
     idealSavings: 0,
 }
 
-function transactionsToOverview() {
+function calculateOverview() {
     //update dates from strings to Dates
     first = Date.parse(userData.spendingHistory[0].dates[0])
     second = Date.parse(userData.spendingHistory[0].dates[1])
@@ -131,3 +119,20 @@ function transactionsToOverview() {
     
 }
 
+
+
+function displaySpendingOverview(userData) {
+    calculateOverview()
+    //REWORK ALL OF THIS WITH NEW DATA
+    //This should calculate spending automatically from transactions.
+    let wantsPercentage = overview.wants/overview.income * 100
+    let needsPercentage = overview.needs/overview.income * 100
+    let savingsPercentage = overview.idealSavings/overview.income * 100
+
+    document.querySelector("#needs-bar").style.width = `${needsPercentage}%`
+    document.querySelector("#wants-bar").style.width = `${wantsPercentage}%`
+    document.querySelector("#savings-bar").style.width = `${savingsPercentage}%`
+
+    document.querySelector('.percent').innerHTML = `${Math.round(100-needsPercentage-wantsPercentage-savingsPercentage)}%`
+
+}
