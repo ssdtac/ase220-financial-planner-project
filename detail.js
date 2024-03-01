@@ -56,21 +56,32 @@ function showEditModal(transaction, data, transactionId) {
     };
 }
 
-function saveTransactionChanges(transactionId, data) {
-    const updatedTransaction = {
-        date: document.getElementById('transactionDate').value,
-        vendor: document.getElementById('transactionVendor').value, 
-        amount: parseFloat(document.getElementById('transactionAmount').value), 
-        category: document.getElementById('transactionCategory').value, 
-        description: document.getElementById('transactionDescription').value, 
-    };
-    const userData = data[Object.keys(data)[0]]; 
+function saveTransactionChanges(transactionId) {
     const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === transactionId);
     if (transactionIndex !== -1) {
-        userData.transactionHistory[transactionIndex] = {...userData.transactionHistory[transactionIndex], ...updatedTransaction};
-        updateJSONBlob(data);
-        location.reload()
+        const currentTransaction = userData.transactionHistory[transactionIndex];
 
+        const updatedTransaction = {
+            id: transactionId,
+            date: document.getElementById('transactionDate').value,
+            vendor: document.getElementById('transactionVendor').value,
+            amount: parseFloat(document.getElementById('transactionAmount').value),
+            category: document.getElementById('transactionCategory').value,
+            description: document.getElementById('transactionDescription').value,
+            type: currentTransaction.type,
+            recurring: currentTransaction.recurring
+        };
+
+        userData.transactionHistory[transactionIndex] = updatedTransaction;
+
+        updateJSONBlob(userData, function(success) {
+            if (success) {
+                alert("Transaction updated successfully");
+                location.reload(); 
+            } else {
+                alert("Failed to update the transaction.");
+            }
+        });
     }
 }
 

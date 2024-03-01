@@ -126,6 +126,13 @@
                 <div class="modal-body">
                     <form id="editTransactionForm">
                         <div class="mb-3">
+                            <label for="transactionType" class="form-label">Transaction Type</label>
+                            <select class="form-control" id="transactionCategory">
+                                <option value="purchase">Purchase</option>
+                                <option value="deposit">Credit/ Deposit</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="transactionDate" class="form-label">Date</label>
                             <input type="date" class="form-control" id="transactionDate">
                         </div>
