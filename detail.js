@@ -13,10 +13,10 @@ function displayTransactionDetails(transaction) {
 }
 
 function findTransactionById(id) {
-        const transaction = userData.transactionHistory.find(transaction => transaction.id === id);
-        if (transaction) {
-            return transaction;
-        }
+    const transaction = userData.transactionHistory.find(transaction => transaction.id === id);
+    if (transaction) {
+        return transaction;
+    }
     return null;
 }
 
@@ -26,7 +26,6 @@ async function displayPageData() {
     if (transactionId) {
         getUserData(localStorage.blobId).then( function() {
         if (userData) {
-
             const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
             setupEditAndDeleteButtons(transactionDetails, userData, transactionId);
@@ -64,32 +63,32 @@ function saveTransactionChanges(transactionId, data) {
         category: document.getElementById('transactionCategory').value, 
         description: document.getElementById('transactionDescription').value, 
     };
-    const userData = data[Object.keys(data)[0]]; 
-    const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === transactionId);
-    if (transactionIndex !== -1) {
-        userData.transactionHistory[transactionIndex] = {...userData.transactionHistory[transactionIndex], ...updatedTransaction};
-        updateJSONBlob(data);
-        location.reload()
-
-    }
+    getUserData(localStorage.blobId).then(function () {
+        const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === transactionId);
+        if (transactionIndex !== -1) {
+            userData.transactionHistory[transactionIndex] = {...userData.transactionHistory[transactionIndex], ...updatedTransaction};
+            updateJSONBlob(data);
+            location.reload()
+        }
+    });
 }
 
 function deleteTransaction(transactionId, data) {
     if (confirm('Are you sure you want to delete this transaction?')) {
-        const userData = data[Object.keys(data)[0]]; 
-        const newTransactionHistory = userData.transactionHistory.filter(transaction => transaction.id !== transactionId);
-        userData.transactionHistory = newTransactionHistory;
-        updateJSONBlob(data);
-        location.href = "/"
+        getUserData(localStorage.blobId).then(function() {
+            const newTransactionHistory = userData.transactionHistory.filter(transaction => transaction.id !== transactionId);
+            userData.transactionHistory = newTransactionHistory;
+            updateJSONBlob(data);
+            location.href = "/";
+        });
     }
 }
 
 
 // Update JSONBlob
 function updateJSONBlob(data) {
-    const dataLocation = 'https://jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976';
-    
-    fetch(dataLocation, {
+    const url = "https://jsonblob.com//api/jsonBlob/"+localStorage.blobId;
+    fetch(url, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
