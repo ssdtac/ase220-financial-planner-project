@@ -12,27 +12,25 @@ function displayTransactionDetails(transaction) {
     }
 }
 
-function findTransactionById(data, id) {
-    for (const user in data) {
-        const userData = data[user];
+function findTransactionById(id) {
         const transaction = userData.transactionHistory.find(transaction => transaction.id === id);
         if (transaction) {
             return transaction;
         }
-    }
     return null;
 }
 
 async function displayPageData() {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionId = urlParams.get('id');
-
     if (transactionId) {
-        if (data) {
-            const transactionDetails = findTransactionById(data, transactionId);
+        getUserData(localStorage.blobId).then( function() {
+        if (userData) {
+
+            const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
             setupEditAndDeleteButtons(transactionDetails, data, transactionId);
-        }
+        }});
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction ID not provided in the URL.';
     }

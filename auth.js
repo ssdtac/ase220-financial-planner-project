@@ -19,12 +19,21 @@ function changeDisplays(login, username) {
     } else {
         $("main, #logout-banner, #top-buttons").css("display", "none");
         $("#login").css("display", "block");
-        clearPage()
+        clearPage();
         document.getElementById("user-title").innerText = "";
     }
 }
 
 var userData;
+
+async function getUserData(blobId) {
+    try {
+        let response = await fetch("https:///jsonblob.com/api/jsonBlob/jsonblob.com/"+blobId);
+        userData = await response.json();
+    } catch (error) {
+        console.error('Failed to load user data!', error);
+    }
+}
 
 function loginUser(username) {
     if(!userShown){

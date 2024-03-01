@@ -15,14 +15,7 @@ async function loadIndex() {
     }
 }
 
-async function getUserData(blobId) {
-    try {
-        let response = await fetch("https:///jsonblob.com/api/jsonBlob/jsonblob.com/"+blobId);
-        userData = await response.json();
-    } catch (error) {
-        console.error('Failed to load user data!', error);
-    }
-}
+
 
 
 function displayPageData() {
