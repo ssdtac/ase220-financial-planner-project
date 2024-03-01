@@ -72,18 +72,17 @@ function saveTransactionChanges(transactionId) {
             recurring: currentTransaction.recurring
         };
 
-        getUserData(localStorage.blobId).then(function() {
+        
             userData.transactionHistory[transactionIndex] = updatedTransaction;
 
             updateJSONBlob(userData, function(success) {
                 if (success) {
                     alert("Transaction updated successfully");
-                    location.reload(); 
                 } else {
                     alert("Failed to update the transaction.");
                 }
             });
-        });
+       
     }
 }
 
@@ -111,7 +110,7 @@ function updateJSONBlob(data) {
     .then(updatedData => {
         console.log('JSONBlob updated successfully', updatedData);
         alert('Transaction updated successfully');
-    })
+    }).then(location.reload())
     .catch(error => console.error('Error updating JSONBlob:', error));
 }
 
