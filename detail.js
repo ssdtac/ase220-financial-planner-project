@@ -75,19 +75,16 @@ function saveTransactionChanges(transactionId, data) {
 }
 
 function deleteTransaction(transactionId, data) {
-    if (confirm('Are you sure you want to delete this transaction?')) {
-        const userData = data[Object.keys(data)[0]]; 
-        const newTransactionHistory = userData.transactionHistory.filter(transaction => transaction.id !== transactionId);
-        userData.transactionHistory = newTransactionHistory;
-        updateJSONBlob(data);
-        location.href = "/"
-    }
+    data.transactionHistory = data.transactionHistory.filter(transaction => transaction.id !== transactionId);
+    updateJSONBlob(data, () => {
+        alert("Transaction deleted successfully");
+        window.location.href = "index.html";
+    });
 }
-
 
 // Update JSONBlob
 function updateJSONBlob(data) {
-    const dataLocation = 'https://jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976';
+    const dataLocation = `https://jsonblob.com/api/jsonBlob/${localStorage.blobId}`;
     
     fetch(dataLocation, {
         method: 'PUT',
