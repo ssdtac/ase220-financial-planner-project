@@ -29,7 +29,7 @@ async function displayPageData() {
 
             const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
-            setupEditAndDeleteButtons(transactionDetails, data, transactionId);
+            setupEditAndDeleteButtons(transactionDetails, userData, transactionId);
         }});
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction ID not provided in the URL.';
