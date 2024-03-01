@@ -75,7 +75,7 @@ function clearPage() {
 }
 
 function readDate() {
-    date = userData.transactionHistory[0].date.split("-")
+    date = userData.transactionHistory[selectedTimeframe].date.split("-")
     date = new Date(date[0], date[1], date[2])
     return date
 }
@@ -93,9 +93,10 @@ let overview = {
 }
 
 function calculateOverview(userData) {
+    const timeframe = userData.spendingHistory[selectedTimeframe]
     //update dates from strings to Dates
-    first = Date.parse(userData.spendingHistory[0].dates[0])
-    second = Date.parse(userData.spendingHistory[0].dates[1])
+    first = Date.parse(timeframe.dates[0])
+    second = Date.parse(timeframe.dates[1])
     // calculate needs/wants/income for current time
     userData.transactionHistory.forEach(function(transaction) {
         between = Date.parse(transaction.date).between(first, second)                   // true|false
@@ -112,16 +113,16 @@ function calculateOverview(userData) {
         }
     })
     //calculate ideal need/wants
-    overview.idealNeeds = userData.spendingHistory[0].needs * overview.income
-    overview.idealWants = userData.spendingHistory[0].wants * overview.income
-    overview.idealSavings = userData.spendingHistory[0].savings * overview.income
+    overview.idealNeeds = timeframe.needs * overview.income
+    overview.idealWants = timeframe.wants * overview.income
+    overview.idealSavings = timeframe.savings * overview.income
 
 
     return overview
     
 }
 
-
+let selectedTimeframe = 0;
 
 function displaySpendingOverview(userData) {
     calculateOverview(userData)
@@ -140,13 +141,14 @@ function displaySpendingOverview(userData) {
 }
 
 function displayOverviewText(userData) {
+    const timeframe = userData.spendingHistory[selectedTimeframe]
     //using most recent month until i have a way of switching between
-    document.querySelector("#summary .ideal-needs").innerHTML = toPercentage(userData.spendingHistory[0].needs)
-    document.querySelector("#summary .ideal-wants").innerHTML = toPercentage(userData.spendingHistory[0].wants)
+    document.querySelector("#summary .ideal-needs").innerHTML = toPercentage(timeframe.needs)
+    document.querySelector("#summary .ideal-wants").innerHTML = toPercentage(timeframe.wants)
     document.querySelector("#summary .needs").innerHTML = `${overview.needsPercentage}%`
     document.querySelector("#summary .wants").innerHTML = `${overview.wantsPercentage}%`
     
-    document.querySelector("#summary .savings").innerHTML = toPercentage(userData.spendingHistory[0].savings)
+    document.querySelector("#summary .savings").innerHTML = toPercentage(timeframe.savings)
 
 
 }
