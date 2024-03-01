@@ -1,24 +1,39 @@
-var data; 
+var data;
+var users;
+
+
 const itemsPerPage = 3;
 let currentPage = 1;
 
 async function loadIndex() {
     try {
         const response = await fetch(dataLocation);
-        data = await response.json();
+        users = await response.json();
         loginUser(localStorage.username);
     } catch (error) {
         console.error('Failed to load data!', error);
     }
 }
 
-function displayPageData(user) {
-    userData = data[user];
-    displayTransactionTable(userData);
-    displaySpendingOverview(userData);
-    displayOverviewText(userData)
-    document.getElementById('load-more').style.display = 'block';
+async function getUserData(blobId) {
+    try {
+        let response = await fetch("https:///jsonblob.com/api/jsonBlob/jsonblob.com/"+blobId);
+        userData = await response.json();
+    } catch (error) {
+        console.error('Failed to load user data!', error);
+    }
 }
+
+
+function displayPageData() {
+    getUserData(localStorage.blobId).then(function() {
+        displayTransactionTable(userData);
+        displaySpendingOverview(userData);
+        displayOverviewText(userData)
+        document.getElementById('load-more').style.display = 'block';
+    })
+}
+
 
 function displayTransactionTable(userData) {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -50,7 +65,7 @@ function displayTransactionTable(userData) {
 
 document.getElementById('load-more').addEventListener('click', function() {
     currentPage++;
-    displayTransactionTable(data[localStorage.username]);
+    displayPageData();
 });
 
 
@@ -84,7 +99,7 @@ let overview = {
     savingsPercentage: 0,
 }
 
-function calculateOverview() {
+function calculateOverview(userData) {
     //update dates from strings to Dates
     first = Date.parse(userData.spendingHistory[0].dates[0])
     second = Date.parse(userData.spendingHistory[0].dates[1])
@@ -116,7 +131,7 @@ function calculateOverview() {
 
 
 function displaySpendingOverview(userData) {
-    calculateOverview()
+    calculateOverview(userData)
     //REWORK ALL OF THIS WITH NEW DATA
     //This should calculate spending automatically from transactions.
     overview.wantsPercentage = overview.wants/overview.income * 100

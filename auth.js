@@ -2,7 +2,7 @@ var userShown = false;
 
 
 $(document).on("click", "#login-button", function() {
-    let username = $("#username").val();
+    let username = document.getElementById("username").value;
     loginUser(username);
 });
 
@@ -24,12 +24,13 @@ function changeDisplays(login, username) {
     }
 }
 
-
+var userData;
 
 function loginUser(username) {
     if(!userShown){
-        if (username in data) {  
+        if (username in users) {  
             userShown = true;
+            localStorage.blobId = users[username].blobId;
             displayPageData(username);
             localStorage.username = username;
         } else {
@@ -57,14 +58,14 @@ document.querySelector("#saveNewTransaction").addEventListener("click", function
     }
 });
 
-const dataLocation = "https:///jsonblob.com/api/jsonBlob/jsonblob.com/1212135446795902976"
+const dataLocation = "https://jsonblob.com/api/jsonBlob/jsonblob.com/1213035252695293952"
+var users;
 
-var data;
 
 async function loadPage() {
     try {
         const response = await fetch(dataLocation);
-        data = await response.json();
+        users = await response.json();
     } catch (error) {
         console.error('Failed to load data!', error);
     }
