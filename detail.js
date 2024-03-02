@@ -36,16 +36,17 @@ async function displayPageData() {
 
 
 function setupEditAndDeleteButtons(transaction, data, transactionId) {
-    document.getElementById('edit-transaction').addEventListener('click', () => showEditModal(transaction, data, transactionId));
+    document.getElementById('edit-transaction').addEventListener('click', () => showEditModal(transaction, transactionId));
     document.getElementById('delete-transaction').addEventListener('click', () => deleteTransaction(transactionId, data));
 }
 
-function showEditModal(transaction, data, transactionId) {
+function showEditModal(transaction, transactionId) {
     document.getElementById('transactionDate').value = transaction.date;
     document.getElementById('transactionVendor').value = transaction.vendor;
     document.getElementById('transactionAmount').value = transaction.amount;
     document.getElementById('transactionCategory').value = transaction.category;
     document.getElementById('transactionDescription').value = transaction.description;
+    document.getElementById('transactionType').value = transaction.type;
     var editModal = new bootstrap.Modal(document.getElementById('editTransactionModal'));
     editModal.show();
     document.getElementById('saveTransactionChanges').addEventListener('click', () => {
