@@ -6,6 +6,7 @@
     --background: #18181B;
     --card-background: #2B2B2B;
     --text: #FFF;
+    --textbox: #DDD;
     --header-background: #000;
 }
 
@@ -109,4 +110,8 @@ main {
 
 #title-div {
     padding-left: 1em;
+}
+
+body .form-control {
+    background-color: var(--textbox)
 }
