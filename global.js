@@ -97,7 +97,7 @@ function updateJSONBlob(data) {
     .then(updatedData => {
         console.log('JSONBlob updated successfully', updatedData);
         alert('Transaction updated successfully');
-    })
+    }).then(location.reload())
     .catch(error => console.error('Error updating JSONBlob:', error));
 }
 
