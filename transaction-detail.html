@@ -50,66 +50,6 @@
 
     </footer>
 
-    <!-- Add Transaction Modal -->
-        <div id="addTransactionModal" class="modal modal-lg" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">New Transaction</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editTransactionForm">
-                            <div class="mb-3">
-                                <label for="transactionType" class="form-label">Transaction Type</label>
-                                <select class="form-control" id="transactionCategory">
-                                    <option value="purchase">Purchase</option>
-                                    <option value="deposit">Credit/ Deposit</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="transactionDate" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="addtransactionDate">
-                            </div>
-                            <div class="mb-3">
-                                <label for="transactionVendor" class="form-label">Vendor</label>
-                                <input type="text" class="form-control" id="addtransactionVendor">
-                            </div>
-                            <div class="mb-3">
-                                <label for="transactionAmount" class="form-label">Amount</label>
-                                <input type="number" class="form-control" id="addtransactionAmount" step="0.01">
-                            </div>
-                            <div class="mb-3" id="transactionOptions">
-                            <div id="purchaseOptions">
-                                <label for="transactionCategory" class="form-label">Category</label>
-                                <select class="form-control" id="addtransactionCategory">
-                                    <option value="need">Need</option>
-                                    <option value="want">Want</option>
-                                    <option value="savings">Savings</option>
-                                    <option value="utilities">Utilities</option>
-                                    <option value="entertainment">Entertainment</option>
-                                    <!-- Add more categories as needed -->
-                                </select>
-                            </div>
-                            </div>
-    
-                            <div class="mb-3">
-                                <label for="transactionDescription" class="form-label">Description</label>
-                                <textarea class="form-control" id="addtransactionDescription"></textarea>
-                            </div>
-                        </form>
-                        </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Transaction</button>
-                        <button type="button" class="btn btn-primary" id="saveNewTransaction">Save Transaction</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-
-
     <!-- Edit transaction Modal-->
     <div id="editTransactionModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
@@ -122,7 +62,7 @@
                     <form id="editTransactionForm">
                         <div class="mb-3">
                             <label for="transactionType" class="form-label">Transaction Type</label>
-                            <select class="form-control" id="transactionCategory">
+                            <select class="form-control" id="transactionType">
                                 <option value="purchase">Purchase</option>
                                 <option value="deposit">Credit/ Deposit</option>
                             </select>

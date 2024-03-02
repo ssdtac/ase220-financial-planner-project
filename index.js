@@ -71,7 +71,7 @@ function displayTransactionTable(userData) {
 
     transactions.forEach(transaction => {
         let frequency = transaction.recurring ? "Recurring" : "One-Time";
-        let type = transaction.type === "deposit" ? "add" : "subtract";
+        let type = transaction.type.toLowerCase() === "deposit" ? "add" : "subtract";
         document.querySelector("tbody").innerHTML += `
         <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type.toLowerCase()} recurring-${transaction.recurring}">
             <td>${transaction.date}</td>

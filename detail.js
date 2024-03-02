@@ -49,16 +49,13 @@ function showEditModal(transaction, data, transactionId) {
     var editModal = new bootstrap.Modal(document.getElementById('editTransactionModal'));
     editModal.show();
     document.getElementById('saveTransactionChanges').addEventListener('click', () => {
-        console.log(data)
         saveTransactionChanges(transactionId);
-        console.log(userData);
         editModal.hide();
     });
 }
 
 function saveTransactionChanges(transactionId) {
     const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === parseInt(transactionId));
-    console.log(transactionIndex);
     if (transactionIndex !== -1) {
         const currentTransaction = userData.transactionHistory[transactionIndex];
 
@@ -69,13 +66,11 @@ function saveTransactionChanges(transactionId) {
             amount: parseFloat(document.getElementById('transactionAmount').value),
             category: document.getElementById('transactionCategory').value,
             description: document.getElementById('transactionDescription').value,
-            type: currentTransaction.type,
+            type: document.getElementById("transactionType").value,
             recurring: currentTransaction.recurring
         };
-
-        console.log(updatedTransaction);
         userData.transactionHistory[transactionIndex] = updatedTransaction;
-        console.log(userData);
+        
             updateJSONBlob(userData, function(success) {
                 if (success) {
                     alert("Transaction updated successfully");
