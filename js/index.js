@@ -32,8 +32,13 @@ document.querySelector("#transactionCategory").addEventListener("click", functio
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("saveNewTransaction").addEventListener("click", async function() {
+        //default value for transaction date should be today if nothing is entered
         if (document.getElementById('transactionDate').value == "") {
             document.getElementById('transactionDate').value = Date.today().toString('yyyy-MM-dd')
+        }
+        //default value for transaction amount should be 0 if nothing is entered
+        if (document.getElementById('transactionAmount').value == "") {
+            document.getElementById('transactionAmount').value = 0
         }
         const newTransaction = {
             date: document.getElementById('transactionDate').value,
