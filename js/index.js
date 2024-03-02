@@ -102,7 +102,9 @@ function displayTransactionTable(userData) {
 
 document.getElementById('load-more').addEventListener('click', function() {
     currentPage++;
-    displayPageData();
+    getUserData(localStorage.blobId).then(function() {
+        displayTransactionTable(userData);
+    });
 });
 
 
@@ -139,11 +141,13 @@ function calculateOverview(userData) {
     // calculate needs/wants/income for current time
     userData.transactionHistory.forEach(function(transaction) {
         between = Date.parse(transaction.date).between(first, second)                   // true|false
+        category = transaction.category.toLowerCase()
         if (between) {
-            if (transaction.category == "need") {
+            console.log(category)
+            if (category == "need") {
                 overview.needs = overview.needs + transaction.amount
             }
-            else if (transaction.category == "income") {
+            else if (category == "income") {
                 overview.income = overview.income + transaction.amount
             }
             else {
