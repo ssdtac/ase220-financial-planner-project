@@ -30,10 +30,10 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
     - Handles all methods that are used by both the `index.html` page and the `transaction-detail.html` page.
   - `index.js`:
     - Loads all transaction content for individual users in `index.js`.
-    - Visually switch `index.js` when logged in or out.
+    - Visually switches css for `index.js` when user is logged in or out.
     - Implements the add transaction functionality.
   - `date.js`: Contains utility functions for date manipulation.
-  - `detail.js`: Manages the display and editing of individual transaction details on the `transaction-detail.html` page.
+  - `detail.js`: Manages the display, editing, and deleting of individual transaction details on the `transaction-detail.html` page.
   - `transaction-detail.html`: Provides the layout for viewing the details of a specific transaction, including options to edit or delete the transaction.
   - `users.json`: Stores user credentials and associated blob IDs for accessing their transaction data on JSONBlob.
 
