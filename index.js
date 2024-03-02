@@ -31,11 +31,8 @@ document.querySelector("#transactionCategory").addEventListener("click", functio
 });
 
 $(document).on("click", "#saveNewTransaction", function(){
-    let date = new Date(); // date object right now
-    let currentDate = `${date.getYear}-${date.getMonth}-${date.getDay}`;
-    let vendor = document.querySelector("#addTransactionVendor");
     const newTransaction = {
-        date: currentDate,
+        date: document.getElementById('transactionDate').value,
         type: document.getElementById("transactionCategory").value,
         vendor: document.getElementById("transactionVendor").value,
         amount: parseFloat(document.getElementById("transactionAmount").value),
@@ -44,7 +41,7 @@ $(document).on("click", "#saveNewTransaction", function(){
         id: userData.transactionHistory.length, // use ints for IDs, make new Id the current length (0 indexed)
     }
     userData.transactionHistory = [newTransaction, ...userData.transactionHistory]
-    
+    updateJSONBlob(userData);
 });
 
 function displayPageData() { 
