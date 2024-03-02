@@ -48,19 +48,22 @@ function showEditModal(transaction, data, transactionId) {
     document.getElementById('transactionDescription').value = transaction.description;
     var editModal = new bootstrap.Modal(document.getElementById('editTransactionModal'));
     editModal.show();
-    document.getElementById('saveTransactionChanges').onclick = () => {
-        saveTransactionChanges(transactionId, data);
+    document.getElementById('saveTransactionChanges').addEventListener('click', () => {
+        console.log(data)
+        saveTransactionChanges(transactionId);
+        console.log(userData);
         editModal.hide();
-    };
+    });
 }
 
 function saveTransactionChanges(transactionId) {
-    const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === transactionId);
+    const transactionIndex = userData.transactionHistory.findIndex(transaction => transaction.id === parseInt(transactionId));
+    console.log(transactionIndex);
     if (transactionIndex !== -1) {
         const currentTransaction = userData.transactionHistory[transactionIndex];
 
         const updatedTransaction = {
-            id: transactionId,
+            id: parseInt(transactionId),
             date: document.getElementById('transactionDate').value,
             vendor: document.getElementById('transactionVendor').value,
             amount: parseFloat(document.getElementById('transactionAmount').value),
@@ -70,9 +73,9 @@ function saveTransactionChanges(transactionId) {
             recurring: currentTransaction.recurring
         };
 
-        
-            userData.transactionHistory[transactionIndex] = updatedTransaction;
-
+        console.log(updatedTransaction);
+        userData.transactionHistory[transactionIndex] = updatedTransaction;
+        console.log(userData);
             updateJSONBlob(userData, function(success) {
                 if (success) {
                     alert("Transaction updated successfully");

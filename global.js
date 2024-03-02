@@ -8,6 +8,7 @@ $(document).on("click", "#login-button", function() {
 
 $(document).on("click", "#logout-button", function() {
     logoutUser();
+    location.reload();
 });
 
 function changeDisplays(login, username) {
@@ -96,7 +97,7 @@ function updateJSONBlob(data) {
     .then(updatedData => {
         console.log('JSONBlob updated successfully', updatedData);
         alert('Transaction updated successfully');
-    }).then(location.reload())
+    })
     .catch(error => console.error('Error updating JSONBlob:', error));
 }
 
