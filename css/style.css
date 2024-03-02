@@ -58,6 +58,9 @@ header {
     background-color: var(--header-background);
     border-bottom: grey solid 3px;
     padding-bottom: 1em;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 footer {
@@ -102,4 +105,8 @@ main {
 
 #summary {
     padding-top: 1em;
+}
+
+#title-div {
+    padding-left: 1em;
 }
