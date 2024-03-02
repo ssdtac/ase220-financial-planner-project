@@ -124,6 +124,7 @@ let overview = {
     wantsPercentage: 0,
     needsPercentage: 0,
     savingsPercentage: 0,
+    actualSavings: 0
 }
 
 function calculateOverview(userData) {
@@ -168,11 +169,23 @@ function displaySpendingOverview(userData) {
 
     document.querySelector("#needs-bar").style.width = `${overview.needsPercentage}%`
     document.querySelector("#wants-bar").style.width = `${overview.wantsPercentage}%`
-    document.querySelector("#savings-bar").style.width = `${overview.savingsPercentage}%`
+    document.querySelector("#savings-bar").style.width = `${0}%`
 
 
     document.querySelector("#ideal-needs-bar").style.width = `${(timeframe.needs*100)-overview.needsPercentage}%`
     document.querySelector("#ideal-wants-bar").style.width = `${(timeframe.wants*100)-overview.wantsPercentage}%`
+    
+    const bars = document.querySelectorAll(".progress-bar")
+    let width = 0
+    bars.forEach(function(bar) {
+        width = width + parseInt( bar.style.width.split("%")[0])
+    })
+    console.log(width)
+    document.querySelector("#savings-bar").style.width = `${100-width}%`
+    document.querySelector("#summary .actual-savings").innerHTML = 100-width+"%"
+
+
+    
     document.querySelector('.percent').innerHTML = `${Math.round(100-overview.needsPercentage-overview.wantsPercentage-overview.savingsPercentage)}%`
 
 }
@@ -186,6 +199,7 @@ function displayOverviewText(userData) {
     document.querySelector("#summary .wants").innerHTML = `${overview.wantsPercentage}%`
     
     document.querySelector("#summary .savings").innerHTML = toPercentage(timeframe.savings)
+
 
 
 }
