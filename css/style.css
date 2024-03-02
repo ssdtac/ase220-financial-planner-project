@@ -150,3 +150,13 @@ body .form-control {
     display: flex;
     justify-content: space-between;
 }
+.table>:not(:last-child)>:last-child>* {
+    border-top: var(--border) solid 1px !important;
+    border-bottom: var(--border) solid 1px !important;
+
+}
+
+table {
+    border: var(--border) solid 1px !important;
+
+}
