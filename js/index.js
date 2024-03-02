@@ -32,6 +32,9 @@ document.querySelector("#transactionCategory").addEventListener("click", functio
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("saveNewTransaction").addEventListener("click", async function() {
+        if (document.getElementById('transactionDate').value == "") {
+            document.getElementById('transactionDate').value = Date.today().toString('yyyy-MM-dd')
+        }
         const newTransaction = {
             date: document.getElementById('transactionDate').value,
             type: document.getElementById("transactionCategory").value,
@@ -39,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             amount: parseFloat(document.getElementById("transactionAmount").value),
             category: document.getElementById("transactionCategory").value,
             description: document.getElementById("transactionDescription").value,
+            recurring: document.getElementById('transactionRecurring').value,
             id: userData.transactionHistory.length, // use ints for IDs, make new Id the current length (0 indexed)
         };
         userData.transactionHistory.unshift(newTransaction); // Adds the new transaction at the beginning of the array

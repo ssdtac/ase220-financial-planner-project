@@ -120,13 +120,19 @@
                             <select class="form-control" id="transactionCategory">
                                 <option value="Need">Need</option>
                                 <option value="Want">Want</option>
-                                <option value="Savings">Savings</option>
-                                <option value="Utilities">Utilities</option>
-                                <option value="Entertainment">Entertainment</option>
+                                <option value="income">Income</option>
                                 <!-- Add more categories as needed -->
                             </select>
                         </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="transactionCategory" class="form-label">Recurring Transaction?</label>
+                            <select class="form-control" id="transactionRecurring">
+                                <option value="false">No (One-Time)</option>
+                                <option value="true">Yes (Recurring)</option>
+                            </select>
+                        </div>
+                        
 
                         <div class="mb-3">
                             <label for="transactionDescription" class="form-label">Description</label>

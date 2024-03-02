@@ -172,3 +172,7 @@ table {
 button.btn-close {
     filter: invert();
 }
+
+#addTransactionModal {
+    max-width: 100%;
+}
