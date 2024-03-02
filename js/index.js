@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const newTransaction = {
             date: document.getElementById('transactionDate').value,
-            type: document.getElementById("transactionCategory").value,
+            type: document.getElementById("transactionType").value,
             vendor: document.getElementById("transactionVendor").value,
             amount: parseFloat(document.getElementById("transactionAmount").value),
             category: document.getElementById("transactionCategory").value,
