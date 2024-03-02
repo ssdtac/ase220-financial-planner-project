@@ -158,10 +158,10 @@ function calculateOverview(userData) {
 
 let selectedTimeframe = 0;
 
+
 function displaySpendingOverview(userData) {
     calculateOverview(userData)
-    //REWORK ALL OF THIS WITH NEW DATA
-    //This should calculate spending automatically from transactions.
+    const timeframe = userData.spendingHistory[selectedTimeframe]
     overview.wantsPercentage = overview.wants/overview.income * 100
     overview.needsPercentage = overview.needs/overview.income * 100
     overview.savingsPercentage = overview.idealSavings/overview.income * 100
@@ -170,6 +170,9 @@ function displaySpendingOverview(userData) {
     document.querySelector("#wants-bar").style.width = `${overview.wantsPercentage}%`
     document.querySelector("#savings-bar").style.width = `${overview.savingsPercentage}%`
 
+
+    document.querySelector("#ideal-needs-bar").style.width = `${(timeframe.needs*100)-overview.needsPercentage}%`
+    document.querySelector("#ideal-wants-bar").style.width = `${(timeframe.wants*100)-overview.wantsPercentage}%`
     document.querySelector('.percent').innerHTML = `${Math.round(100-overview.needsPercentage-overview.wantsPercentage-overview.savingsPercentage)}%`
 
 }

@@ -11,6 +11,13 @@
     --border: #434343;
 }
 
+#ideal-needs-bar {
+    background-color: #8bba9f;
+}
+#ideal-wants-bar {
+    background-color: #eb858f;
+}
+
 #title {
     margin-bottom: 0 !important;
     
