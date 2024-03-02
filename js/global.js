@@ -11,6 +11,15 @@ $(document).on("click", "#logout-button", function() {
     location.reload();
 });
 
+$(document).on("change", "#transactionType", function() {
+    if (document.getElementById("transactionType").value == "deposit") {
+        document.getElementById("transactionCategory").selectedIndex = 2
+    }
+    else {
+        document.getElementById("transactionCategory").selectedIndex = 0
+    }
+});
+
 function changeDisplays(login, username) {
     if (login) {
         $("main, #logout-banner, #top-buttons").css("display", "block");
