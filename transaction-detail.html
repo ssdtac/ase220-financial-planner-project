@@ -34,14 +34,18 @@
     </div>
     <main class="container">
         <div class="card">
-            <h1>Transaction Details</h1>
+            <div class="flex-between">
+                <h1>Transaction Details</h1>
+                <div>
+                    <button id="edit-transaction" class="btn btn-primary">Edit</button>
+                    <button id="delete-transaction" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+            
             <div id="transaction-details" class="details">
                 <!-- Transaction details will be loaded here -->
             </div>
-            <div>
-                <button id="edit-transaction" class="btn btn-primary">Edit</button>
-                <button id="delete-transaction" class="btn btn-danger">Delete</button>
-            </div>
+            
         </div>
     </main>
     <footer>

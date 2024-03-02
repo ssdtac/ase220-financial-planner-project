@@ -1,15 +1,27 @@
 function displayTransactionDetails(transaction) {
     if (transaction) {
-        document.getElementById('transaction-details').innerHTML = `
-            <p>Date: ${transaction.date}</p>
-            <p>Vendor: ${transaction.vendor}</p>
-            <p>Amount: $${transaction.amount}</p>
-            <p>Category: ${transaction.category}</p>
-            <p>Description: ${transaction.description}</p>
-        `;
+        document.getElementById('transaction-details').innerHTML = ""
+        
+        addDetail("Date", transaction.date)
+        addDetail("Vendor", transaction.vendor)
+        addDetail("Amount", `$${transaction.amount}`)
+        addDetail("Category", transaction.category)
+        addDetail("Description", transaction.description)
+        addDetail("Recurring", transaction.recurring)
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction details not found.';
     }
+}
+
+
+function addDetail(type, data) {
+    document.getElementById('transaction-details').innerHTML +=             
+    `<div class="transaction">
+        <h3>${type}</h3> 
+        <p class="caps">${data}</p>
+    </div>`
+
+
 }
 
 function findTransactionById(id) {

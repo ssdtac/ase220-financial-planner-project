@@ -115,3 +115,34 @@ main {
 body .form-control {
     background-color: var(--textbox)
 }
+
+#transaction-details {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+}
+
+.transaction {
+    border: solid 3px #434343;
+    margin: 1em;
+    text-align: center;
+    border-radius: 5px;
+    
+    width: 24%;
+}
+
+.transaction h3 {
+    border-bottom: solid 3px #434343;
+    width: 100%;
+    padding-bottom: .3em;
+    padding-top: .3em;
+}
+.transaction p {
+    padding: 1em;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
