@@ -59,6 +59,7 @@ function showEditModal(transaction, transactionId) {
     document.getElementById('transactionCategory').value = transaction.category;
     document.getElementById('transactionDescription').value = transaction.description;
     document.getElementById('transactionType').value = transaction.type;
+    document.getElementById('transactionRecurring').value = transaction.recurring;
     var editModal = new bootstrap.Modal(document.getElementById('editTransactionModal'));
     editModal.show();
     document.getElementById('saveTransactionChanges').addEventListener('click', () => {
@@ -80,7 +81,7 @@ function saveTransactionChanges(transactionId) {
             category: document.getElementById('transactionCategory').value,
             description: document.getElementById('transactionDescription').value,
             type: document.getElementById("transactionType").value,
-            recurring: currentTransaction.recurring
+            recurring: document.getElementById('transactionRecurring').value
         };
         userData.transactionHistory[transactionIndex] = updatedTransaction;
         

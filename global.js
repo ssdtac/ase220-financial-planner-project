@@ -111,5 +111,11 @@ async function updateJSONBlob(data) {
     }
 }
 
+function readDate() {
+    date = userData.transactionHistory[selectedTimeframe].date.split("-")
+    date = new Date(date[0], date[1], date[2])
+    return date
+}
+
 
 loadPage()
