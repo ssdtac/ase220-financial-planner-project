@@ -13,7 +13,7 @@ function displayTransactionDetails(transaction) {
 }
 
 function findTransactionById(id) {
-        const transaction = userData.transactionHistory.find(transaction => transaction.id === id);
+        const transaction = userData.transactionHistory.find(transaction => transaction.id === parseInt(id));
         if (transaction) {
             return transaction;
         }
@@ -25,12 +25,10 @@ async function displayPageData() {
     const transactionId = urlParams.get('id');
     if (transactionId) {
         getUserData(localStorage.blobId).then( function() {
-        if (userData) {
-
             const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
             setupEditAndDeleteButtons(transactionDetails, userData, transactionId);
-        }});
+        });
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction ID not provided in the URL.';
     }

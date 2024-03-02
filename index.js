@@ -67,7 +67,7 @@ function displayTransactionTable(userData) {
         let frequency = transaction.recurring ? "Recurring" : "One-Time";
         let type = transaction.type === "credit" ? "add" : "subtract";
         document.querySelector("tbody").innerHTML += `
-        <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type} recurring-${transaction.recurring}">
+        <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type.toLowerCase()} recurring-${transaction.recurring}">
             <td>${transaction.date}</td>
             <td class="caps">${transaction.category}</td>
             <td>${transaction.vendor}</td>
