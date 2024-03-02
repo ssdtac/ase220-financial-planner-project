@@ -5,26 +5,55 @@ var users;
 const itemsPerPage = 3;
 let currentPage = 1;
 
-async function loadIndex() {
+
+
+async function getUsers() {
     try {
         const response = await fetch(dataLocation);
         users = await response.json();
-        loginUser(localStorage.username);
     } catch (error) {
         console.error('Failed to load data!', error);
     }
 }
 
+function getNewId() {
+    return 
+}
 
 
+document.querySelector("#transactionCategory").addEventListener("click", function() {
+    let val = document.querySelector("#transactionCategory").value;
+    if(val == "purchase") {
+        // do purchase things
+    } else if (val == "deposit") {
+        //do deposit things
+    }
+});
 
-function displayPageData() {
+$(document).on("click", "#saveNewTransaction", function(){
+    let date = new Date(); // date object right now
+    let currentDate = `${date.getYear}-${date.getMonth}-${date.getDay}`;
+    let vendor = document.querySelector("#addTransactionVendor");
+    const newTransaction = {
+        date: currentDate,
+        type: document.getElementById("transactionCategory").value,
+        vendor: document.getElementById("transactionVendor").value,
+        amount: parseFloat(document.getElementById("transactionAmount").value),
+        category: document.getElementById("transactionCategory").value,
+        description: document.getElementById("transactionDescription").value,
+        id: userData.transactionHistory.length, // use ints for IDs, make new Id the current length (0 indexed)
+    }
+    userData.transactionHistory = [newTransaction, ...userData.transactionHistory]
+    
+});
+
+function displayPageData() { 
     getUserData(localStorage.blobId).then(function() {
         displayTransactionTable(userData);
         displaySpendingOverview(userData);
         displayOverviewText(userData)
         document.getElementById('load-more').style.display = 'block';
-    })
+    });
 }
 
 
@@ -152,3 +181,14 @@ function displayOverviewText(userData) {
 
 
 }
+
+function loadIndex() {
+    if (!userShown) {
+        getUsers().then(function() {
+            loginUser(localStorage.username)
+        });
+    } else {
+        displayPageData();
+    }
+}
+

@@ -40,7 +40,7 @@ function loginUser(username) {
         if (username in users) {  
             userShown = true;
             localStorage.blobId = users[username].blobId;
-            displayPageData(username);
+            displayPageData(username)
             localStorage.username = username;
         } else {
             localStorage.username = ""
@@ -58,14 +58,7 @@ function logoutUser() {
     changeDisplays(userShown, "");
 }
 
-document.querySelector("#saveNewTransaction").addEventListener("click", function() {
-    let val = document.querySelector("#transactionCategory").value
-    if(val == "purchase") {
-        // do purchase things
-    } else if (val == "deposit") {
-        //do deposit things
-    }
-});
+
 
 const dataLocation = "https://jsonblob.com/api/jsonBlob/jsonblob.com/1213035252695293952"
 var users;
@@ -85,6 +78,26 @@ async function loadPage() {
         loginUser(localStorage.username);
 
     }
+}
+
+// Update JSONBlob
+function updateJSONBlob(data) {
+    const dataLocation = `https://jsonblob.com/api/jsonBlob/${localStorage.blobId}`;
+    
+    fetch(dataLocation, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(updatedData => {
+        console.log('JSONBlob updated successfully', updatedData);
+        alert('Transaction updated successfully');
+    }).then(location.reload())
+    .catch(error => console.error('Error updating JSONBlob:', error));
 }
 
 loadPage()

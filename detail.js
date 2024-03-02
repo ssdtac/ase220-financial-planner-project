@@ -94,23 +94,5 @@ function deleteTransaction(transactionId, data) {
     });
 }
 
-// Update JSONBlob
-function updateJSONBlob(data) {
-    const dataLocation = `https://jsonblob.com/api/jsonBlob/${localStorage.blobId}`;
-    
-    fetch(dataLocation, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(updatedData => {
-        console.log('JSONBlob updated successfully', updatedData);
-        alert('Transaction updated successfully');
-    }).then(location.reload())
-    .catch(error => console.error('Error updating JSONBlob:', error));
-}
+
 
