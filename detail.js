@@ -36,9 +36,21 @@ async function displayPageData() {
 
 
 function setupEditAndDeleteButtons(transaction, data, transactionId) {
-    document.getElementById('edit-transaction').addEventListener('click', () => showEditModal(transaction, transactionId));
-    document.getElementById('delete-transaction').addEventListener('click', () => deleteTransaction(transactionId, data));
+    // Clone the edit button to remove all event listeners
+    var oldEditButton = document.getElementById('edit-transaction');
+    var newEditButton = oldEditButton.cloneNode(true);
+    oldEditButton.parentNode.replaceChild(newEditButton, oldEditButton);
+
+    // Clone the delete button to remove all event listeners
+    var oldDeleteButton = document.getElementById('delete-transaction');
+    var newDeleteButton = oldDeleteButton.cloneNode(true);
+    oldDeleteButton.parentNode.replaceChild(newDeleteButton, oldDeleteButton);
+
+    // Attach the event listeners to the new buttons
+    newEditButton.addEventListener('click', () => showEditModal(transaction, transactionId));
+    newDeleteButton.addEventListener('click', () => deleteTransaction(transactionId, data));
 }
+
 
 function showEditModal(transaction, transactionId) {
     document.getElementById('transactionDate').value = transaction.date;
@@ -84,14 +96,18 @@ function saveTransactionChanges(transactionId) {
 }
 
 function deleteTransaction(transactionId, data) {
-    if(confirm("Are you sure you want to delete the transaction? It cannot be undone.")) {
-        data.transactionHistory = data.transactionHistory.filter(transaction => transaction.id !== transactionId);
-        updateJSONBlob(data, () => {
-            alert("Transaction deleted successfully");
+    if (confirm("Are you sure you want to delete the transaction? It cannot be undone.")) {
+        const updatedTransactions = data.transactionHistory.filter(transaction => transaction.id !== parseInt(transactionId));
+        userData.transactionHistory = updatedTransactions;
+        updateJSONBlob(userData, function() {
             window.location.href = "index.html";
-        }); 
-    }   
+        });
+    }
 }
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    displayPageData();
+});
 
 

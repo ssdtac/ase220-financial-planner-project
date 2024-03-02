@@ -82,23 +82,34 @@ async function loadPage() {
 }
 
 // Update JSONBlob
-function updateJSONBlob(data) {
+async function updateJSONBlob(data) {
     const dataLocation = `https://jsonblob.com/api/jsonBlob/${localStorage.blobId}`;
-    
-    fetch(dataLocation, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(updatedData => {
-        console.log('JSONBlob updated successfully', updatedData);
-        alert('Transaction updated successfully');
-    }).then(location.reload())
-    .catch(error => console.error('Error updating JSONBlob:', error));
+
+    try {
+        const response = await fetch(dataLocation, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            const updatedData = await response.json();
+            console.log('JSONBlob updated successfully', updatedData);
+            alert('Transaction updated successfully');
+            location.reload();
+            return true;
+        } else {
+            throw new Error('Failed to update JSONBlob');
+        }
+    } catch (error) {
+        console.error('Error updating JSONBlob:', error);
+        alert('Failed to update the transaction.');
+        return false;
+    }
 }
+
 
 loadPage()

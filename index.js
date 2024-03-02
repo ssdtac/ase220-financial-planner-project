@@ -30,25 +30,28 @@ document.querySelector("#transactionCategory").addEventListener("click", functio
     }
 });
 
-$(document).on("click", "#saveNewTransaction", function(){
-    const newTransaction = {
-        date: document.getElementById('transactionDate').value,
-        type: document.getElementById("transactionCategory").value,
-        vendor: document.getElementById("transactionVendor").value,
-        amount: parseFloat(document.getElementById("transactionAmount").value),
-        category: document.getElementById("transactionCategory").value,
-        description: document.getElementById("transactionDescription").value,
-        id: userData.transactionHistory.length, // use ints for IDs, make new Id the current length (0 indexed)
-    }
-    userData.transactionHistory = [newTransaction, ...userData.transactionHistory]
-    updateJSONBlob(userData, function(success) {
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("saveNewTransaction").addEventListener("click", async function() {
+        const newTransaction = {
+            date: document.getElementById('transactionDate').value,
+            type: document.getElementById("transactionCategory").value,
+            vendor: document.getElementById("transactionVendor").value,
+            amount: parseFloat(document.getElementById("transactionAmount").value),
+            category: document.getElementById("transactionCategory").value,
+            description: document.getElementById("transactionDescription").value,
+            id: userData.transactionHistory.length, // use ints for IDs, make new Id the current length (0 indexed)
+        };
+        userData.transactionHistory.unshift(newTransaction); // Adds the new transaction at the beginning of the array
+
+        const success = await updateJSONBlob(userData);
         if(success) {
-            console.log("yay!")
+            console.log("yay");
         } else {
-            console.log("something went wrong")
+            console.log("something went wrong");
         }
     });
 });
+
 
 function displayPageData() { 
     getUserData(localStorage.blobId).then(function() {
