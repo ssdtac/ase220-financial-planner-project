@@ -1,13 +1,19 @@
 function displayTransactionDetails(transaction) {
     if (transaction) {
         document.getElementById('transaction-details').innerHTML = ""
+        if (transaction.recurring == "false") {
+            frequency = "One-Time"
+        }
+        else {
+            frequency = "Recurring"
+        }
         
         addDetail("Date", transaction.date)
         addDetail("Vendor", transaction.vendor)
         addDetail("Amount", `$${transaction.amount}`)
         addDetail("Category", transaction.category)
         addDetail("Description", transaction.description)
-        addDetail("Recurring", transaction.recurring)
+        addDetail("Recurring", frequency)
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction details not found.';
     }
