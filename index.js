@@ -41,7 +41,13 @@ $(document).on("click", "#saveNewTransaction", function(){
         id: userData.transactionHistory.length, // use ints for IDs, make new Id the current length (0 indexed)
     }
     userData.transactionHistory = [newTransaction, ...userData.transactionHistory]
-    updateJSONBlob(userData);
+    updateJSONBlob(userData, function(success) {
+        if(success) {
+            console.log("yay!")
+        } else {
+            console.log("something went wrong")
+        }
+    });
 });
 
 function displayPageData() { 
@@ -65,7 +71,7 @@ function displayTransactionTable(userData) {
 
     transactions.forEach(transaction => {
         let frequency = transaction.recurring ? "Recurring" : "One-Time";
-        let type = transaction.type === "credit" ? "add" : "subtract";
+        let type = transaction.type === "deposit" ? "add" : "subtract";
         document.querySelector("tbody").innerHTML += `
         <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type.toLowerCase()} recurring-${transaction.recurring}">
             <td>${transaction.date}</td>
