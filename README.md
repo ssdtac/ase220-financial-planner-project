@@ -26,7 +26,7 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
 - **Key Files and Their Roles**:
   - `index.html`: The main page that users interact with. It includes the transaction overview, login/logout functionality, and the ability to add new transactions.
   - `global.js`: Handles user authentication, including login and logout functionalities. Handles all methods that are used by both the `index.html` page and the `transaction-detail.html` page.
-  - `index.js`: Loads all transaction content for individual users in `index.js`. Visually switch `index.js` when logged in or out. 
+  - `index.js`: Loads all transaction content for individual users in `index.js`. Visually switch `index.js` when logged in or out. Implements the add transaction functionality.
   - `date.js`: Contains utility functions for date manipulation.
   - `detail.js`: Manages the display and editing of individual transaction details on the `transaction-detail.html` page.
   - `transaction-detail.html`: Provides the layout for viewing the details of a specific transaction, including options to edit or delete the transaction.
