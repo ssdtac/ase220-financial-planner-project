@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;700&display=swap');
 
 :root {
-    --red: #de7d7d;
-    --green: #B7E1CD;
+    --red: #d76a74;
+    --green: #50b479;
     --background: #18181B;
     --card-background: #2B2B2B;
     --text: #FFF;
     --textbox: #DDD;
     --header-background: #000;
+    --border: #434343;
 }
 
 #title {
@@ -89,8 +90,12 @@ header button {
     text-transform: capitalize;
 }
 
-tr {
+tbody {
     cursor: pointer;
+}
+
+thead, tbody {
+    text-align: center;
 }
 
 .card button {
@@ -124,16 +129,15 @@ body .form-control {
 }
 
 .transaction {
-    border: solid 3px #434343;
+    border: solid 3px var(--border);
     margin: 1em;
     text-align: center;
     border-radius: 5px;
-    
     width: 24%;
 }
 
 .transaction h3 {
-    border-bottom: solid 3px #434343;
+    border-bottom: solid 3px var(--border);
     width: 100%;
     padding-bottom: .3em;
     padding-top: .3em;
