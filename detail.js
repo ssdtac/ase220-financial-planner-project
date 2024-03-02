@@ -84,11 +84,13 @@ function saveTransactionChanges(transactionId) {
 }
 
 function deleteTransaction(transactionId, data) {
-    data.transactionHistory = data.transactionHistory.filter(transaction => transaction.id !== transactionId);
-    updateJSONBlob(data, () => {
-        alert("Transaction deleted successfully");
-        window.location.href = "index.html";
-    });
+    if(confirm("Are you sure you want to delete the transaction? It cannot be undone.")) {
+        data.transactionHistory = data.transactionHistory.filter(transaction => transaction.id !== transactionId);
+        updateJSONBlob(data, () => {
+            alert("Transaction deleted successfully");
+            window.location.href = "index.html";
+        }); 
+    }   
 }
 
 
