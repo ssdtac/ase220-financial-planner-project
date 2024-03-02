@@ -118,7 +118,8 @@ main {
 }
 
 body .form-control {
-    background-color: var(--textbox)
+    background-color: var(--textbox);
+    border: var(--border) solid 3px;
 }
 
 #transaction-details {
@@ -159,4 +160,8 @@ body .form-control {
 table {
     border: var(--border) solid 1px !important;
 
+}
+
+button.btn-close {
+    filter: invert();
 }
