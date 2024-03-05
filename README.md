@@ -1,5 +1,14 @@
 # ASE 220 Financial Planning Website Documentation
 
+# [Project Video](https://www.youtube.com/watch?v=PUO_iO2qIAo)
+
+## Contribution Summary
+Cassian Godsted - Created code to import from JSONblob. Defined initial structure for JSON. Created spending overview card, including a  progress bar based off recent spending, automatic calculation of how a user is spending based off of their needs/wants and their paycheck. Created persistent user storage through localstorage. CSS styling changes for login and details pages. Reorganized code for a more consistent site experience. Wrote contribution summary. General bugfixes.
+
+Christian Lane - Added recent transactions table. Added user login and log out functionality that hides the main page when logged out. Created an add transaction modal. Reorganized the JSON structure so every user has their own blob. Recorded video. General bugfixes.
+
+Jeffrey Perdue - Added additional details page for transactions. Added the ability to add and delete transactions. Added pagination for recent transactions. Wrote the README.
+
 ## Project Goal
 
 The ASE 220 Financial Planning project is designed to help users manage their financial transactions effectively. It provides a platform where users can add, view, edit, and delete transactions related to their financial activities. The application aims to give users a clear overview of their spending, savings, and overall financial health, enabling better financial planning and management.
