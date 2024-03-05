@@ -16,10 +16,6 @@ async function getUsers() {
     }
 }
 
-function getNewId() {
-    return 
-}
-
 
 document.querySelector("#transactionCategory").addEventListener("click", function() {
     let val = document.querySelector("#transactionCategory").value;
@@ -30,7 +26,46 @@ document.querySelector("#transactionCategory").addEventListener("click", functio
     }
 });
 
+async function createUser(username) {
+    const newUser = {
+        username: username,
+        balance: 0,
+        spendingHistory: [],
+        transactionHistory: []
+    }
+
+    const response = await fetch('https://jsonblob.com/api/jsonBlob', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+    });
+
+    if (response.ok) {
+        console.log(response)
+        console.log(response.location)
+    }
+    
+
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("addUserButton").addEventListener("click", function() {
+        $("#addUserModal").modal("show");
+    });
+    document.getElementById("saveNewUser").addEventListener("click", async function() {
+        createUser(document.getElementById("newUsername").value).then(function() {
+            const newUser = {
+                username: document.getElementById("newUsername").value,
+                password: document.getElementById("newPassword").value,
+                //blobId: 
+            }
+        });
+    });
+
+
     document.getElementById("saveNewTransaction").addEventListener("click", async function() {
         //default value for transaction date should be today if nothing is entered
         if (document.getElementById('transactionDate').value == "") {

@@ -22,13 +22,13 @@ $(document).on("change", "#transactionType", function() {
 
 function changeDisplays(login, username) {
     if (login) {
-        $("main, #logout-banner, #top-buttons").css("display", "block");
-        $("#login").css("display", "none");
+        $("main, #logout-banner, #top-buttons-login").css("display", "block");
+        $("#login, #top-buttons-logout").css("display", "none");
         document.getElementById("username").value = ""
         document.getElementById("user-title").innerText = username;
     } else {
-        $("main, #logout-banner, #top-buttons").css("display", "none");
-        $("#login").css("display", "block");
+        $("main, #logout-banner, #top-buttons-login").css("display", "none");
+        $("#login, #top-buttons-logout").css("display", "block");
         clearPage();
         document.getElementById("user-title").innerText = "";
     }

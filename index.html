@@ -20,8 +20,11 @@
                 <h1 id="title" class="display-4 text-center my-4 bold">ASE 220 Financial Planning</h1>
             </a>
         </div>
-        <span class="text-end mt-2" id="top-buttons">
+        <span class="text-end mt-2" id="top-buttons-login">
             <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addTransactionModal">Add Transaction</button>
+        </span>
+        <span class="text-end mt-2" id="top-buttons-logout">
+            <button type="button" class="btn btn-primary my-4" id="addUserButton">Add User</button>
         </span>
     </header>
     <div class="container" id="login" style="display: none;">
@@ -85,8 +88,36 @@
         </div>
     </footer>
 
+    <!--add user modal-->
+    <div id="addUserModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="AddUserForm">
+                        <div class="mb-3">
+                            <label for="newUsername" class="form-label">Username</label>
+                            <input type="text" id="newUsername" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Password</label>
+                            <input type="password" id="newPassword" class="form-control">
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard User</button>
+                        <button type="button" class="btn btn-primary" id="saveNewUser">Save New User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--add transaction modal-->
-    <div id="addTransactionModal" class="modal modal-lg" tabindex="-1">
+    <div id="addTransactionModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
