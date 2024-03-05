@@ -13,6 +13,12 @@ Jeffrey Perdue - Added additional details page for transactions. Added the abili
 
 The ASE 220 Financial Planning project is designed to help users manage their financial transactions effectively. It provides a platform where users can add, view, edit, and delete transactions related to their financial activities. The application aims to give users a clear overview of their spending, savings, and overall financial health, enabling better financial planning and management.
 
+## How to Use
+
+1. First, create a new user using the button in the top right. 
+2. Sign in with that username.
+3. You can then add recent transactions using the button in the top right. The dashboard will calculate your spending based off of 50% to needs, 20% to wants, and 30% to savings. How much that is will depend on how much income you add.
+
 ## Features
 
 - **User Authentication**: Users can log in to access their personalized financial data. The authentication ensures data privacy and security.
