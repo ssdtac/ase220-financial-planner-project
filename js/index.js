@@ -16,6 +16,23 @@ async function getUsers() {
     }
 }
 
+async function setUsers() {
+    const response = await fetch(dataLocation, {
+        method: "PUT", 
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(users)
+    });
+
+    if (response.ok) {
+        alert("User created successfully.");
+    } else {
+        
+    }
+}
+
 
 document.querySelector("#transactionCategory").addEventListener("click", function() {
     let val = document.querySelector("#transactionCategory").value;
@@ -44,27 +61,35 @@ async function createUser(username) {
     });
 
     if (response.ok) {
-        console.log(response)
-        console.log(response.location)
+        let url = response.headers.get("Location");
+        localStorage.blobId = url.slice(33); // initial url is 33 long
     }
-    
-
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("addUserButton").addEventListener("click", function() {
         $("#addUserModal").modal("show");
     });
+
     document.getElementById("saveNewUser").addEventListener("click", async function() {
-        createUser(document.getElementById("newUsername").value).then(function() {
+        let newUsername = document.getElementById("newUsername").value;
+        createUser(newUsername).then(function() {
             const newUser = {
-                username: document.getElementById("newUsername").value,
+                username: newUsername,
                 password: document.getElementById("newPassword").value,
-                //blobId: 
+                blobId: localStorage.blobId 
             }
+            users[newUsername] = newUser;
+            setUsers()
+            $('#addUserModal').modal('hide');
         });
     });
 
+    document.getElementById('discardUser').addEventListener("click", function() {
+        document.getElementById('newUsername').value = '';
+        document.getElementById('newPassword').value = '';
+    });
 
     document.getElementById("saveNewTransaction").addEventListener("click", async function() {
         //default value for transaction date should be today if nothing is entered
