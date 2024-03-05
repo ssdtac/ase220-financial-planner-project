@@ -32,6 +32,7 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
     - Loads all transaction content for individual users in `index.js`.
     - Visually switches css for `index.js` when user is logged in or out.
     - Implements the add transaction functionality.
+    - Implements the add user functionality.
     - Calculates spending overview.
   - `date.js`: Contains utility functions for date manipulation.
   - `detail.js`: Manages the display, editing, and deleting of individual transaction details on the `transaction-detail.html` page.
