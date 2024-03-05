@@ -47,7 +47,18 @@ async function createUser(username) {
     const newUser = {
         username: username,
         balance: 0,
-        spendingHistory: [],
+        spendingHistory: [
+            {
+              timeframe: "February 2024",
+              dates: [
+                "2024-02-01",
+                "2024-04-28"
+              ],
+              needs: 0.5,
+              wants: 0.2,
+              savings: 0.2
+            },
+          ],
         transactionHistory: []
     }
 
