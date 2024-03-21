@@ -161,7 +161,7 @@ function displayTransactionTable(userData) {
         }
         let type = transaction.type.toLowerCase() === "deposit" ? "add" : "subtract";
         document.querySelector("tbody").innerHTML += `
-        <tr title="View more details about your transaction" onclick="window.location.href='transaction-detail.html?id=${transaction.id}'" class="${type.toLowerCase()} recurring-${transaction.recurring}">
+        <tr title="View more details about your transaction" onclick="window.location.href='transaction?id=${transaction.id}'" class="${type.toLowerCase()} recurring-${transaction.recurring}">
             <td>${Date.parse(transaction.date).toString("MMMM d, yyyy")}</td>
             <td class="caps">${transaction.category}</td>
             <td>${transaction.vendor}</td>
