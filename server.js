@@ -18,5 +18,5 @@ app.use(express.static('js'))
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Financial Planner live on port ${port}`)
 })
