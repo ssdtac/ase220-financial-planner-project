@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 const app = express()
 const port = 5500
 
@@ -15,7 +16,13 @@ app.get('/transaction', (req, res) => {
 })
 
 app.get('/api/users/:id', (req, res) =>  {
-    res.sendFile(path.join(__dirname, 'json', `${req.params.id}.json`))
+    if (fs.existsSync(`./json/${req.params.id}.json`)) {
+        res.sendFile(path.join(__dirname, 'json', `${req.params.id}.json`))
+
+    }
+    else {
+        res.json("404 - not found")
+    }
 })
 
 //Serve static CSS/JS
