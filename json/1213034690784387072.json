@@ -1,0 +1,114 @@
+{
+    "username": "cassiancc",
+    "balance": 404.04,
+    "spendingHistory": [
+      {
+        "timeframe": "February 2024",
+        "dates": [
+          "2024-02-01",
+          "2024-03-28"
+        ],
+        "needs": 0.5,
+        "wants": 0.2,
+        "savings": 0.2
+      },
+      {
+        "timeframe": "January 2024",
+        "needs": 0.5,
+        "wants": 0.2,
+        "savings": 0.2
+      }
+    ],
+    "transactionHistory": [
+      {
+        "id": 8,
+        "date": "2024-03-02",
+        "vendor": "12",
+        "amount": 12,
+        "category": "income",
+        "description": "",
+        "type": "deposit",
+        "recurring": "false"
+      },
+      {
+        "id": 7,
+        "date": "2024-02-01",
+        "vendor": "Food",
+        "amount": 200,
+        "category": "need",
+        "description": "Weekly grocery shopping",
+        "type": "purchase",
+        "recurring": "false"
+      },
+      {
+        "id": 6,
+        "date": "2024-02-25",
+        "vendor": "Games",
+        "amount": 20,
+        "category": "want",
+        "description": "New video game purchase",
+        "type": "purchase",
+        "recurring": "false"
+      },
+      {
+        "id": 5,
+        "date": "2024-02-19",
+        "vendor": "Payroll",
+        "amount": 500,
+        "category": "income",
+        "description": "Monthly salary",
+        "type": "deposit",
+        "recurring": "true"
+      },
+      {
+        "date": "2023-10-22",
+        "type": "purchase",
+        "vendor": "Supermarket",
+        "recurring": true,
+        "amount": 150,
+        "category": "need",
+        "description": "Bi-weekly grocery shopping",
+        "id": 4
+      },
+      {
+        "id": 3,
+        "date": "2023-08-22",
+        "vendor": "Online Store",
+        "amount": 75,
+        "category": "want",
+        "description": "New headphones",
+        "type": "purchase",
+        "recurring": "false"
+      },
+      {
+        "id": 2,
+        "date": "2023-07-30",
+        "vendor": "Utility Company",
+        "amount": 100,
+        "category": "need",
+        "description": "Monthly electricity bill",
+        "type": "purchase",
+        "recurring": "true"
+      },
+      {
+        "id": 1,
+        "date": "2023-09-14",
+        "vendor": "Freelance Project",
+        "amount": 500,
+        "category": "income",
+        "description": "Payment for freelance project",
+        "type": "deposit",
+        "recurring": "true"
+      },
+      {
+        "date": "2023-10-05",
+        "type": "purchase",
+        "vendor": "Cafe",
+        "recurring": false,
+        "amount": 30,
+        "category": "want",
+        "description": "Meeting with clients",
+        "id": 0
+      }
+    ]
+  }

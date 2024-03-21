@@ -14,6 +14,10 @@ app.get('/transaction', (req, res) => {
     res.sendFile(path.join(__dirname, 'transaction-detail.html'))
 })
 
+app.get('/api/users/:id', (req, res) =>  {
+    res.sendFile(path.join(__dirname, 'json', `${req.params.id}.json`))
+})
+
 //Serve static CSS/JS
 app.use(express.static('css'))
 app.use(express.static('js'))

@@ -1,0 +1,83 @@
+{
+    "username": "ssdtac",
+    "balance": 404.04,
+    "spendingHistory": [
+      {
+        "timeframe": "February 2024",
+        "dates": [
+          "2024-02-01",
+          "2024-02-28"
+        ],
+        "needs": 0.5,
+        "wants": 0.2,
+        "savings": 0.2
+      },
+      {
+        "timeframe": "January 2024",
+        "needs": 0.5,
+        "wants": 0.2,
+        "savings": 0.2
+      }
+    ],
+    "transactionHistory": [
+      {
+        "id": 5,
+        "date": "2024-03-26",
+        "vendor": "asdfasdfasdf",
+        "amount": 1111,
+        "category": "purchase",
+        "description": "",
+        "type": "purchase"
+      },
+      {
+        "id": 4,
+        "date": "2025-04-11",
+        "vendor": "someone else",
+        "amount": 5000,
+        "category": "income",
+        "description": "somethgin",
+        "type": "deposit",
+        "recurring": "true"
+      },
+      {
+        "id": 3,
+        "date": "2023-11-12",
+        "vendor": "Bookstore",
+        "amount": 120,
+        "category": "income",
+        "description": "Textbooks for new semester",
+        "type": "deposit",
+        "recurring": "false"
+      },
+      {
+        "id": 2,
+        "date": "2023-06-27",
+        "vendor": "Electronics Store",
+        "amount": 250,
+        "category": "need",
+        "description": "sold New gaming mouse and keyboard",
+        "type": "purchase",
+        "recurring": "false"
+      },
+      {
+        "id": 1,
+        "date": "2023-10-30",
+        "vendor": "Streaming Service",
+        "amount": 15,
+        "category": "want",
+        "description": "Monthly streaming service subscriptoon town YES",
+        "type": "purchase",
+        "recurring": true
+      },
+      {
+        "id": 0,
+        "date": "2023-10-30",
+        "vendor": "Streaming Service",
+        "amount": 14.97,
+        "category": "want",
+        "description": "Monthly streaming service subscription",
+        "type": "purchase",
+        "recurring": true
+      }
+    ]
+  }
