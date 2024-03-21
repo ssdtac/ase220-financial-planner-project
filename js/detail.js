@@ -119,7 +119,7 @@ function deleteTransaction(transactionId, data) {
         const updatedTransactions = data.transactionHistory.filter(transaction => transaction.id !== parseInt(transactionId));
         userData.transactionHistory = updatedTransactions;
         updateJSONBlob(userData, function() {
-            window.location.href = "index.html";
+            window.location.href = "/";
         });
     }
 }
