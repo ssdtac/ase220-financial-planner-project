@@ -16,8 +16,8 @@ app.get('/transaction', (req, res) => {
 })
 
 app.get('/api/users/:id', (req, res) =>  {
-    if (fs.existsSync(`./json/${req.params.id}.json`)) {
-        res.sendFile(path.join(__dirname, 'json', `${req.params.id}.json`))
+    if (fs.existsSync(`./json/users/${req.params.id}.json`)) {
+        res.sendFile(path.join(__dirname, 'json', 'users', `${req.params.id}.json`))
 
     }
     else {
