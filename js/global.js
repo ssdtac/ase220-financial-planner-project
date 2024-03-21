@@ -38,7 +38,7 @@ var userData;
 
 async function getUserData(blobId) {
     try {
-        let response = await fetch("https:///jsonblob.com/api/jsonBlob/jsonblob.com/"+blobId);
+        let response = await fetch("/api/users/"+blobId);
         userData = await response.json();
     } catch (error) {
         console.error('Failed to load user data!', error);
@@ -70,7 +70,7 @@ function logoutUser() {
 
 
 
-const dataLocation = "https://jsonblob.com/api/jsonBlob/jsonblob.com/1213035252695293952"
+const dataLocation = "/api/users.json"
 var users;
 
 
@@ -92,7 +92,7 @@ async function loadPage() {
 
 // Update JSONBlob
 async function updateJSONBlob(data) {
-    const dataLocation = `https://jsonblob.com/api/jsonBlob/${localStorage.blobId}`;
+    const dataLocation = `/api/users/${localStorage.blobId}`;
 
     try {
         const response = await fetch(dataLocation, {

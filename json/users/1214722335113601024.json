@@ -1,0 +1,38 @@
+{
+    "username": "user123",
+    "balance": 0,
+    "spendingHistory": [
+      {
+        "timeframe": "February 2024",
+        "dates": [
+          "2024-02-01",
+          "2024-04-28"
+        ],
+        "needs": 0.5,
+        "wants": 0.2,
+        "savings": 0.2
+      }
+    ],
+    "transactionHistory": [
+      {
+        "date": "2024-03-05",
+        "type": "deposit",
+        "vendor": "100",
+        "amount": 100,
+        "category": "income",
+        "description": "",
+        "recurring": "false",
+        "id": 1
+      },
+      {
+        "date": "2024-03-05",
+        "type": "purchase",
+        "vendor": "10",
+        "amount": 10,
+        "category": "Need",
+        "description": "",
+        "recurring": "false",
+        "id": 0
+      }
+    ]
+  }

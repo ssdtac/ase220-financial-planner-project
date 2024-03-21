@@ -25,6 +25,11 @@ app.get('/api/users/:id', (req, res) =>  {
     }
 })
 
+//Serve transaction details page as /transaction
+app.get('/api/users.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'json', 'users.json'))
+})
+
 //Serve static CSS/JS
 app.use(express.static('css'))
 app.use(express.static('js'))
