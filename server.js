@@ -7,12 +7,12 @@ const port = 5500
 
 //Serve homepage and dashboard
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'))
+    res.sendFile(path.join(__dirname, "html", 'index.html'))
 })
 
 //Serve transaction details page as /transaction
 app.get('/transaction', (req, res) => {
-    res.sendFile(path.join(__dirname, 'transaction-detail.html'))
+    res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'))
 })
 
 app.get('/api/users/:id', (req, res) =>  {
