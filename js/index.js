@@ -9,7 +9,7 @@ let currentPage = 1;
 
 async function getUsers() {
     try {
-        const response = await fetch(dataLocation);
+        const response = await fetch('/api/users.json');
         users = await response.json();
     } catch (error) {
         console.error('Failed to load data!', error);
@@ -17,7 +17,7 @@ async function getUsers() {
 }
 
 async function setUsers() {
-    const response = await fetch(dataLocation, {
+    const response = await fetch('/api/users.json', {
         method: "PUT", 
         headers: {
             'Content-Type': 'application/json',
@@ -61,8 +61,20 @@ async function createUser(username) {
           ],
         transactionHistory: []
     }
+    // create new random id
+    id = []
+    for (let i=0; i<19; i++) { //ids are 19 random numbers
+        // no checking for now it will probably not matter
 
-    const response = await fetch('https://jsonblob.com/api/jsonBlob', {
+        id.push(Math.floor(10 * Math.random()));
+    }
+    id = id.join("");
+    console.log(id);
+    
+
+
+    const response = await fetch(`/api/users/${id}`, 
+    {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -71,9 +83,8 @@ async function createUser(username) {
         body: JSON.stringify(newUser)
     });
 
-    if (response.ok) {
-        let url = response.headers.get("Location");
-        localStorage.blobId = url.slice(33); // initial url is 33 long
+    if (response.ok) {        
+        localStorage.blobId = id; 
     }
 }
 
@@ -91,8 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 password: document.getElementById("newPassword").value,
                 blobId: localStorage.blobId 
             }
-            users[newUsername] = newUser;
-            setUsers()
+            getUsers().then(function() {
+                users[newUsername] = newUser;
+                setUsers()
+            })
             $('#addUserModal').modal('hide');
         });
     });

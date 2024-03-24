@@ -4,6 +4,7 @@ const fs = require('fs')
 const app = express()
 const port = 5500
 
+app.use(express.json())
 
 //Serve homepage and dashboard
 app.get('/', (req, res) => {
@@ -29,6 +30,36 @@ app.get('/api/users/:id', (req, res) =>  {
 app.get('/api/users.json', (req, res) => {
     res.sendFile(path.join(__dirname, 'json', 'users.json'))
 })
+
+//update existing user
+app.put('/api/users/:id', (req, res) => {
+    if(fs.existsSync(`./json/users/${req.params.id}.json`)){
+        data = express.json(req.body);
+        fs.writeFileSync(`./json/users/${req.params.id}.json`, JSON.stringify(data, null, 2));
+        res.json({ok:true});
+    } else {
+        
+        res.json({ok:false});
+    }
+});
+
+//create user
+app.post('/api/users/:id', (req, res) => {
+    if(!fs.existsSync(`json/users/${req.params.id}.json`)) {
+        fs.writeFileSync(`json/users/${req.params.id}.json`, JSON.stringify(req.body, null, 2));
+        res.sendStatus(200)
+    } else {
+        res.sendStatus(400)   
+    }
+})
+
+//create user in users file
+app.put('/api/users.json', (req, res) =>{
+    id = req.params.id
+    console.log(req.body)
+    fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2))
+    res.sendStatus(200)
+});
 
 //Serve static CSS/JS
 app.use(express.static('css'))

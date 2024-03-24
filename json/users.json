@@ -14,34 +14,19 @@
     "password": "jperdue",
     "blobId": "1213035093844418560"
   },
-  "TEST": {
-    "username": "TEST",
-    "password": "asdf",
-    "blobId": "1214683368041340928"
+  "newuser111": {
+    "username": "newuser111",
+    "password": "yeah",
+    "blobId": "7393864197519780542"
   },
-  "JOHNATHAN": {
-    "username": "JOHNATHAN",
-    "password": "passwrod",
-    "blobId": "1214687113017942016"
+  "new user test 2": {
+    "username": "new user test 2",
+    "password": "pasword",
+    "blobId": "1081734824024398206"
   },
-  "newusername": {
-    "username": "newusername",
-    "password": "something",
-    "blobId": "1214707335812734976"
-  },
-  "test": {
-    "username": "test",
-    "password": "",
-    "blobId": "1214720858517266432"
-  },
-  "sptest": {
-    "username": "sptest",
-    "password": "",
-    "blobId": "1214721591367032832"
-  },
-  "user123": {
-    "username": "user123",
-    "password": "",
-    "blobId": "1214722335113601024"
+  "test123": {
+    "username": "test123",
+    "password": "pass",
+    "blobId": "4405907795123850654"
   }
 }
