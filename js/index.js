@@ -69,7 +69,7 @@ async function createUser(username) {
         id.push(Math.floor(10 * Math.random()));
     }
     id = id.join("");
-    console.log(id);
+    //console.log(id);
     
 
 

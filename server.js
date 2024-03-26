@@ -8,6 +8,7 @@ const port = 5500
 app.use(bodyParser.urlencoded({ extended:false }))
 app.use(bodyParser.json())
 
+
 //Serve homepage and dashboard
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'index.html'))
@@ -38,20 +39,21 @@ app.put('/api/users/:id', (req, res) => {
     if(fs.existsSync(`./json/users/${req.params.id}.json`)){
         data = express.json(req.body);
         fs.writeFileSync(`./json/users/${req.params.id}.json`, JSON.stringify(data, null, 2));
-        res.json({ok:true});
+        res.send({ok:true});
     } else {
-        
-        res.json({ok:false});
+        res.send({ok:false});
     }
 });
 
 //create user
 app.post('/api/users/:id', (req, res) => {
     if(!fs.existsSync(`json/users/${req.params.id}.json`)) {
+        //console.log(`wrote file sync ${req.params.id}.json`)
         fs.writeFileSync(`json/users/${req.params.id}.json`, JSON.stringify(req.body, null, 2));
-        res.sendStatus(200)
+        res.send({ok:true})
     } else {
-        res.sendStatus(400)   
+        // bad request
+        res.send({ok:false})   
     }
 })
 
@@ -60,9 +62,14 @@ app.put('/api/users.json', (req, res) =>{
     id = req.params.id
     res.setHeader('Content-Type', 'application/json')
     console.log(req.body)
-    console.log(req.headers)
-    fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2))
-    res.sendStatus(200)
+    if (req.headers['content-type'] === 'application/json') {
+        fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2))
+        //console.log("wrote file sync users.json")
+        res.send({ok:true})
+    } else {
+        // bad request
+        res.send({ok:false})
+    }
 });
 
 //Serve static CSS/JS
