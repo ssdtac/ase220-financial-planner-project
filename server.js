@@ -72,6 +72,26 @@ app.put('/api/users.json', (req, res) =>{
     }
 });
 
+app.delete('/api/users/:id', (req, res) => {
+    const filePath = path.join(__dirname, 'json', 'users', `${req.params.id}.json`);
+    
+    if (fs.existsSync(filePath)) {
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error(err);
+                // Internal Server Error
+                return res.sendStatus(500);
+            }
+            // Successfully deleted
+            res.sendStatus(200);
+        });
+    } else {
+        // File not found
+        res.sendStatus(404);
+    }
+});
+
+
 //Serve static CSS/JS
 app.use(express.static('css'))
 app.use(express.static('js'))
