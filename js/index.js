@@ -89,6 +89,19 @@ async function createUser(username) {
 }
 
 
+async function deleteUser(username) {
+    let id = users[username].blobId
+    const response = await fetch(`/api/users/${id}`, 
+    {
+        method: 'DELETE',    
+    });
+
+    if (response.ok) {        
+        console.log("Removed user")
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("addUserButton").addEventListener("click", function() {
         $("#addUserModal").modal("show");
