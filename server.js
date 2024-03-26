@@ -1,10 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const path = require('path')
 const fs = require('fs')
 const app = express()
 const port = 5500
 
-app.use(express.json())
+app.use(bodyParser.urlencoded({ extended:false }))
+app.use(bodyParser.json())
 
 //Serve homepage and dashboard
 app.get('/', (req, res) => {
@@ -56,7 +58,9 @@ app.post('/api/users/:id', (req, res) => {
 //create user in users file
 app.put('/api/users.json', (req, res) =>{
     id = req.params.id
+    res.setHeader('Content-Type', 'application/json')
     console.log(req.body)
+    console.log(req.headers)
     fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2))
     res.sendStatus(200)
 });
