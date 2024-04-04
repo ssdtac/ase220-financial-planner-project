@@ -37,8 +37,7 @@ app.get('/api/users.json', (req, res) => {
 //update existing user
 app.put('/api/users/:id', (req, res) => {
     if(fs.existsSync(`./json/users/${req.params.id}.json`)){
-        data = express.json(req.body);
-        fs.writeFileSync(`./json/users/${req.params.id}.json`, JSON.stringify(data, null, 2));
+        fs.writeFileSync(`./json/users/${req.params.id}.json`, JSON.stringify(req.body, null, 2));
         res.send({ok:true});
     } else {
         res.send({ok:false});
