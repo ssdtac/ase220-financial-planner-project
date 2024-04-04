@@ -71,6 +71,7 @@ app.put('/api/users.json', (req, res) =>{
     }
 });
 
+//delete user
 app.delete('/api/users/:id', (req, res) => {
     const filePath = path.join(__dirname, 'json', 'users', `${req.params.id}.json`);
     
@@ -81,6 +82,18 @@ app.delete('/api/users/:id', (req, res) => {
                 // Internal Server Error
                 return res.sendStatus(500);
             }
+            //If file has beeen deleted, remove it from users.json
+            const file = fs.readFileSync(path.join(__dirname, 'json', `users.json`), 'utf8')
+            let parsedFile = JSON.parse(file)
+            let removeUsername = ""
+            Object.entries(parsedFile).forEach(function(user) {
+                user = user[1]
+                if (user.blobId == req.params.id) {
+                    removeUsername = user.username
+                }
+            })
+            delete parsedFile[removeUsername]
+            fs.writeFileSync("./json/users.json", JSON.stringify(parsedFile, null, 2))
             // Successfully deleted
             res.sendStatus(200);
         });

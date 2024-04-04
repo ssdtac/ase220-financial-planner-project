@@ -2,6 +2,14 @@
 
 # [Project Video](https://www.youtube.com/watch?v=PUO_iO2qIAo)
 
+
+## Contribution Summary - Assignment 10
+Cassian Godsted - Setup Express to serve static files through NodeJS, replaced READ requests to Jsonblob with NodeJS equivalents. Fixed bugs with POST requests and ensured DELETE requests also remove the user from user index file.
+
+Christian Lane - Replaced POST/PUT requests with NodeJS equivalents. Implemented verification of data types in request bodies.
+
+Jeffrey Perdue - Replaced DELETE requests with NodeJS equivalents.
+
 ## Contribution Summary
 Cassian Godsted - Created code to import from JSONblob. Defined initial structure for JSON. Created spending overview card, including a  progress bar based off recent spending, automatic calculation of how a user is spending based off of their needs/wants and their paycheck. Created persistent user storage through localstorage. CSS styling changes for login and details pages. Reorganized code for a more consistent site experience. Wrote contribution summary. General bugfixes.
 
