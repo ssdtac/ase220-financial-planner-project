@@ -1,73 +1,124 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const path = require('path')
-const fs = require('fs')
-const app = express()
-const port = 5500
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const fs = require('fs');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const csvParser = require('csv-parser');
+const csvWriter = require('csv-write-stream');
 
-app.use(bodyParser.urlencoded({ extended:false }))
-app.use(bodyParser.json())
+const app = express();
+const port = 5500;
 
+const SECRET_KEY = 'secret_key';
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Middleware to authenticate token
+function authenticateToken(req, res, next) {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (token == null) return res.sendStatus(401); // Unauthorized
+
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+        if (err) return res.sendStatus(403); // Forbidden
+        req.user = user;
+        next();
+    });
+}
+
+// User Signup
+app.post('/signup', async (req, res) => {
+    const { username, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 8);
+    const writer = csvWriter({ sendHeaders: false });
+    writer.pipe(fs.createWriteStream('users.csv', { flags: 'a' }));
+    writer.write({ username, password: hashedPassword });
+    writer.end();
+    res.json({ message: 'Signup successful' });
+});
+
+// User Login
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    const users = [];
+    fs.createReadStream('users.csv')
+        .pipe(csvParser())
+        .on('data', (row) => users.push(row))
+        .on('end', () => {
+            const user = users.find(u => u.username === username);
+            if (!user) {
+                return res.status(400).send('User not found');
+            }
+            bcrypt.compare(password, user.password, (err, isValid) => {
+                if (err) {
+                    return res.status(500).send('Error during password comparison');
+                }
+                if (!isValid) {
+                    return res.status(401).send('Invalid password');
+                }
+                const token = jwt.sign({ username: user.username }, SECRET_KEY);
+                res.json({ token });
+            });
+        });
+});
+
+// An example protected route
+app.get('/protected', authenticateToken, (req, res) => {
+    res.send('This is a protected route');
+});
 
 //Serve homepage and dashboard
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "html", 'index.html'))
-})
+    res.sendFile(path.join(__dirname, "html", 'index.html'));
+});
 
 //Serve transaction details page as /transaction
 app.get('/transaction', (req, res) => {
-    res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'))
-})
+    res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'));
+});
 
 app.get('/api/users/:id', (req, res) =>  {
     if (fs.existsSync(`./json/users/${req.params.id}.json`)) {
-        res.sendFile(path.join(__dirname, 'json', 'users', `${req.params.id}.json`))
-
+        res.sendFile(path.join(__dirname, 'json', 'users', `${req.params.id}.json`));
+    } else {
+        res.json("404 - not found");
     }
-    else {
-        res.json("404 - not found")
-    }
-})
+});
 
-//Serve transaction details page as /transaction
 app.get('/api/users.json', (req, res) => {
-    res.sendFile(path.join(__dirname, 'json', 'users.json'))
-})
+    res.sendFile(path.join(__dirname, 'json', 'users.json'));
+});
 
 //update existing user
 app.put('/api/users/:id', (req, res) => {
     if(fs.existsSync(`./json/users/${req.params.id}.json`)){
         fs.writeFileSync(`./json/users/${req.params.id}.json`, JSON.stringify(req.body, null, 2));
-        res.send({ok:true});
+        res.json({ok: true});
     } else {
-        res.send({ok:false});
+        res.json({ok: false});
     }
 });
 
 //create user
 app.post('/api/users/:id', (req, res) => {
     if(!fs.existsSync(`json/users/${req.params.id}.json`)) {
-        //console.log(`wrote file sync ${req.params.id}.json`)
         fs.writeFileSync(`json/users/${req.params.id}.json`, JSON.stringify(req.body, null, 2));
-        res.send({ok:true})
+        res.json({ok: true});
     } else {
-        // bad request
-        res.send({ok:false})   
+        res.json({ok: false});   
     }
-})
+});
 
 //create user in users file
-app.put('/api/users.json', (req, res) =>{
-    id = req.params.id
-    res.setHeader('Content-Type', 'application/json')
-    console.log(req.body)
+app.put('/api/users.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
     if (req.headers['content-type'] === 'application/json') {
-        fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2))
-        //console.log("wrote file sync users.json")
-        res.send({ok:true})
+        fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2));
+        res.json({ok: true});
     } else {
-        // bad request
-        res.send({ok:false})
+        res.json({ok: false});
     }
 });
 
@@ -79,36 +130,32 @@ app.delete('/api/users/:id', (req, res) => {
         fs.unlink(filePath, (err) => {
             if (err) {
                 console.error(err);
-                // Internal Server Error
-                return res.sendStatus(500);
+                return res.sendStatus(500); // Internal Server Error
             }
-            //If file has beeen deleted, remove it from users.json
-            const file = fs.readFileSync(path.join(__dirname, 'json', `users.json`), 'utf8')
-            let parsedFile = JSON.parse(file)
-            let removeUsername = ""
+            // If the file has been deleted, remove it from users.json
+            const file = fs.readFileSync(path.join(__dirname, 'json', 'users.json'), 'utf8');
+            let parsedFile = JSON.parse(file);
+            let removeUsername = "";
             Object.entries(parsedFile).forEach(function(user) {
-                user = user[1]
+                user = user[1];
                 if (user.blobId == req.params.id) {
-                    removeUsername = user.username
+                    removeUsername = user.username;
                 }
-            })
-            delete parsedFile[removeUsername]
-            fs.writeFileSync("./json/users.json", JSON.stringify(parsedFile, null, 2))
-            // Successfully deleted
-            res.sendStatus(200);
+            });
+            delete parsedFile[removeUsername];
+            fs.writeFileSync("./json/users.json", JSON.stringify(parsedFile, null, 2));
+            res.sendStatus(200); // Successfully deleted
         });
     } else {
-        // File not found
-        res.sendStatus(404);
+        res.sendStatus(404); // File not found
     }
 });
 
-
 //Serve static CSS/JS
-app.use(express.static('css'))
-app.use(express.static('js'))
+app.use(express.static('css'));
+app.use(express.static('js'));
 
 //Start the server
 app.listen(port, () => {
-  console.log(`Financial Planner live on port ${port}`)
-})
+    console.log(`Financial Planner live on port ${port}`);
+});
