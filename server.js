@@ -41,25 +41,27 @@ app.post('/signup', async (req, res) => {
 // User Login
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-
-    const users = [];
+    var users = [];
     fs.createReadStream('users.csv')
         .pipe(csvParser())
         .on('data', (row) => users.push(row))
         .on('end', () => {
             const user = users.find(u => u.username === username);
             if (!user) {
-                return res.status(400).send('User not found');
+                res.status(400).send('User not found');
             }
             bcrypt.compare(password, user.password, (err, isValid) => {
+                console.log(password)
+                console.log(user.password)
                 if (err) {
                     return res.status(500).send('Error during password comparison');
                 }
-                if (!isValid) {
+                else if (!isValid) {
                     return res.status(401).send('Invalid password');
+                } else {
+                    const token = jwt.sign({ username: user.username }, SECRET_KEY);
+                    res.redirect(`/dashboard?token=${token}`)
                 }
-                const token = jwt.sign({ username: user.username }, SECRET_KEY);
-                res.json({ token });
             });
         });
 });
@@ -72,6 +74,10 @@ app.get('/protected', authenticateToken, (req, res) => {
 //Serve homepage and dashboard
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'index.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, "html", 'dashboard.html'));
 });
 
 //Serve transaction details page as /transaction

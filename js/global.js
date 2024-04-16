@@ -1,39 +1,4 @@
 var userShown = false;
-
-
-$(document).on("click", "#login-button", function() {
-    let username = document.getElementById("username").value;
-    loginUser(username);
-});
-
-$(document).on("click", "#logout-button", function() {
-    logoutUser();
-    location.reload();
-});
-
-$(document).on("change", "#transactionType", function() {
-    if (document.getElementById("transactionType").value == "deposit") {
-        document.getElementById("transactionCategory").selectedIndex = 2
-    }
-    else {
-        document.getElementById("transactionCategory").selectedIndex = 0
-    }
-});
-
-function changeDisplays(login, username) {
-    if (login) {
-        $("main, #logout-banner, #top-buttons-login").css("display", "block");
-        $("#login, #top-buttons-logout").css("display", "none");
-        document.getElementById("username").value = ""
-        document.getElementById("user-title").innerText = username;
-    } else {
-        $("main, #logout-banner, #top-buttons-login").css("display", "none");
-        $("#login, #top-buttons-logout").css("display", "block");
-        clearPage();
-        document.getElementById("user-title").innerText = "";
-    }
-}
-
 var userData;
 
 async function getUserData(blobId) {
@@ -45,18 +10,22 @@ async function getUserData(blobId) {
     }
 }
 
-function loginUser(username) {
-    if(!userShown){
-        if (username in users) {  
-            userShown = true;
-            localStorage.blobId = users[username].blobId;
-            displayPageData(username)
-            localStorage.username = username;
-        } else {
-            localStorage.username = ""
-            alert("Username does not exist!")
-        }
-        changeDisplays(userShown, username);
+async function loginUser(username) {
+    try {
+        let response = await fetch("/login", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                username, 
+                password: document.getElementById("password").value
+            })
+        })
+        console.log(response)
+    } catch (error) {
+        console.error("Login failed!", error)
     }
 }
 
@@ -80,13 +49,6 @@ async function loadPage() {
         users = await response.json();
     } catch (error) {
         console.error('Failed to load data!', error);
-    }
-    if ((localStorage.username == '') || (localStorage.username == undefined)) {
-        changeDisplays(false);
-    }
-    else {
-        loginUser(localStorage.username);
-
     }
 }
 

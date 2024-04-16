@@ -5,43 +5,12 @@ var users;
 const itemsPerPage = 3;
 let currentPage = 1;
 
-
-
-async function getUsers() {
-    try {
-        const response = await fetch('/api/users.json');
-        users = await response.json();
-    } catch (error) {
-        console.error('Failed to load data!', error);
-    }
-}
-
-async function setUsers() {
-    const response = await fetch('/api/users.json', {
-        method: "PUT", 
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(users)
-    });
-
-    if (response.ok) {
-        alert("User created successfully.");
-    } else {
-        
-    }
-}
-
-
-document.querySelector("#transactionCategory").addEventListener("click", function() {
-    let val = document.querySelector("#transactionCategory").value;
-    if(val == "purchase") {
-        // do purchase things
-    } else if (val == "deposit") {
-        //do deposit things
-    }
+$(document).on("click", "#login-button", function() {
+    //let username = document.getElementById("username").value;
+    //loginUser(username);
 });
+
+
 
 async function createUser(username) {
     const newUser = {
@@ -309,8 +278,6 @@ function displayOverviewText(userData) {
     document.querySelector("#summary .wants").innerHTML = '$'+overview.wants
     
     document.querySelector("#summary .savings").innerHTML = '$'+timeframe.savings*overview.income
-
-
 
 }
 
