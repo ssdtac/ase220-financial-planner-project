@@ -6,6 +6,39 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const csvParser = require('csv-parser');
 const csvWriter = require('csv-write-stream');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const uri = fs.readFileSync("uri.txt", "utf-8");
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+var db = null
+
+
+async function connect(){
+	let connection=await client.connect()
+	return connection
+}
+
+async function insert(db,database,collection,document){
+  let dbo=db.db(database)
+  let result=await dbo.collection(collection).insertOne(document)
+  console.log(result)
+  return result;
+}
+
+async function find(db,database,collection,criteria){
+  let dbo=db.db(database)
+  let result=await dbo.collection(collection).find(criteria).toArray()
+  //console.log(result)
+  return result;
+}
+
+async function start() {
+    db=await connect()
+    result = await find(db, "financial-planner", "users", {})
+    console.log(result)
+
+}
+start()
 
 const app = express();
 const port = 5500;
