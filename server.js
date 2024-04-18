@@ -76,7 +76,7 @@ app.post('/login', async function (req, res) {
     const { username, password } = req.body;
 
     db=await connect()
-    result = await find(db, "financial-planner", "users", {username: username})
+    result = await find(db, "financial-planner", "users", {username: username, password: password})
 
     console.log(result[0].username)
     console.log(result[0]._id.toString())
@@ -119,17 +119,20 @@ app.get('/api/users/:id', async function (req, res) {
 });
 
 //MONGODB
-app.get('/api/findid/:id', async function (req, res) {
-    console.log("token provided", req.params.id)
+app.get('/api/findid/:id/:password', async function (req, res) {
+    console.log("username provided", req.params.id)
+    console.log("password provided", req.params.password)
+
     db=await connect()
-    result = await find(db, "financial-planner", "users", {"username": req.params.id})
+    result = await find(db, "financial-planner", "users", {"username": req.params.id, "password": req.params.password})
     if (result != []) {
         console.log(result)
         res.json(result[0])
 
     }
     else {
-        res.json("404 - not found");
+        console.log("Authentication failed!")
+        res.json({ok:false});
     }
     db.close()
 });

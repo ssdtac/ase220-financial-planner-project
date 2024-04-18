@@ -4,7 +4,9 @@ urlParams = new URL(window.location.href).searchParams,
 
 $(document).on("click", "#login-button", function() {
     let username = document.getElementById("username").value;
-    loginUser(username);
+    let passsword = document.getElementById("password").value;
+
+    loginUser(username, passsword);
 });
 
 $(document).on("click", "#logout-button", function() {
@@ -51,9 +53,9 @@ async function getUserData(blobId) {
     }
 }
 
-async function loginUser(username) {
-    console.log(username)
-    let response = await fetch("/api/findid/"+username);
+async function loginUser(username, password) {
+    console.log(username, password)
+    let response = await fetch("/api/findid/"+username+"/"+password);
         data = await response.json();
         console.log(data)
     if(!userShown){
@@ -61,7 +63,6 @@ async function loginUser(username) {
             userShown = true;
             localStorage.blobId = data._id;
             displayPageData(data.username)
-            localStorage.username = data.username;
         } else {
             localStorage.username = ""
             alert("Username does not exist!")
@@ -90,7 +91,7 @@ async function loadPage() {
         changeDisplays(false);
     }
     else {
-        loginUser(localStorage.username);
+        // loginUser(localStorage.username);
 
     }
 }

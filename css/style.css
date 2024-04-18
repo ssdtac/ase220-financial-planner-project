@@ -84,6 +84,11 @@ footer {
     
 }
 
+#login input {
+    display: block;
+    margin-bottom: .5em;
+}
+
 footer button {
     width: max-content;
     margin: auto;

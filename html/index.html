@@ -24,7 +24,7 @@
             <button type="button" class="btn btn-primary my-4" id="addPurchaseButton" data-bs-toggle="modal" data-bs-target="#addTransactionModal">Add Transaction</button>
         </span>
         <span class="text-end mt-2" id="top-buttons-logout" style="display: none;">
-            <button type="button" class="btn btn-primary my-4" id="addUserButton">Add User</button>
+            <button type="button" class="btn btn-primary my-4" id="addUserButton">Register</button>
         </span>
     </header>
     <div class="container" id="login" style="display: none;">
@@ -33,9 +33,10 @@
                 <h1>Login</h1>
                 <h2>For your security, please log in to continue.</h2>
             </div>
-            <div>
+            <div id="login">
                 <input type="text" placeholder="Username" id="username">
-                <button class="btn btn-primary" id="login-button">Select User</button>
+                <input type="password" placeholder="Password" id="password">
+                <button class="btn btn-primary" id="login-button">Login</button>
             </div>
         </div>
         
