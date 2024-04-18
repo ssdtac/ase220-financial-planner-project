@@ -39,7 +39,7 @@ var userData;
 
 async function getUserData(blobId) {
     try {
-        let response = await fetch("/api/users/"+urlParams.get('user'));
+        let response = await fetch("/api/users/"+blobId);
         userData = await response.json();
     } catch (error) {
         console.error('Failed to load user data!', error);
