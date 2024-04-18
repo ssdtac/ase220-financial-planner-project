@@ -47,28 +47,21 @@ async function getUserData(blobId) {
 }
 
 async function loginUser(username) {
-        if(!userShown){
-            const response = await fetch(`/login`, 
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({username: username})
-        });
-        console.log(response.url)
-        location.href = response.url
-        // if (username in users) {  
-        //     userShown = true;
-        //     localStorage.blobId = users[username].blobId;
-        //     displayPageData(username)
-        //     localStorage.username = username;
-        // } else {
-        //     localStorage.username = ""
-        //     alert("Username does not exist!")
-        // }
-        // changeDisplays(userShown, username);
+    console.log(username)
+    let response = await fetch("/api/findid/"+username);
+        data = await response.json();
+        console.log(data)
+    if(!userShown){
+        if (response.ok) {  
+            userShown = true;
+            localStorage.blobId = data._id;
+            displayPageData(data.username)
+            localStorage.username = data.username;
+        } else {
+            localStorage.username = ""
+            alert("Username does not exist!")
+        }
+        changeDisplays(userShown, data.username);
     }
 }
 
@@ -88,12 +81,6 @@ var users;
 
 
 async function loadPage() {
-    try {
-        const response = await fetch(dataLocation);
-        users = await response.json();
-    } catch (error) {
-        console.error('Failed to load data!', error);
-    }
     if ((localStorage.username == '') || (localStorage.username == undefined)) {
         changeDisplays(false);
     }

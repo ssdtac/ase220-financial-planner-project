@@ -5,15 +5,13 @@ var users;
 const itemsPerPage = 3;
 let currentPage = 1;
 
+function clearPage() {
+    document.querySelector("tbody").innerHTML = "";
 
+}
 
 async function getUsers() {
-    try {
-        const response = await fetch('/api/users.json');
-        users = await response.json();
-    } catch (error) {
-        console.error('Failed to load data!', error);
-    }
+    console.log("unfinished")
 }
 
 async function setUsers() {
@@ -215,11 +213,6 @@ function toPercentage(val) {
     val = val * 100
     val = `${val}%`
     return val
-}
-
-function clearPage() {
-    document.querySelector("tbody").innerHTML = "";
-
 }
 
 let overview = {

@@ -8,7 +8,6 @@ const csvParser = require('csv-parser');
 const csvWriter = require('csv-write-stream');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-
 const uri = fs.readFileSync("uri.txt", "utf-8");
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 var db = null
@@ -39,7 +38,6 @@ async function start() {
     console.log(result)
 
 }
-
 // start()
 
 const app = express();
@@ -103,12 +101,37 @@ app.get('/transaction', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'));
 });
 
-app.get('/api/legacyusers/:id', (req, res) =>  {
-    if (fs.existsSync(`./json/users/${req.params.id}.json`)) {
-        res.sendFile(path.join(__dirname, 'json', 'users', `${req.params.id}.json`));
-    } else {
+
+//MONGODB
+app.get('/api/users/:id', async function (req, res) {
+    console.log("token provided", req.params.id)
+    db=await connect()
+    result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
+    if (result != []) {
+        console.log(result)
+        res.json(result[0])
+
+    }
+    else {
         res.json("404 - not found");
     }
+    db.close()
+});
+
+//MONGODB
+app.get('/api/findid/:id', async function (req, res) {
+    console.log("token provided", req.params.id)
+    db=await connect()
+    result = await find(db, "financial-planner", "users", {"username": req.params.id})
+    if (result != []) {
+        console.log(result)
+        res.json(result[0])
+
+    }
+    else {
+        res.json("404 - not found");
+    }
+    db.close()
 });
 
 app.get('/api/users/:id', async function (req, res) {
