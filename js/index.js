@@ -5,11 +5,6 @@ var users;
 const itemsPerPage = 3;
 let currentPage = 1;
 
-function clearPage() {
-    document.querySelector("tbody").innerHTML = "";
-
-}
-
 async function getUsers() {
     console.log("unfinished")
 }

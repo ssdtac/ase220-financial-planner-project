@@ -21,6 +21,11 @@ $(document).on("change", "#transactionType", function() {
     }
 });
 
+function clearPage() {
+    document.querySelector("tbody").innerHTML = "";
+
+}
+
 function changeDisplays(login, username) {
     if (login) {
         $("main, #logout-banner, #top-buttons-login").css("display", "block");
