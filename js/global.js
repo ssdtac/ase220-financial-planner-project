@@ -1,4 +1,5 @@
 var userShown = false;
+urlParams = new URL(window.location.href).searchParams, 
 
 
 $(document).on("click", "#login-button", function() {
@@ -70,6 +71,34 @@ async function loginUser(username) {
         // changeDisplays(userShown, username);
     }
 }
+
+
+
+async function token() {
+    if(!userShown){
+        const response = await fetch(`/api/token/`, 
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({token: urlParams.get("user")})
+    });
+    console.log(response)
+    // if (username in users) {  
+    //     userShown = true;
+    //     localStorage.blobId = users[username].blobId;
+    //     displayPageData(username)
+    //     localStorage.username = username;
+    // } else {
+    //     localStorage.username = ""
+    //     alert("Username does not exist!")
+    // }
+    // changeDisplays(userShown, username);
+}
+}
+
 
 function logoutUser() {
     if(userShown) {

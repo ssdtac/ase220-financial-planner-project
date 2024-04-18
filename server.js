@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const csvParser = require('csv-parser');
 const csvWriter = require('csv-write-stream');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
 
 const uri = fs.readFileSync("uri.txt", "utf-8");
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -84,6 +85,7 @@ app.post('/login', async function (req, res) {
     if (result[0].username == username) {
         res.redirect(301, `/?user=${result[0]._id.toString()}`)
     }
+    db.close()
 });
 
 // An example protected route
@@ -107,6 +109,21 @@ app.get('/api/users/:id', (req, res) =>  {
     } else {
         res.json("404 - not found");
     }
+});
+
+app.post('/api/token', async function (req, res) {
+    const { token } = req.body;
+
+console.log("token provided", token)
+
+    db=await connect()
+    result = await find(db, "financial-planner", "users", new ObjectId(token))
+
+    console.log(result)
+    if (result[0]._id == token) {
+        res.json(result)
+    }
+    db.close()
 });
 
 app.get('/api/users.json', (req, res) => {
