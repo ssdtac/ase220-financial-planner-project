@@ -39,7 +39,7 @@ var userData;
 
 async function getUserData(blobId) {
     try {
-        let response = await fetch("/api/users/"+blobId);
+        let response = await fetch("/api/users/"+urlParams.get('user'));
         userData = await response.json();
     } catch (error) {
         console.error('Failed to load user data!', error);
@@ -70,34 +70,6 @@ async function loginUser(username) {
         // }
         // changeDisplays(userShown, username);
     }
-}
-
-
-
-async function token() {
-    console.log(urlParams.get("user"))
-
-    if(!userShown){
-        const response = await fetch(`/api/users/${urlParams.get("user")}`, 
-    {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-    });
-    console.log(response.body)
-    // if (username in users) {  
-    //     userShown = true;
-    //     localStorage.blobId = users[username].blobId;
-    //     displayPageData(username)
-    //     localStorage.username = username;
-    // } else {
-    //     localStorage.username = ""
-    //     alert("Username does not exist!")
-    // }
-    // changeDisplays(userShown, username);
-}
 }
 
 

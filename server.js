@@ -112,15 +112,16 @@ app.get('/api/legacyusers/:id', (req, res) =>  {
 });
 
 app.get('/api/users/:id', async function (req, res) {
-    const { token } = req.params.id;
-
     console.log("token provided", req.params.id)
-
     db=await connect()
     result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
     if (result != []) {
-        res.send(result)
+        console.log(result)
+        res.json(result[0])
 
+    }
+    else {
+        res.json("404 - not found");
     }
     db.close()
 });
