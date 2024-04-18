@@ -34,11 +34,12 @@ async function find(db,database,collection,criteria){
 
 async function start() {
     db=await connect()
-    result = await find(db, "financial-planner", "users", {})
+    result = await find(db, "financial-planner", "users", {username: 'cassiancc'})
     console.log(result)
 
 }
-start()
+
+// start()
 
 const app = express();
 const port = 5500;
@@ -72,29 +73,17 @@ app.post('/signup', async (req, res) => {
 });
 
 // User Login
-app.post('/login', (req, res) => {
+app.post('/login', async function (req, res) {
     const { username, password } = req.body;
 
-    const users = [];
-    fs.createReadStream('users.csv')
-        .pipe(csvParser())
-        .on('data', (row) => users.push(row))
-        .on('end', () => {
-            const user = users.find(u => u.username === username);
-            if (!user) {
-                return res.status(400).send('User not found');
-            }
-            bcrypt.compare(password, user.password, (err, isValid) => {
-                if (err) {
-                    return res.status(500).send('Error during password comparison');
-                }
-                if (!isValid) {
-                    return res.status(401).send('Invalid password');
-                }
-                const token = jwt.sign({ username: user.username }, SECRET_KEY);
-                res.json({ token });
-            });
-        });
+    db=await connect()
+    result = await find(db, "financial-planner", "users", {username: username})
+
+    console.log(result[0].username)
+    console.log(result[0]._id.toString())
+    if (result[0].username == username) {
+        res.redirect(301, `/?user=${result[0]._id.toString()}`)
+    }
 });
 
 // An example protected route

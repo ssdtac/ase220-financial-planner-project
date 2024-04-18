@@ -45,18 +45,29 @@ async function getUserData(blobId) {
     }
 }
 
-function loginUser(username) {
-    if(!userShown){
-        if (username in users) {  
-            userShown = true;
-            localStorage.blobId = users[username].blobId;
-            displayPageData(username)
-            localStorage.username = username;
-        } else {
-            localStorage.username = ""
-            alert("Username does not exist!")
-        }
-        changeDisplays(userShown, username);
+async function loginUser(username) {
+        if(!userShown){
+            const response = await fetch(`/login`, 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({username: username})
+        });
+        console.log(response.url)
+        location.href = response.url
+        // if (username in users) {  
+        //     userShown = true;
+        //     localStorage.blobId = users[username].blobId;
+        //     displayPageData(username)
+        //     localStorage.username = username;
+        // } else {
+        //     localStorage.username = ""
+        //     alert("Username does not exist!")
+        // }
+        // changeDisplays(userShown, username);
     }
 }
 
