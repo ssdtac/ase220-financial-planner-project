@@ -51,8 +51,8 @@ app.post('/login', (req, res) => {
                 res.status(400).send('User not found');
             }
             bcrypt.compare(password, user.password, (err, isValid) => {
-                console.log(password)
-                console.log(user.password)
+                //console.log(password)
+               // console.log(user.password)
                 if (err) {
                     return res.status(500).send('Error during password comparison');
                 }

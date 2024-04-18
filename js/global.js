@@ -1,14 +1,6 @@
 var userShown = false;
 var userData;
 
-async function getUserData(blobId) {
-    try {
-        let response = await fetch("/api/users/"+blobId);
-        userData = await response.json();
-    } catch (error) {
-        console.error('Failed to load user data!', error);
-    }
-}
 
 async function loginUser(username) {
     try {
@@ -23,18 +15,14 @@ async function loginUser(username) {
                 password: document.getElementById("password").value
             })
         })
-        console.log(response)
     } catch (error) {
         console.error("Login failed!", error)
     }
 }
 
 function logoutUser() {
-    if(userShown) {
-        localStorage.username = ""
-        userShown = false;
-    }
-    changeDisplays(userShown, "");
+    localStorage.token = "";
+    $(location).prop('href', `/`)
 }
 
 

@@ -2,6 +2,11 @@
 const bcrypt = require('bcryptjs')
 
 
-str = "ssdtac"
+str = "cassiancc"
+async function hey() {
+    const string = await bcrypt.hash(str, 8)
+    console.log(string)
+}
+hey()
 
-console.log(bcrypt.hash(str, 8))
+
