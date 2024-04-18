@@ -75,17 +75,18 @@ async function loginUser(username) {
 
 
 async function token() {
+    console.log(urlParams.get("user"))
+
     if(!userShown){
-        const response = await fetch(`/api/token/`, 
+        const response = await fetch(`/api/users/${urlParams.get("user")}`, 
     {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify({token: urlParams.get("user")})
     });
-    console.log(response)
+    console.log(response.body)
     // if (username in users) {  
     //     userShown = true;
     //     localStorage.blobId = users[username].blobId;

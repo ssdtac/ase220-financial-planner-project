@@ -103,7 +103,7 @@ app.get('/transaction', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'));
 });
 
-app.get('/api/users/:id', (req, res) =>  {
+app.get('/api/legacyusers/:id', (req, res) =>  {
     if (fs.existsSync(`./json/users/${req.params.id}.json`)) {
         res.sendFile(path.join(__dirname, 'json', 'users', `${req.params.id}.json`));
     } else {
@@ -111,17 +111,16 @@ app.get('/api/users/:id', (req, res) =>  {
     }
 });
 
-app.post('/api/token', async function (req, res) {
-    const { token } = req.body;
+app.get('/api/users/:id', async function (req, res) {
+    const { token } = req.params.id;
 
-console.log("token provided", token)
+    console.log("token provided", req.params.id)
 
     db=await connect()
-    result = await find(db, "financial-planner", "users", new ObjectId(token))
+    result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
+    if (result != []) {
+        res.send(result)
 
-    console.log(result)
-    if (result[0]._id == token) {
-        res.json(result)
     }
     db.close()
 });
