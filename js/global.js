@@ -15,30 +15,22 @@ async function loginUser(username) {
                 password: document.getElementById("password").value
             })
         })
+        data = await response.json();
+        if (response.ok) {
+            localStorage.blobId = data._id
+        }
     } catch (error) {
         console.error("Login failed!", error)
     }
 }
 
+
 function logoutUser() {
     localStorage.token = "";
+    localStorage.blobId = "";
     $(location).prop('href', `/`)
 }
 
-
-
-const dataLocation = "/api/users.json"
-var users;
-
-
-async function loadPage() {
-    try {
-        const response = await fetch(dataLocation);
-        users = await response.json();
-    } catch (error) {
-        console.error('Failed to load data!', error);
-    }
-}
 
 // Update JSONBlob
 async function updateJSONBlob(data) {
@@ -75,6 +67,3 @@ function readDate() {
     date = new Date(date[0], date[1], date[2])
     return date
 }
-
-
-loadPage()

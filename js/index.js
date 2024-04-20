@@ -1,12 +1,27 @@
 var data;
 var users;
 
+async function getUsers() {
+    console.log("unfinished")
+}
 
+async function setUsers() {
+    const response = await fetch('/api/users.json', {
+        method: "PUT", 
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(users)
+    });
 
-$(document).on("click", "#login-button", function() {
-    //let username = document.getElementById("username").value;
-    //loginUser(username);
-});
+    if (response.ok) {
+        alert("User created successfully.");
+    } else {
+        
+    }
+}
+
 
 
 
@@ -55,7 +70,7 @@ async function createUser(username) {
     }
 }
 
-
+// Could be moved to somewhere else when button is added
 async function deleteUser(username) {
     let id = users[username].blobId
     const response = await fetch(`/api/users/${id}`, 
@@ -96,16 +111,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
-function loadIndex() {
-    if (!userShown) {
-        getUsers().then(function() {
-            loginUser(localStorage.username)
-        });
-    } else {
-        displayPageData();
-    }
-}
 

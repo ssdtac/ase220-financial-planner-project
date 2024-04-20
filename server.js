@@ -6,6 +6,39 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const csvParser = require('csv-parser');
 const csvWriter = require('csv-write-stream');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
+const uri = fs.readFileSync("uri.txt", "utf-8");
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+var db = null
+
+
+async function connect(){
+	let connection=await client.connect()
+	return connection
+}
+
+async function insert(db,database,collection,document){
+  let dbo=db.db(database)
+  let result=await dbo.collection(collection).insertOne(document)
+  console.log(result)
+  return result;
+}
+
+async function find(db,database,collection,criteria){
+  let dbo=db.db(database)
+  let result=await dbo.collection(collection).find(criteria).toArray()
+  //console.log(result)
+  return result;
+}
+
+async function start() {
+    db=await connect()
+    result = await find(db, "financial-planner", "users", {username: 'cassiancc'})
+    console.log(result)
+
+}
+// start()
 
 const app = express();
 const port = 5500;
@@ -39,8 +72,9 @@ app.post('/signup', async (req, res) => {
 });
 
 // User Login
-app.post('/login', (req, res) => {
+app.post('/login', async function (req, res) {
     const { username, password } = req.body;
+    // users.csv works for me, want to migrate to mongodb at some point
     var users = [];
     fs.createReadStream('users.csv')
         .pipe(csvParser())
@@ -57,13 +91,26 @@ app.post('/login', (req, res) => {
                     return res.status(500).send('Error during password comparison');
                 }
                 else if (!isValid) {
-                    return res.status(401).send('Invalid password');
+                    return res.status(401).send("Invalid Password")
                 } else {
                     const token = jwt.sign({ username: user.username }, SECRET_KEY);
-                    res.redirect(`/dashboard?token=${token}`)
+                    res.redirect(301, `/dashboard?token=${token}`);
                 }
             });
         });
+    
+    // mongodb
+    db=await connect()
+    result = await find(db, "financial-planner", "users", { username, password })
+
+    console.log(result[0].username)
+    console.log(result[0]._id.toString())
+    if (result[0].username == username) {
+
+        const token = jwt.sign({username}, SECRET_KEY)
+        res.redirect(301, `/dashboard?user=${result[0]._id.toString()}&token=${token}`)
+    }
+    db.close()
 });
 
 // An example protected route
@@ -71,7 +118,7 @@ app.get('/protected', authenticateToken, (req, res) => {
     res.send('This is a protected route');
 });
 
-//Serve homepage and dashboard
+//Serve login
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'index.html'));
 });
@@ -85,12 +132,57 @@ app.get('/transaction', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'));
 });
 
-app.get('/api/users/:id', (req, res) =>  {
-    if (fs.existsSync(`./json/users/${req.params.id}.json`)) {
-        res.sendFile(path.join(__dirname, 'json', 'users', `${req.params.id}.json`));
-    } else {
+
+//MONGODB
+app.get('/api/users/:id', async function (req, res) {
+    console.log("token provided", req.params.id)
+    db=await connect()
+    result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
+    if (result != []) {
+        console.log(result)
+        res.json(result[0])
+
+    }
+    else {
         res.json("404 - not found");
     }
+    db.close()
+});
+
+
+
+//MONGODB
+app.get('/api/findid/:id/:password', async function (req, res) {
+    console.log("username provided", req.params.id)
+    console.log("password provided", req.params.password)
+
+    db=await connect()
+    result = await find(db, "financial-planner", "users", {"username": req.params.id, "password": req.params.password})
+    if (result != []) {
+        console.log(result)
+        res.json(result[0])
+
+    }
+    else {
+        console.log("Authentication failed!")
+        res.json({ok:false});
+    }
+    db.close()
+});
+
+app.get('/api/users/:id', async function (req, res) {
+    console.log("token provided", req.params.id)
+    db=await connect()
+    result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
+    if (result != []) {
+        console.log(result)
+        res.json(result[0])
+
+    }
+    else {
+        res.json("404 - not found");
+    }
+    db.close()
 });
 
 app.get('/api/users.json', (req, res) => {
