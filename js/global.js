@@ -1,25 +1,6 @@
 var userShown = false;
 var userData;
 
-
-async function loginUser(username, password) {
-    console.log(username, password)
-    let response = await fetch("/api/findid/"+username+"/"+password);
-        data = await response.json();
-        console.log(data)
-    if(!userShown){
-        if (response.ok) {  
-            userShown = true;
-            localStorage.blobId = data._id;
-            location.href = `http://localhost:5500/dashboard?user=${data._id}`
-        } else {
-            localStorage.username = ""
-            alert("Username does not exist!")
-        }
-        changeDisplays(userShown, data.username);
-    }
-}
-
 function logoutUser() {
     localStorage.token = "";
     localStorage.blobId = "";

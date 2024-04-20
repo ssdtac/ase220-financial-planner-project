@@ -74,31 +74,6 @@ app.post('/signup', async (req, res) => {
 // User Login
 app.post('/login', async function (req, res) {
     const { username, password } = req.body;
-    /*// users.csv works for me, want to migrate to mongodb at some point
-    var users = [];
-    fs.createReadStream('users.csv')
-        .pipe(csvParser())
-        .on('data', (row) => users.push(row))
-        .on('end', () => {
-            const user = users.find(u => u.username === username);
-            if (!user) {
-                res.status(400).send('User not found');
-            }
-            bcrypt.compare(password, user.password, (err, isValid) => {
-                //console.log(password)
-               // console.log(user.password)
-                if (err) {
-                    return res.status(500).send('Error during password comparison');
-                }
-                else if (!isValid) {
-                    return res.status(401).send("Invalid Password")
-                } else {
-                    const token = jwt.sign({ username: user.username }, SECRET_KEY);
-                    res.redirect(301, `/dashboard?token=${token}`);
-                }
-            });
-        });*/
-    
     // mongodb
     db=await connect()
     result = await find(db, "financial-planner", "users", { username, password })
