@@ -100,6 +100,7 @@ function displayPageData() {
         displayTransactionTable(userData);
         displaySpendingOverview(userData);
         displayOverviewText(userData)
+        document.getElementById("user-title").innerText = userData.username
         document.getElementById('load-more').style.display = 'block';
     });
 }
