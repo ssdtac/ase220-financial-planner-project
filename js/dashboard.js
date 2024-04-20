@@ -7,6 +7,9 @@ $(document).on("click", "#logout-button", function() {
     logoutUser();
 });
 
+urlParams = new URL(window.location.href).searchParams, 
+
+localStorage.blobId = urlParams.get("user")
 
 async function getUserData(blobId) {
     try {
