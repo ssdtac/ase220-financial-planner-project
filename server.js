@@ -94,7 +94,7 @@ app.post('/login', async function (req, res) {
                     return res.status(401).send("Invalid Password")
                 } else {
                     const token = jwt.sign({ username: user.username }, SECRET_KEY);
-                    res.redirect(301, `/dashboard?token=${token}`);
+                    //res.redirect(301, `/dashboard?token=${token}`);
                 }
             });
         });

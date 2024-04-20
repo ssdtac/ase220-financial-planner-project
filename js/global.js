@@ -17,6 +17,7 @@ async function loginUser(username) {
         })
         data = await response.json();
         if (response.ok) {
+            console.log(data._id)
             localStorage.blobId = data._id
         }
     } catch (error) {

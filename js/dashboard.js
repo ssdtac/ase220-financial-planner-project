@@ -8,9 +8,11 @@ $(document).on("click", "#logout-button", function() {
 });
 
 
-async function getUserData(blobId) {
+async function getUserData() {
+    const urlParams = new URLSearchParams(window.location.search)
+
     try {
-        let response = await fetch("/api/users/"+blobId);
+        let response = await fetch("/api/users/"+urlParams.get('user'));
         userData = await response.json();
     } catch (error) {
         console.error('Failed to load user data!', error);
@@ -93,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function displayPageData() { 
+    console.log("hello"+localStorage.blobId)
     getUserData(localStorage.blobId).then(function() {
         displayTransactionTable(userData);
         displaySpendingOverview(userData);
