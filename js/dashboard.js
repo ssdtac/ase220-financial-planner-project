@@ -9,16 +9,10 @@ $(document).on("click", "#logout-button", function() {
 
 urlParams = new URL(window.location.href).searchParams
 
-if (localStorage.blobId == undefined) {
-    localStorage.blobId = urlParams.get("user")
-
-}
-
-async function getUserData() {
-    const urlParams = new URLSearchParams(window.location.search)
-
+async function getUserData(blobId) {
+    console.log(blobId)
     try {
-        let response = await fetch("/api/users/"+urlParams.get('user'));
+        let response = await fetch("/api/users/"+blobId);
         userData = await response.json();
     } catch (error) {
         console.error('Failed to load user data!', error);
@@ -102,6 +96,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function displayPageData() { 
     console.log("hello"+localStorage.blobId)
+    let blobId;
+    if ((localStorage.blobId == undefined) || localStorage.blobId == "") {
+        localStorage.blobId = urlParams.get("user")
+    
+    }
+    
     getUserData(localStorage.blobId).then(function() {
         displayTransactionTable(userData);
         displaySpendingOverview(userData);
