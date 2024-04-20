@@ -23,19 +23,19 @@
             <button type="button" class="btn btn-primary my-4" id="addUserButton">Register</button>
     </header>
     <div class="container" id="login">
-        <form action="/login" method="POST">    
+        <div>    
             <div class="card">
                 <div class="row">
                     <h1>Login</h1>
                     <h2>For your security, please log in to continue.</h2>
                 </div>
                 <div>
-                    <input type="text" placeholder="Username" name="username">
-                    <input type="password" placeholder="Password" name="password">
-                    <button class="btn btn-primary" id="login-button" type="submit">Log in</button>
+                    <input type="text" placeholder="Username" name="username" id="username">
+                    <input type="password" placeholder="Password" name="password" id="password">
+                    <button class="btn btn-primary" id="login-button">Log in</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     <!--add user modal-->
     <div id="addUserModal" class="modal" tabindex="-1">

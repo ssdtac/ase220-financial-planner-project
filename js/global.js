@@ -2,25 +2,39 @@ var userShown = false;
 var userData;
 
 
-async function loginUser(username) {
-    try {
-        let response = await fetch("/login", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                username, 
-                password: document.getElementById("password").value
-            })
+
+async function loginUser(username, password) {
+    //auth 
+    let response = await fetch("/api/findid", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application-json",
+            "Accept": "application-json"
+        }, 
+        body:JSON.stringify({
+            username, password
         })
-        data = await response.json();
-        if (response.ok) {
-            localStorage.blobId = data._id
+    })
+    // login
+    if (response.ok) {
+        try {
+            let response = await fetch("/login", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    username, password
+                })
+            })
+            data = await response.json();
+            if (response.ok) {
+                localStorage.blobId = data._id
+            }
+        } catch (error) {
+            console.error("Login failed!", error)
         }
-    } catch (error) {
-        console.error("Login failed!", error)
     }
 }
 

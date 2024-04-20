@@ -152,16 +152,13 @@ app.get('/api/users/:id', async function (req, res) {
 
 
 //MONGODB
-app.get('/api/findid/:id/:password', async function (req, res) {
-    console.log("username provided", req.params.id)
-    console.log("password provided", req.params.password)
-
+app.post('/api/findid', async function (req, res) {
+    const { id, password } = req.body;
     db=await connect()
-    result = await find(db, "financial-planner", "users", {"username": req.params.id, "password": req.params.password})
+    result = await find(db, "financial-planner", "users", {"username": id, "password": password})
     if (result != []) {
         console.log(result)
         res.json(result[0])
-
     }
     else {
         console.log("Authentication failed!")

@@ -109,6 +109,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('newUsername').value = '';
         document.getElementById('newPassword').value = '';
     });
+
+    $(document).on("click", "#login-button", function() {
+        console.log('hi')
+        let username = document.getElementById("username").value;
+        let passsword = document.getElementById("password").value;
+        loginUser(username, passsword);
+    });
+
 });
 
 
