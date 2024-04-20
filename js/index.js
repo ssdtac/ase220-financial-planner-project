@@ -109,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('newUsername').value = '';
         document.getElementById('newPassword').value = '';
     });
-
 });
 
 
