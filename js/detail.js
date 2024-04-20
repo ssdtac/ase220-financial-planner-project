@@ -55,6 +55,8 @@ async function displayPageData() {
             const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
             setupEditAndDeleteButtons(transactionDetails, userData, transactionId);
+            document.getElementById("user-title").innerText = userData.username
+
         });
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction ID not provided in the URL.';
