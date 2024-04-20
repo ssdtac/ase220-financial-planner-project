@@ -19,6 +19,15 @@ function displayTransactionDetails(transaction) {
     }
 }
 
+async function getUserData(blobId) {
+    try {
+        let response = await fetch("/api/users/"+blobId);
+        userData = await response.json();
+    } catch (error) {
+        console.error('Failed to load user data!', error);
+    }
+}
+
 
 function addDetail(type, data) {
     document.getElementById('transaction-details').innerHTML +=             
@@ -46,6 +55,8 @@ async function displayPageData() {
             const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
             setupEditAndDeleteButtons(transactionDetails, userData, transactionId);
+            document.getElementById("user-title").innerText = userData.username
+
         });
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction ID not provided in the URL.';
