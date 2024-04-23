@@ -43,19 +43,7 @@ async function createUser(username) {
           ],
         transactionHistory: []
     }
-    // create new random id
-    id = []
-    for (let i=0; i<19; i++) { //ids are 19 random numbers
-        // no checking for now it will probably not matter
-
-        id.push(Math.floor(10 * Math.random()));
-    }
-    id = id.join("");
-    //console.log(id);
-    
-
-
-    const response = await fetch(`/api/users/${id}`, 
+    const response = await fetch(`/api/users/${username}`, 
     {
         method: 'POST',
         headers: {
@@ -66,7 +54,7 @@ async function createUser(username) {
     });
 
     if (response.ok) {        
-        localStorage.blobId = id; 
+        console.log(response)
     }
 }
 
@@ -95,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const newUser = {
                 username: newUsername,
                 password: document.getElementById("newPassword").value,
-                blobId: localStorage.blobId 
             }
             getUsers().then(function() {
                 users[newUsername] = newUser;
