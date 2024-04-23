@@ -16,11 +16,16 @@ async function loginUser(username) {
             })
         })
         data = await response.json();
-        if (response.ok) {
+        if (data = 400) {
+            alert("Login failed!")
+        }
+        else {
+        }
             console.log(data._id)
             localStorage.blobId = data._id
+
         }
-    } catch (error) {
+        catch (error) {
         console.error("Login failed!", error)
     }
 }

@@ -77,14 +77,19 @@ app.post('/login', async function (req, res) {
     // mongodb
     db=await connect()
     result = await find(db, "financial-planner", "users", { username, password })
-
-    console.log(result[0].username)
-    console.log(result[0]._id.toString())
-    if (result[0].username == username) {
-
-        const token = jwt.sign({username}, SECRET_KEY)
-        res.redirect(301, `/dashboard?user=${result[0]._id.toString()}&token=${token}`)
+    if (result[0] == undefined) {
+        res.json(400)
     }
+    else {
+        console.log(result[0].username)
+        console.log(result[0]._id.toString())
+        if (result[0].username == username) {
+    
+            const token = jwt.sign({username}, SECRET_KEY)
+            res.redirect(301, `/dashboard?user=${result[0]._id.toString()}&token=${token}`)
+        }
+    }
+    
     db.close()
 });
 
@@ -140,7 +145,7 @@ app.get('/api/findid/:id/:password', async function (req, res) {
     }
     else {
         console.log("Authentication failed!")
-        res.json({ok:false});
+        res.json(400);
     }
     db.close()
 });
