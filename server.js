@@ -166,12 +166,32 @@ app.get('/api/users.json', (req, res) => {
 
 //update existing user
 app.put('/api/users/:id', (req, res) => {
-    if(fs.existsSync(`./json/users/${req.params.id}.json`)){
-        fs.writeFileSync(`./json/users/${req.params.id}.json`, JSON.stringify(req.body, null, 2));
-        res.json({ok: true});
-    } else {
-        res.json({ok: false});
-    }
+    client.connect(function(err,db){
+        if(err) throw err    
+        const database=db.db('financial-planner')
+        database.collection('users').find({username: req.params.id}).toArray(function(err, result){
+            if (err) throw err
+            console.log(result[0])
+            if (result[0] == undefined) {
+                data = req.body
+                delete data._id
+                database.collection('users').replaceOne({_id: new ObjectId(req.params.id)}, req.body,function(err,result){
+                    if (err) throw err
+                })
+                database.collection('users').find({username: req.params.id}).toArray(function(err, result){
+                    if (err) throw err
+                    res.json({ok: true});
+                    db.close()
+                })
+            }
+            else {
+                res.json({ok: false});
+            }
+           
+        })
+    })
+    
+    
 });
 
 //create user
@@ -198,7 +218,7 @@ app.post('/api/users/:id', async function(req, res) {
            
         })
     })
-        
+    
 });
 
 //create user in users file
