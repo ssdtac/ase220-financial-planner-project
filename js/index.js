@@ -54,7 +54,9 @@ async function createUser(username) {
     });
 
     if (response.ok) {        
-        console.log(response)
+        data = await response.json();
+        localStorage.blobId = data
+        location.href = "/dashboard"
     }
 }
 
@@ -84,10 +86,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 username: newUsername,
                 password: document.getElementById("newPassword").value,
             }
-            getUsers().then(function() {
-                users[newUsername] = newUser;
-                setUsers()
-            })
+            // getUsers().then(function() {
+            //     users[newUsername] = newUser;
+            //     setUsers()
+            // })
             $('#addUserModal').modal('hide');
         });
     });

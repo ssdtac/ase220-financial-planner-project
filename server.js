@@ -181,11 +181,11 @@ app.post('/api/users/:id', async function(req, res) {
         console.log('Connected to database')
     
         const database=db.db('financial-planner')
-        database.collection('users').insertOne(req.body,function(err,result){
-            if (err) throw err
-            console.log(result)
-            // db.close();
-        })
+        // database.collection('users').insertOne(req.body,function(err,result){
+        //     if (err) throw err
+        //     console.log(result)
+        //     // db.close();
+        // })
         
         /*database.collection('users').insertMany([{firstname:'Jane'},{lastname:"Doe",age:30}],function(err,result){
             if (err) throw err
@@ -196,8 +196,8 @@ app.post('/api/users/:id', async function(req, res) {
         database.collection('users').find({username: req.params.id}).toArray(function(err, result){
             if (err) throw err
             console.log(result)
-            console.log(result[0].id);
-            res.json(result[0].id)
+            console.log(result[0]._id.toString());
+            res.json(result[0]._id.toString())
             db.close()
         })
     
