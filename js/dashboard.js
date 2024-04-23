@@ -235,23 +235,26 @@ function displaySpendingOverview(userData) {
     })
     console.log(width)
     document.querySelector("#savings-bar").style.width = `${100-width}%`
-    document.querySelector("#summary .actual-savings").innerHTML = '$'+((100-width)/100)*overview.income
+    document.querySelector("#summary .actual-savings").innerHTML = '$'+(overview.income-overview.wants-overview.needs)
 
 
-    
-    document.querySelector('.percent').innerHTML = `${Math.round(100-overview.needsPercentage-overview.wantsPercentage-overview.savingsPercentage)}%`
+    let percentage = `${Math.round(100-overview.needsPercentage-overview.wantsPercentage-overview.savingsPercentage)}%`
+    if (percentage == "NaN%") {
+        percentage = "0%"
+    }
+    document.querySelector('.percent').innerHTML = percentage
 
 }
 
 function displayOverviewText(userData) {
     const timeframe = userData.spendingHistory[selectedTimeframe]
     //using most recent month until i have a way of switching between
-    document.querySelector("#summary .ideal-needs").innerHTML = '$'+timeframe.needs*overview.income
-    document.querySelector("#summary .ideal-wants").innerHTML = '$'+timeframe.wants*overview.income
+    document.querySelector("#summary .ideal-needs").innerHTML = '$'+Math.round(timeframe.needs*overview.income)
+    document.querySelector("#summary .ideal-wants").innerHTML = '$'+Math.round(timeframe.wants*overview.income)
     document.querySelector("#summary .needs").innerHTML = '$'+overview.needs
     document.querySelector("#summary .wants").innerHTML = '$'+overview.wants
     
-    document.querySelector("#summary .savings").innerHTML = '$'+timeframe.savings*overview.income
+    document.querySelector("#summary .savings").innerHTML = '$'+Math.round(timeframe.savings*overview.income)
 
 }
 
