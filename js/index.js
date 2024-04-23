@@ -25,9 +25,10 @@ async function setUsers() {
 
 
 
-async function createUser(username) {
+async function createUser(username, password) {
     const newUser = {
         username: username,
+        password: password,
         balance: 0,
         spendingHistory: [
             {
@@ -90,15 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById("saveNewUser").addEventListener("click", async function() {
         let newUsername = document.getElementById("newUsername").value;
-        createUser(newUsername).then(function() {
-            const newUser = {
-                username: newUsername,
-                password: document.getElementById("newPassword").value,
-            }
-            // getUsers().then(function() {
-            //     users[newUsername] = newUser;
-            //     setUsers()
-            // })
+        let newPassword = document.getElementById("newPassword").value;
+        createUser(newUsername, newPassword).then(function() {
             $('#addUserModal').modal('hide');
         });
     });
