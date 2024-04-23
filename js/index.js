@@ -71,8 +71,7 @@ async function createUser(username, password) {
 }
 
 // Could be moved to somewhere else when button is added
-async function deleteUser(username) {
-    let id = users[username].blobId
+async function deleteUser(id) {
     const response = await fetch(`/api/users/${id}`, 
     {
         method: 'DELETE',    

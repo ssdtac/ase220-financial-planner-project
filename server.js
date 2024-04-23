@@ -191,6 +191,7 @@ app.put('/api/users/:id', (req, res) => {
             }
             else {
                 res.json({ok: false});
+                db.close()
             }
            
         })
@@ -219,6 +220,7 @@ app.post('/api/users/:id', async function(req, res) {
             }
             else {
                 res.json(400)
+                db.close()
             }
            
         })
@@ -239,31 +241,30 @@ app.put('/api/users.json', (req, res) => {
 
 //delete user
 app.delete('/api/users/:id', (req, res) => {
-    const filePath = path.join(__dirname, 'json', 'users', `${req.params.id}.json`);
-    
-    if (fs.existsSync(filePath)) {
-        fs.unlink(filePath, (err) => {
-            if (err) {
-                console.error(err);
-                return res.sendStatus(500); // Internal Server Error
+    client.connect(function(err,db){
+        if(err) throw err    
+        const database=db.db('financial-planner')
+        mongoID = new ObjectId(req.params.id)
+        database.collection('users').find({_id: mongoID}).toArray(function(err, result){
+            if (err) throw err
+            console.log(result[0])
+            if (result[0] != undefined) {
+                database.collection('users').deleteOne({_id: mongoID},function(err,result){
+                    if (err) throw err
+                })
+                database.collection('users').find({_id: mongoID}).toArray(function(err, result){
+                    if (err) throw err
+                    res.json({ok: true});
+                    db.close()
+                })
             }
-            // If the file has been deleted, remove it from users.json
-            const file = fs.readFileSync(path.join(__dirname, 'json', 'users.json'), 'utf8');
-            let parsedFile = JSON.parse(file);
-            let removeUsername = "";
-            Object.entries(parsedFile).forEach(function(user) {
-                user = user[1];
-                if (user.blobId == req.params.id) {
-                    removeUsername = user.username;
-                }
-            });
-            delete parsedFile[removeUsername];
-            fs.writeFileSync("./json/users.json", JSON.stringify(parsedFile, null, 2));
-            res.sendStatus(200); // Successfully deleted
-        });
-    } else {
-        res.sendStatus(404); // File not found
-    }
+            else {
+                res.json({ok: false});
+                db.close()
+            }
+           
+        })
+    })
 });
 
 //Serve static CSS/JS
