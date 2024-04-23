@@ -57,6 +57,7 @@ async function createUser(username) {
 
             
         data = await response.json();
+        console.log(data)
         if (data == 400) {
             console.log("Invalid user!")
             alert("Invalid username.")

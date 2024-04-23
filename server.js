@@ -177,13 +177,12 @@ app.put('/api/users/:id', (req, res) => {
 //create user
 app.post('/api/users/:id', async function(req, res) {
     client.connect(function(err,db){
-        if(err) throw err
-        console.log('Connected to database')
-    
+        if(err) throw err    
         const database=db.db('financial-planner')
         database.collection('users').find({username: req.params.id}).toArray(function(err, result){
             if (err) throw err
-            if (result == []) {
+            console.log(result[0])
+            if (result[0] == undefined) {
                 database.collection('users').insertOne(req.body,function(err,result){
                     if (err) throw err
                 })
@@ -194,7 +193,6 @@ app.post('/api/users/:id', async function(req, res) {
                 })
             }
             else {
-                console.log("user exists!")
                 res.json(400)
             }
            
