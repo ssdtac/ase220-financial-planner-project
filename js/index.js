@@ -70,18 +70,6 @@ async function createUser(username, password) {
 
 }
 
-// Could be moved to somewhere else when button is added
-async function deleteUser(id) {
-    const response = await fetch(`/api/users/${id}`, 
-    {
-        method: 'DELETE',    
-    });
-
-    if (response.ok) {        
-        console.log("Removed user")
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("addUserButton").addEventListener("click", function() {

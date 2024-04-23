@@ -2,7 +2,7 @@ var userShown = false;
 var userData;
 
 
-async function loginUser(username) {
+async function loginUser(username, password) {
     try {
         let response = await fetch("/login", {
             method: 'POST',
@@ -12,7 +12,7 @@ async function loginUser(username) {
             },
             body: JSON.stringify({
                 username, 
-                password: document.getElementById("password").value
+                password
             })
         })
         data = await response.json();
@@ -27,6 +27,17 @@ async function loginUser(username) {
         }
         catch (error) {
         console.error("Login failed!", error)
+    }
+}
+
+async function deleteUser(id) {
+    const response = await fetch(`/api/users/${id}`, 
+    {
+        method: 'DELETE',    
+    });
+
+    if (response.ok) {        
+        console.log("Removed user")
     }
 }
 
