@@ -2,34 +2,6 @@ var userShown = false;
 var userData;
 
 
-async function loginUser(username, password) {
-    try {
-        let response = await fetch("/login", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                username, 
-                password
-            })
-        })
-        data = await response.json();
-        if (data = 400) {
-            alert("Login failed!")
-        }
-        else {
-        }
-            console.log(data._id)
-            localStorage.blobId = data._id
-
-        }
-        catch (error) {
-        console.error("Login failed!", error)
-    }
-}
-
 async function deleteUser(id) {
     const response = await fetch(`/api/users/${id}`, 
     {
