@@ -53,11 +53,19 @@ async function createUser(username) {
         body: JSON.stringify(newUser)
     });
 
-    if (response.ok) {        
+    console.log(response)
+
+            
         data = await response.json();
-        localStorage.blobId = data
-        location.href = "/dashboard"
-    }
+        if (data == 400) {
+            console.log("Invalid user!")
+            alert("Invalid username.")
+        }
+        else {
+            localStorage.blobId = data
+            location.href = "/dashboard"
+        }
+
 }
 
 // Could be moved to somewhere else when button is added
