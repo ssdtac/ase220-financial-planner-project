@@ -165,8 +165,15 @@ app.get('/api/users/:id', async function (req, res) {
     db.close()
 });
 
+//Read users from MongoDB while testing.
 app.get('/api/users.json', (req, res) => {
-    res.sendFile(path.join(__dirname, 'json', 'users.json'));
+    client.connect(function(err,db){
+        if(err) throw err    
+        const database=db.db('financial-planner')
+        database.collection('users').find().toArray(function(err, result){
+            res.json(result)
+        })
+    })
 });
 
 //update existing user
@@ -226,17 +233,6 @@ app.post('/api/users/:id', async function(req, res) {
         })
     })
     
-});
-
-//create user in users file
-app.put('/api/users.json', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    if (req.headers['content-type'] === 'application/json') {
-        fs.writeFileSync("./json/users.json", JSON.stringify(req.body, null, 2));
-        res.json({ok: true});
-    } else {
-        res.json({ok: false});
-    }
 });
 
 //delete user
