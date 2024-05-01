@@ -46,7 +46,9 @@ function findTransactionById(id) {
         }
     return null;
 }
-
+function goHome() {
+    location.href = `dashboard?token=${localStorage.token}`
+}
 async function displayPageData() {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionId = urlParams.get('id');

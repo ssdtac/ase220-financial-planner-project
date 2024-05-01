@@ -48,9 +48,16 @@ const SECRET_KEY = 'secret_key';
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+
+var token;
 // Middleware to authenticate token
 function authenticateToken(req, res, next) {
-    const token = req.headers['authorization']?.split(' ')[1];
+    //const params = new URL(req.originalURL).searchParams;
+    if (req.query.token !== null) {
+        token = req.query.token//  gets token in URL, works on repeat auths bc of var
+    }
+    //console.log("hey", token)
     if (token == null) return res.sendStatus(401); // Unauthorized
 
     jwt.verify(token, SECRET_KEY, (err, user) => {
@@ -81,12 +88,12 @@ app.post('/login', async function (req, res) {
         res.json(400)
     }
     else {
-        console.log(result[0].username)
-        console.log(result[0]._id.toString())
+        //console.log("username",result[0].username)
+        //console.log("id ",result[0]._id.toString())
         if (result[0].username == username) {
     
-            const token = jwt.sign({username}, SECRET_KEY)
-            res.redirect(301, `/dashboard?user=${result[0]._id.toString()}&token=${token}`)
+            urltoken = jwt.sign({username}, SECRET_KEY)
+            res.redirect(301, `/dashboard?user=${result[0]._id.toString()}&token=${urltoken}`)
         }
     }
     
@@ -103,11 +110,12 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'index.html'));
 });
 
-app.get('/dashboard', (req, res) => {
+//protected dashboard route for users only
+app.get('/dashboard', authenticateToken, (req, res) => {
     res.sendFile(path.join(__dirname, "html", 'dashboard.html'));
 });
 
-//Serve transaction details page as /transaction
+//Serve transaction details page as /transaction, protected route
 app.get('/transaction', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'));
 });
@@ -115,11 +123,11 @@ app.get('/transaction', (req, res) => {
 
 //MONGODB
 app.get('/api/users/:id', async function (req, res) {
-    console.log("token provided", req.params.id)
+    //console.log("id provided", req.params.id)
     db=await connect()
     result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
     if (result != []) {
-        console.log(result)
+        //console.log(result)
         res.json(result[0])
 
     }
@@ -151,11 +159,12 @@ app.get('/api/findid/:id/:password', async function (req, res) {
 });
 
 app.get('/api/users/:id', async function (req, res) {
-    console.log("token provided", req.params.id)
+    console.log("id provided", req.params.id)
+    console.log("token provided", req.params.token)
     db=await connect()
     result = await find(db, "financial-planner", "users", new ObjectId(req.params.id))
     if (result != []) {
-        console.log(result)
+        //console.log(result)
         res.json(result[0])
 
     }

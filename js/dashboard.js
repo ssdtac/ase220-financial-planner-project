@@ -10,7 +10,7 @@ $(document).on("click", "#logout-button", function() {
 urlParams = new URL(window.location.href).searchParams
 
 async function getUserData(blobId) {
-    console.log(blobId)
+    //console.log(blobId)
     try {
         let response = await fetch("/api/users/"+blobId);
         userData = await response.json();
@@ -95,13 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function displayPageData() { 
-    console.log("hello"+localStorage.blobId)
-    let blobId;
-    if ((localStorage.blobId == undefined) || localStorage.blobId == "") {
+    if (localStorage.blobId.length != 24) { // must be exactly 24, old IDs are not so this "should" fix permanently
         localStorage.blobId = urlParams.get("user")
-    
+        //set token for auth use
+        localStorage.token = urlParams.get("token")
     }
-    
+        
     getUserData(localStorage.blobId).then(function() {
         displayTransactionTable(userData);
         displaySpendingOverview(userData);
