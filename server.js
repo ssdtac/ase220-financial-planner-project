@@ -95,17 +95,29 @@ app.post('/login', async function (req, res) {
     const { username, password } = req.body;
     // mongodb
     db=await connect()
-    result = await find(db, "financial-planner", "users", { username, password })
+    result = await find(db, "financial-planner", "users", { username })
+    //If username does not exist in DB
     if (result[0] == undefined) {
         res.redirect(301, `/?promptIncorrect=true`)
     }
+    //If username exists in DB
     else {
-        //console.log("username",result[0].username)
-        //console.log("id ",result[0]._id.toString())
+        const id = result[0]._id
         if (result[0].username == username) {
-    
-            urltoken = jwt.sign({username}, SECRET_KEY)
-            res.redirect(301, `/dashboard?user=${result[0]._id.toString()}&token=${urltoken}`)
+            //Check password against password hash
+            bcrypt.compare(password, result[0].password, function(err, result) {
+                //If it matches, log user in.
+                if (result) {
+                    urltoken = jwt.sign({username}, SECRET_KEY)
+                    res.redirect(301, `/dashboard?user=${id}&token=${urltoken}`)
+                }
+                //If not, display incorrect password.
+                else {
+                    res.redirect(301, `/?promptIncorrect=true`)
+
+                }
+            })
+            
         }
     }
     
