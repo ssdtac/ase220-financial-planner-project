@@ -4,8 +4,6 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const csvParser = require('csv-parser');
-const csvWriter = require('csv-write-stream');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const uri = fs.readFileSync("uri.txt", "utf-8");
@@ -31,15 +29,6 @@ async function find(db,database,collection,criteria){
   //console.log(result)
   return result;
 }
-
-async function start() {
-    db=await connect()
-    result = await find(db, "financial-planner", "users", {username: 'cassiancc'})
-    console.log(result)
-
-}
-// start()
-
 const app = express();
 const port = 5500;
 
@@ -67,16 +56,39 @@ function authenticateToken(req, res, next) {
     });
 }
 
-// User Signup
-app.post('/signup', async (req, res) => {
-    const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 8);
-    const writer = csvWriter({ sendHeaders: false });
-    writer.pipe(fs.createWriteStream('users.csv', { flags: 'a' }));
-    writer.write({ username, password: hashedPassword });
-    writer.end();
-    res.json({ message: 'Signup successful' });
+//create user
+app.post('/signup', async function(req, res) {
+    const newUser = req.body;
+    const hashedPassword = await bcrypt.hash(newUser.password, 8);
+    newUser.password = hashedPassword
+
+    client.connect(function(err,db){
+        if(err) throw err    
+        const database=db.db('financial-planner')
+        database.collection('users').find({username: newUser.username}).toArray(function(err, result){
+            if (err) throw err
+            console.log(result[0])
+            if (result[0] == undefined) {
+                database.collection('users').insertOne(newUser,function(err,result){
+                    if (err) throw err
+                })
+                database.collection('users').find({username: newUser.username}).toArray(function(err, result){
+                    if (err) throw err
+                    res.json(result[0]._id.toString())
+                    db.close()
+                })
+            }
+            else {
+                res.json(400)
+                db.close()
+            }
+           
+        })
+    })
+    
 });
+
+
 
 // User Login
 app.post('/login', async function (req, res) {

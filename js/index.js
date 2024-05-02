@@ -1,10 +1,6 @@
 var data;
 var users;
 
-async function getUsers() {
-    console.log("unfinished")
-}
-
 async function setUsers() {
     const response = await fetch('/api/users.json', {
         method: "PUT", 
@@ -49,7 +45,7 @@ async function createUser(username, password) {
           ],
         transactionHistory: []
     }
-    const response = await fetch(`/api/users/${username}`, 
+    const response = await fetch(`/signup`, 
     {
         method: 'POST',
         headers: {
