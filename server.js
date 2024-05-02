@@ -85,7 +85,7 @@ app.post('/login', async function (req, res) {
     db=await connect()
     result = await find(db, "financial-planner", "users", { username, password })
     if (result[0] == undefined) {
-        res.json(400)
+        res.redirect(301, `/?promptIncorrect=true`)
     }
     else {
         //console.log("username",result[0].username)

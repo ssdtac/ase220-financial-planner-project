@@ -22,7 +22,12 @@ async function setUsers() {
     }
 }
 
+urlParams = new URL(window.location.href).searchParams
+if (urlParams.get("promptIncorrect") == 'true') {
+    alert("Incorrect username or password!")
+    location.href = '/'
 
+}
 
 
 async function createUser(username, password) {
