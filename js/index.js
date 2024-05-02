@@ -35,7 +35,7 @@ async function createUser(username, password) {
               timeframe: "February 2024",
               dates: [
                 "2024-02-01",
-                "2024-04-28"
+                "2024-05-28"
               ],
               needs: 0.5,
               wants: 0.2,
