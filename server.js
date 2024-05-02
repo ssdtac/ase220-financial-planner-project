@@ -116,7 +116,7 @@ app.get('/dashboard', authenticateToken, (req, res) => {
 });
 
 //Serve transaction details page as /transaction, protected route
-app.get('/transaction', (req, res) => {
+app.get('/transaction', authenticateToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'transaction-detail.html'));
 });
 
