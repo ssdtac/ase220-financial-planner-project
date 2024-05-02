@@ -4,9 +4,9 @@
 
 Cassian Godsted - Created MongoDB authentication. Ported frontend login, add user, update user, create user, delete user to MongoDB. Fix bugs with dashboard appearence from port. Required only hashed passwords to be used in user creation and login. General bufixes.
 
-Christian Lane - Seperated login page functionality. Helped with frontend login MongoDB port. Created JSON Webtoken Auth for Dashboard and Detail pages, making them more secure. General bugfixes.
+Christian Lane - Seperated login page functionality. Helped with frontend login MongoDB port. implemented JSON Webtoken Auth for Dashboard and Detail pages, making them more secure. General bugfixes.
 
-Jeffrey Perdue
+Jeffrey Perdue - Created JSON Webtoken Auth method
 
 ## Project Goal
 
