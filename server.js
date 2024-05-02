@@ -1,3 +1,4 @@
+//Import functions
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -6,21 +7,15 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
+//Setup MongoDB
 const uri = fs.readFileSync("uri.txt", "utf-8");
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 var db = null
 
-
+//MongoDB base functions
 async function connect(){
 	let connection=await client.connect()
 	return connection
-}
-
-async function insert(db,database,collection,document){
-  let dbo=db.db(database)
-  let result=await dbo.collection(collection).insertOne(document)
-  console.log(result)
-  return result;
 }
 
 async function find(db,database,collection,criteria){
@@ -29,6 +24,8 @@ async function find(db,database,collection,criteria){
   //console.log(result)
   return result;
 }
+
+//Setup Express
 const app = express();
 const port = 5500;
 
