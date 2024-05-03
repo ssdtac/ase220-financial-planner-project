@@ -16,9 +16,14 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
 
 ## How to Use
 
-1. First, create a new user using the button in the top right. 
-2. Sign in with that username.
-3. You can then add recent transactions using the button in the top right. The dashboard will calculate your spending based off of 50% to needs, 20% to wants, and 30% to savings. How much that is will depend on how much income you add.
+1. Start the server with `node server`, and connect to http://localhost:5500. You'll need a file named `uri.txt` in the root directory with your MongoDB URI for it to work. The MongoDB database should be named `financial-planner` and the collection should be named `users`.
+  - Example URI:
+```
+mongodb+srv://{USERNAMEHERE}:{PASSWORDHERE}@cluster0.{MONGODBSERVERHERE}.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+```
+2. First, create a new user using the button in the top right. 
+3. Sign in with that username.
+4. You can then add recent transactions using the button in the top right. The dashboard will calculate your spending based off of 50% to needs, 20% to wants, and 30% to savings. How much that is will depend on how much income you add.
 
 ## Features
 
