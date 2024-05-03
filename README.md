@@ -1,5 +1,7 @@
 # ASE 220 Financial Planning Website Documentation
 
+# [Final Project Video](https://www.youtube.com/watch?v=n2-1RlvmHHA)
+
 ## Contribution Summary - Final Project
 
 Cassian Godsted - Created MongoDB authentication. Ported frontend login, add user, update user, create user, delete user to MongoDB. Fix bugs with dashboard appearence from port. Required only hashed passwords to be used in user creation and login. General bufixes.
