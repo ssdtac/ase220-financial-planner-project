@@ -127,6 +127,11 @@ main {
 
 #title-div {
     padding-left: 1em;
+    cursor: pointer;
+}
+#title-div a {
+    text-decoration: none;
+    color: var(--text);
 }
 
 body .form-control {
