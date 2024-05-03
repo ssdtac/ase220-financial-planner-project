@@ -16,7 +16,7 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
 
 ## How to Use
 
-1. Start the server with `node server`, and connect to http://localhost:5500. You'll need a file named `uri.txt` in the root directory with your MongoDB URI for it to work. The MongoDB database should be named `financial-planner` and the collection should be named `users`.
+1. Start the server with `node server`, and connect to http://localhost:5500. You'll need to create a file named `uri.txt` in the root directory. The oontents of the file should be the MongoDB URI for it to work. The MongoDB database should be named `financial-planner` and the collection should be named `users`.
   - Example URI:
 ```
 mongodb+srv://{USERNAMEHERE}:{PASSWORDHERE}@cluster0.{MONGODBSERVERHERE}.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
