@@ -84,7 +84,7 @@ Christian Lane - Replaced POST/PUT requests with NodeJS equivalents. Implemented
 Jeffrey Perdue - Replaced DELETE requests with NodeJS equivalents.
 
 ## Contribution Summary - Midterm Project
-# [Midterm Project Video](https://www.youtube.com/watch?v=PUO_iO2qIAo)
+[Midterm Project Video](https://www.youtube.com/watch?v=PUO_iO2qIAo)
 
 Cassian Godsted - Created code to import from JSONblob. Defined initial structure for JSON. Created spending overview card, including a  progress bar based off recent spending, automatic calculation of how a user is spending based off of their needs/wants and their paycheck. Created persistent user storage through localstorage. CSS styling changes for login and details pages. Reorganized code for a more consistent site experience. Wrote contribution summary. General bugfixes.
 
