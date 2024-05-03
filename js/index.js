@@ -66,7 +66,7 @@ async function createUser(username, password) {
         }
         else {
             localStorage.blobId = data
-            location.href = "/dashboard"
+            location.href = `/`
         }
 
 }
