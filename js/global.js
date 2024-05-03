@@ -23,7 +23,7 @@ function logoutUser() {
 
 // Update JSONBlob
 async function updateJSONBlob(data) {
-    const dataLocation = `/api/users/${localStorage.blobId}`;
+    const dataLocation = `/api/users/${localStorage.blobId}/${localStorage.token}`;
 
     try {
         const response = await fetch(dataLocation, {

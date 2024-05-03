@@ -40,7 +40,10 @@ var token;
 // Middleware to authenticate token
 function authenticateToken(req, res, next) {
     //const params = new URL(req.originalURL).searchParams;
-    if (req.query.token !== null) {
+    if(req.params.token !== undefined) {
+        console.log(req.params.token)
+        token = req.params.token // when in params
+    } else if (req.query.token !== null) {
         token = req.query.token//  gets token in URL, works on repeat auths bc of var
     }
     //console.log("hey", token)
@@ -206,8 +209,8 @@ app.get('/api/users.json', (req, res) => {
     })
 });
 
-//update existing user
-app.put('/api/users/:id', (req, res) => {
+//update existing user, protected route
+app.put('/api/users/:id/:token', authenticateToken, (req, res) => {
     client.connect(function(err,db){
         if(err) throw err    
         const database=db.db('financial-planner')

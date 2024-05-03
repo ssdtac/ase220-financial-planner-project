@@ -4,7 +4,7 @@
 
 Cassian Godsted - Created MongoDB authentication. Ported frontend login, add user, update user, create user, delete user to MongoDB. Fix bugs with dashboard appearence from port. Required only hashed passwords to be used in user creation and login. General bufixes.
 
-Christian Lane - Seperated login page functionality. Helped with frontend login MongoDB port. implemented JSON Webtoken Auth for Dashboard and Detail pages, making them more secure. General bugfixes.
+Christian Lane - Seperated login page functionality. Helped with frontend login MongoDB port. implemented JSON Webtoken Auth for Dashboard and Detail pages, as well as adding, editing, and deleting transactions for the user, making them more secure. General bugfixes.
 
 Jeffrey Perdue - Created JSON Webtoken Auth method
 
@@ -22,7 +22,7 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
 
 - **User Authentication**: Users can log in to access their personalized financial data. The authentication ensures data privacy and security.
 
-- **Transaction Management**: Users can perform the following operations on transactions:
+- **Transaction Management**: Users can perform the following operations on transactions, only when authenticated:
   - **Add Transaction**: Users can add new financial transactions by specifying details such as transaction type, date, vendor, amount, and category.
   - **View Transactions**: Users can view a summary of their transactions, including recent transactions and a spending overview that shows the percentage of funds allocated to needs, wants, and savings.
   - **Edit/Delete Transactions**: Users can modify the details of existing transactions or remove them entirely from their financial log.
@@ -57,7 +57,7 @@ The ASE 220 Financial Planning project is designed to help users manage their fi
 
 ## Workflow
 
-1. **User Login**: Upon visiting the site, users are prompted to log in. The system checks the credentials against the `users.json` file.
+1. **User Login**: Upon visiting the site, users are prompted to log in. They can then either create an account or log in to an existing account. The application uses MongoDB and JSON web token for authentication, and users that do not have a valid web token cannot view, edit, or delete transactions.
 
 2. **Viewing Transactions**: After successful login, users are directed to the main page where they can view their transaction summary and spending overview.
 
