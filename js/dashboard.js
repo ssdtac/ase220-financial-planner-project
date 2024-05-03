@@ -238,10 +238,13 @@ function displaySpendingOverview(userData) {
 
 
     let percentage = `${Math.round(100-overview.needsPercentage-overview.wantsPercentage-overview.savingsPercentage)}%`
+    
     if (percentage == "NaN%") {
         percentage = "0%"
     }
     document.querySelector('.percent').innerHTML = percentage
+    let balance = `$${Math.round(overview.income-overview.needs-overview.wants-overview.idealSavings)}`
+    document.querySelector('.balance').innerHTML = balance
 
 }
 
