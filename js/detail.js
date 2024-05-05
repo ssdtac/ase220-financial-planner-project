@@ -19,6 +19,15 @@ function displayTransactionDetails(transaction) {
     }
 }
 
+async function getUserData(blobId) {
+    try {
+        let response = await fetch("/api/users/"+blobId);
+        userData = await response.json();
+    } catch (error) {
+        console.error('Failed to load user data!', error);
+    }
+}
+
 
 function addDetail(type, data) {
     document.getElementById('transaction-details').innerHTML +=             
@@ -38,6 +47,11 @@ function findTransactionById(id) {
     return null;
 }
 
+function goHome() {
+    location.href = `dashboard?token=${localStorage.token}`
+}
+
+
 async function displayPageData() {
     const urlParams = new URLSearchParams(window.location.search);
     const transactionId = urlParams.get('id');
@@ -46,6 +60,8 @@ async function displayPageData() {
             const transactionDetails = findTransactionById(transactionId);
             displayTransactionDetails(transactionDetails);
             setupEditAndDeleteButtons(transactionDetails, userData, transactionId);
+            document.getElementById("user-title").innerText = userData.username
+
         });
     } else {
         document.getElementById('transaction-details').innerText = 'Transaction ID not provided in the URL.';
@@ -119,7 +135,7 @@ function deleteTransaction(transactionId, data) {
         const updatedTransactions = data.transactionHistory.filter(transaction => transaction.id !== parseInt(transactionId));
         userData.transactionHistory = updatedTransactions;
         updateJSONBlob(userData, function() {
-            window.location.href = "index.html";
+            window.location.href = "/";
         });
     }
 }

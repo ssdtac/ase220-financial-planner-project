@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Transaction Details</title>
+</head>
+<body>
+    <header> 
+        <div id="title-div">
+            <a onclick="goHome()">
+                <h1 id="title" class="display-4 text-center my-4 bold">ASE 220 Financial Planning</h1>
+            </a>
+        </div>
+        <span class="text-end mt-2" id="top-buttons">
+            <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" onclick="goHome()">Go Home</button>
+        </span>
+    </header>
+    <div class="container" id="login" style="display: none;">
+        <div class="card">
+            <div class="row">
+                <h1>Login</h1>
+                <h2>For your security, please log in to continue.</h2>
+            </div>
+            <div>
+                <input type="text" placeholder="Username" id="username">
+                <button class="btn btn-primary" id="login-button">Select User</button>
+            </div>
+        </div>
+
+    </div>
+    <main class="container">
+        <div class="card">
+            <div class="flex-between">
+                <h1>Transaction Details</h1>
+                <div>
+                    <button id="edit-transaction" class="btn btn-primary">Edit</button>
+                    <button id="delete-transaction" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+            
+            <div id="transaction-details" class="details">
+                <!-- Transaction details will be loaded here -->
+            </div>
+            
+        </div>
+    </main>
+    <footer>
+        <p>You're logged in as <span id="user-title"><!--Username--></span>.</p>
+        <button type="button" class="btn btn-secondary" id="logout-button">Log Out</button>
+    </footer>
+
+    <!-- Edit transaction Modal-->
+    <div id="editTransactionModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Transaction</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editTransactionForm">
+                        <div class="mb-3">
+                            <label for="transactionType" class="form-label">Transaction Type</label>
+                            <select class="form-control" id="transactionType">
+                                <option value="purchase">Purchase</option>
+                                <option value="deposit">Credit/ Deposit</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="transactionDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionVendor" class="form-label">Vendor</label>
+                            <input type="text" class="form-control" id="transactionVendor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionAmount" class="form-label">Amount</label>
+                            <input type="number" class="form-control" id="transactionAmount" step="0.01">
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionCategory" class="form-label">Category</label>
+                            <select class="form-control" id="transactionCategory">
+                                <option value="need">Need</option>
+                                <option value="want">Want</option>
+                                <option value="income">Income</option>
+                                <!-- Add more categories as needed -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionCategory" class="form-label">Recurring Transaction?</label>
+                            <select class="form-control" id="transactionRecurring">
+                                <option value="false">No (One-Time)</option>
+                                <option value="true">Yes (Recurring)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transactionDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="transactionDescription"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
+                    <button type="button" class="btn btn-primary" id="saveTransactionChanges">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/date.js"></script>
+    <script src="/global.js"></script>
+    <script src="/detail.js"></script>
+</body>
+</html>

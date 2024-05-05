@@ -84,6 +84,11 @@ footer {
     
 }
 
+#login input {
+    display: block;
+    margin-bottom: .5em;
+}
+
 footer button {
     width: max-content;
     margin: auto;
@@ -122,6 +127,11 @@ main {
 
 #title-div {
     padding-left: 1em;
+    cursor: pointer;
+}
+#title-div a {
+    text-decoration: none;
+    color: var(--text);
 }
 
 body .form-control {
